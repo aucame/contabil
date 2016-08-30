@@ -41,9 +41,12 @@
 
 </style>
 </head>
+
+
 <body class="ng-scope" ng-app="CarreteiroApp">
 <input value="UA-81098954-1" id="toikenAnalitics" ng-value="config.UA_ANALYTICS" type="hidden">
 <input id="userAnalitics" ng-value="$root.user.id_user" type="hidden">
+
 <header class="">
     <nav class="navbar navbar-default" style="background-image: url('img/bck_menu.png'); margin-bottom: 0px !important;">
         <div class="container-fluid">
@@ -112,6 +115,7 @@
     </nav>
 </header>
 
+
 <main style="" class="graystyle" ng-class="{graystyle: !$root.user.id_user.length, whitestyle: $root.user.id_user.length}">
    <!-- ngView: undefined --><ng-view style="" class="ng-scope">
 
@@ -149,6 +153,7 @@
 </ng-view>
 </main>
 
+
 <footer>
     <nav class="navbar navbar-default" style="margin-top: 0px !important;">
         <div class="container" style="line-height: 50px; text-align: center;">
@@ -156,6 +161,7 @@
         </div>
     </nav>
 </footer>
+
 <!-- build:js -->
 <script src="vendor/jquery.min.js" charset="utf-8"></script>
 <script src="vendor/jquery.dataTables.min.js" charset="utf-8"></script>
