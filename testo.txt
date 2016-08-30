@@ -1,0 +1,242 @@
+
+        <div class="row">
+            <div class="panel panel-success">
+                <div class="panel-body">
+                    <a class="navbar-brand" href="#">Home</a>
+                    <a class="navbar-brand" href="#">Usuários</a>
+                    <a class="navbar-brand" href="#">Plano Contas</a>
+                    <a class="navbar-brand" href="#">Empresas</a>
+                    <a class="navbar-brand" href="#">Parametros</a>
+                </div>
+        </div>
+
+
+
+<head><style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>
+    <base href="/">
+    <meta charset="utf-8">
+    <title>Carreteiros</title>
+    <!--angular-datatables.bootstrap.min.css-->
+    <!-- build:css-screen -->
+    <link rel="stylesheet" href="vendor/bootstrap.min.css" media="" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="vendor/datatables.bootstrap.min.css" media="" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="vendor/responsive.dataTables.min.css" media="" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="vendor/bootstrap-theme.min.css" media="" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="vendor/font-awesome.min.css" media="" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="css/style.css" media="" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="vendor/sweetalert.css" media="" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="vendor/bootstrap-datepicker3.min.css" media="" title="no title" charset="utf-8">
+    <!-- endbuild -->
+
+    <!-- build:css-print -->
+    <link rel="stylesheet" href="vendor/font-awesome.min.css" media="print" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="css/print.css" media="print" title="no title" charset="utf-8">
+    <!-- endbuild -->
+
+    <link rel="shortcut icon" type="image/x-icon" href="/img/favicon-truck.ico">
+
+<style type="text/css">
+    .graystyle {background-color: #f5f5f5;}
+    .whitestyle {background-color: #fff;}
+
+</style>
+</head>
+<body class="ng-scope" ng-app="CarreteiroApp">
+<input value="UA-81098954-1" id="toikenAnalitics" ng-value="config.UA_ANALYTICS" type="hidden">
+<input id="userAnalitics" ng-value="$root.user.id_user" type="hidden">
+<header class="">
+    <nav class="navbar navbar-default" style="background-image: url('img/bck_menu.png'); margin-bottom: 0px !important;">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/"><i class="fa fa-truck fa-fw"></i> ml-carreteiros</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+                <ul class="nav navbar-nav"></ul>
+                <ul style="" class="nav navbar-nav navbar-right ng-scope ng-hide" ng-controller="loginCtrl" ng-show="$root.user.id_user.length">
+
+                    <!-- ngIf: $root.user.access.indexOf('/menu-carreteiro') > -1 -->
+
+                    <!-- ngIf: $root.user.access.indexOf('/relatorio') > -1 -->
+
+                    <!-- ngIf: $root.user.access.indexOf('/menu-minuta') > -1 -->
+
+                    <!-- ngIf: $root.user.access.indexOf('/menu-usuarios') > -1 -->
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-user" aria-hidden="true"></i>
+                            <span class="ng-binding" ng-bind="$root.user.id_user"></span> <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a>
+                                <div class="ng-scope" ng-controller="modalCtrl as $ctrl">
+                                    <script src="https://www.google-analytics.com/analytics.js" async=""></script><script type="text/ng-template" id="myModalContent.html">
+                                        <div class="modal-header">
+                                            <h3 class="modal-title" id="modal-title">Filiais!</h3>
+                                        </div>
+
+                                        <div class="modal-body" id="modal-body" style="height: 270px;  border: 0px solid blue;overflow: auto">
+                                            <h3 ng-bind-html="$ctrl.items">
+
+                                            </h3>
+
+                                        </div>
+
+                                        <div class="modal-footer">
+                                            <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">OK</button>
+                                        </div>
+
+                                    </script>
+
+                                    <span style="margin-right: 1px;cursor:pointer; margin-right: 5px" class="label label-primary" ng-click="$ctrl.open($root.user.filiais)">     filiais</span>
+                                </div>
+                                <br>
+                                    </a>
+                            </li>
+                            <li><a href="#" ng-click="logout()"><i class="fa fa-sign-out" aria-hidden="true"></i>
+                                Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+</header>
+
+<main style="" class="graystyle" ng-class="{graystyle: !$root.user.id_user.length, whitestyle: $root.user.id_user.length}">
+   <!-- ngView: undefined --><ng-view style="" class="ng-scope">
+
+<div class="col-md-4 col-md-offset-4 ng-scope" style="margin-top: 20px;">
+
+    <div class="panel panel-default">
+        <div class="panel-body">
+
+    <h2><i class="fa fa-caret-square-o-right"></i> Log in</h2>
+
+    <form style="" class="ng-dirty ng-valid-parse ng-valid ng-valid-required" name="form" ng-submit="login(user)" role="form">
+      <hr>
+        <div ng-show="error" class="alert alert-danger ng-binding ng-hide"></div>
+        <div ng-show="success" class="alert alert-success ng-binding ng-hide"></div>
+
+        <div class="form-group" ng-class="{ 'has-error': form.id_user.$dirty &amp;&amp; form.id_user.$error.required }">
+            <label for="id_user">Usuário</label>
+            <input style="" name="id_user" id="id_user" class="form-control ng-untouched ng-not-empty ng-dirty ng-valid-parse ng-valid ng-valid-required" ng-model="user.username" required="" type="text">
+            <span ng-show="form.id_user.$dirty &amp;&amp; form.id_user.$error.required" class="help-block ng-hide">Usuário é Obrigatório</span>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error': form.senha.$dirty &amp;&amp; form.senha.$error.required }">
+            <label for="senha">Senha</label>
+            <input style="" name="senha" id="senha" class="form-control ng-untouched ng-not-empty ng-dirty ng-valid-parse ng-valid ng-valid-required" ng-model="user.password" required="" type="password">
+            <span ng-show="form.senha.$dirty &amp;&amp; form.senha.$error.required" class="help-block ng-hide">Senha é Obrigatória</span>
+        </div>
+        <hr>
+        <div class="form-actions">
+            <!-- <button type="submit" ng-disabled="form.$invalid" class="btn btn-primary">Login</button> -->
+            <button type="submit" class="btn btn-primary" ng-disabled="isDisabled"><span class="glyphicon glyphicon-log-in"></span> Entrar</button>
+        </div>
+    </form>
+        </div>
+    </div>
+</div>
+</ng-view>
+</main>
+
+<footer>
+    <nav class="navbar navbar-default" style="margin-top: 0px !important;">
+        <div class="container" style="line-height: 50px; text-align: center;">
+            © AvanTI - ML-Carreteiros - Magazine Luiza  - v.1.9.11
+        </div>
+    </nav>
+</footer>
+<!-- build:js -->
+<script src="vendor/jquery.min.js" charset="utf-8"></script>
+<script src="vendor/jquery.dataTables.min.js" charset="utf-8"></script>
+<script src="vendor/angular.min.js" charset="utf-8"></script>
+<script src="vendor/bootstrap.min.js" charset="utf-8"></script>
+<script src="vendor/angular-route.min.js" charset="utf-8"></script>
+<script src="vendor/angular-locale_pt-br.js"></script>
+<script src="vendor/angular-animate.min.js" charset="utf-8"></script>
+<script src="vendor/ui-bootstrap-tpls.min.js" charset="utf-8"></script>
+<script src="vendor/ui-bootstrap.min.js" charset="utf-8"></script>
+<script src="vendor/bootstrap3-typeahead.min.js" charset="utf-8"></script>
+<script src="vendor/moment.min.js" charset="utf-8"></script>
+<script src="vendor/angular-moment.min.js" charset="utf-8"></script>
+<script src="vendor/sweetalert.min.js" charset="utf-8"></script>
+<script src="vendor/SweetAlert.js" charset="utf-8"></script>
+<script src="vendor/satellizer.js" charset="utf-8"></script>
+<script src="vendor/angular-input-masks-standalone.min.js" charset="utf-8"></script>
+<script src="vendor/angulartics.min.js" charset="utf-8"></script>
+<script src="vendor/angulartics-ga.min.js" charset="utf-8"></script>
+<script src="vendor/angular-datatables.min.js" charset="utf-8"></script>
+<script src="vendor/angular-datatables.bootstrap.min.js" charset="utf-8"></script>
+<script src="vendor/dataTables.buttons.min.js" charset="utf-8"></script>
+<script src="vendor/dataTables.responsive.min.js"></script>
+<script src="vendor/angular-datatables.buttons.js" charset="utf-8"></script>
+<script src="vendor/buttons.flash.min.js" charset="utf-8"></script>
+<script src="vendor/buttons.html5.min.js" charset="utf-8"></script>
+<script src="vendor/buttons.print.custom.carreteiro.js" charset="utf-8"></script>
+<script src="js/config.js" charset="utf-8"></script>
+<script src="js/app.js" charset="utf-8"></script>
+<script src="js/service/romaneioService.js" charset="utf-8"></script>
+<script src="js/service/minutaService.js" charset="utf-8"></script>
+<script src="js/service/authService.js" charset="utf-8"></script>
+<script src="js/service/carreteiroService.js" charset="utf-8"></script>
+<script src="js/service/trackingService.js" charset="utf-8"></script>
+<script src="js/service/pedidoService.js" charset="utf-8"></script>
+<script src="js/factories/httpInterceptorFactory.js" charset="utf-8"></script>
+<script src="js/service/usuarioSistemaFactory.js" charset="utf-8"></script>
+<script src="js/service/fechamentoFactory.js" charset="utf-8"></script>
+<script src="js/controllers/mainController.js" charset="utf-8"></script>
+<script src="js/controllers/entregaController.js" charset="utf-8"></script>
+<script src="js/controllers/loginController.js" charset="utf-8"></script>
+<script src="js/controllers/fechamentoController.js" charset="utf-8"></script>
+<script src="js/controllers/printController.js" charset="utf-8"></script>
+<script src="js/controllers/carreteiroController.js" charset="utf-8"></script>
+<script src="js/controllers/minutaController.js" charset="utf-8"></script>
+<script src="js/controllers/romaneioController.js" charset="utf-8"></script>
+<script src="js/controllers/usuarioSistemaController.js" charset="utf-8"></script>
+<script src="js/controllers/relatorioGeralController.js" charset="utf-8"></script>
+<script src="js/controllers/printRomaneioController.js" charset="utf-8"></script>
+<script src="js/controllers/printEntregasConfirmadasController.js" charset="utf-8"></script>
+<script src="js/controllers/pedMarcadoEntCtrl.js" charset="utf-8"></script>
+<script src="js/controllers/carreteiroDetalheController.js" charset="utf-8"></script>
+<script src="js/controllers/modalController.js" charset="utf-8"></script>
+<script src="js/modules/numberModule.js" charset="utf-8"></script>
+<script src="js/routerConfig.js" charset="utf-8"></script>
+<!-- CLASSES -->
+<script src="js/classes/Carreteiro.js" charset="utf-8"></script>
+<!-- END CLASSES -->
+<script src="vendor/bootstrap-datepicker.min.js" charset="utf-8"></script>
+<script src="vendor/bootstrap-datepicker.pt-BR.min.js" charset="utf-8"></script>
+<script src="vendor/myArray.js"></script>
+
+<!-- endbuild -->
+
+<script>
+
+    $(function(){
+
+        var token = $("#toikenAnalitics").val();
+
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+        ga('create',token,'auto');
+
+    });
+
+</script>
+
+
+
+
+</body>

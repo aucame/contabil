@@ -1,40 +1,137 @@
 <!DOCTYPE html>
+
 <html lang="pt-br">
+
     <head>
         <title>Contabil</title>
         <meta charset="UTF-8">
         <link rel="stylesheet" type="" href="bootstrap/css/bootstrap.css">
     </head>
+
     <body>
+        <header>
+            <div class="panel-heading">
+                <h4>&nbsp;&nbsp;Sistema Contabil - DRE</h4>
+            </div>
 
-<div class="row">
-    <div class="panel panel-success">
-        <div class="panel-heading">
-            <h4>&nbsp;&nbsp;Sistema Contabil - DRE</h4>
-        </div>
+
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/"><i class="fa fa-truck fa-fw"></i> ml-carreteiros</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+                <ul class="nav navbar-nav"></ul>
+                <ul style="" class="nav navbar-nav navbar-right ng-scope ng-hide" ng-controller="loginCtrl" ng-show="$root.user.id_user.length">
+
+                    <!-- ngIf: $root.user.access.indexOf('/menu-carreteiro') > -1 -->
+
+                    <!-- ngIf: $root.user.access.indexOf('/relatorio') > -1 -->
+
+                    <!-- ngIf: $root.user.access.indexOf('/menu-minuta') > -1 -->
+
+                    <!-- ngIf: $root.user.access.indexOf('/menu-usuarios') > -1 -->
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-user" aria-hidden="true"></i>
+                            <span class="ng-binding" ng-bind="$root.user.id_user"></span> <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a>
+                                <div class="ng-scope" ng-controller="modalCtrl as $ctrl">
+                                    <script src="https://www.google-analytics.com/analytics.js" async=""></script><script type="text/ng-template" id="myModalContent.html">
+                                        <div class="modal-header">
+                                            <h3 class="modal-title" id="modal-title">Filiais!</h3>
+                                        </div>
+
+                                        <div class="modal-body" id="modal-body" style="height: 270px;  border: 0px solid blue;overflow: auto">
+                                            <h3 ng-bind-html="$ctrl.items">
+
+                                            </h3>
+
+                                        </div>
+
+                                        <div class="modal-footer">
+                                            <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">OK</button>
+                                        </div>
+
+                                    </script>
+
+                                    <span style="margin-right: 1px;cursor:pointer; margin-right: 5px" class="label label-primary" ng-click="$ctrl.open($root.user.filiais)">     filiais</span>
+                                </div>
+                                <br>
+                                    </a>
+                            </li>
+                            <li><a href="#" ng-click="logout()"><i class="fa fa-sign-out" aria-hidden="true"></i>
+                                Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+                
+        </header>
+
+        <main>
+
+
+   <!-- ngView: undefined --><ng-view style="" class="ng-scope">
+
+<div class="col-md-4 col-md-offset-4 ng-scope" style="margin-top: 20px;">
+
+    <div class="panel panel-default">
         <div class="panel-body">
-            <a class="navbar-brand" href="">Home</a>
-            <a class="navbar-brand" href="#">Usuários</a>
-            <a class="navbar-brand" href="#">Plano Contas</a>
-            <a class="navbar-brand" href="#">Empresas</a>
-            <a class="navbar-brand" href="#">Parametros</a>
+
+    <h2><i class="fa fa-caret-square-o-right"></i> Log in</h2>
+
+    <form style="" class="ng-dirty ng-valid-parse ng-valid ng-valid-required" name="form" ng-submit="login(user)" role="form">
+      <hr>
+        <div ng-show="error" class="alert alert-danger ng-binding ng-hide"></div>
+        <div ng-show="success" class="alert alert-success ng-binding ng-hide"></div>
+
+        <div class="form-group" ng-class="{ 'has-error': form.id_user.$dirty &amp;&amp; form.id_user.$error.required }">
+            <label for="id_user">Usuário</label>
+            <input style="" name="id_user" id="id_user" class="form-control ng-untouched ng-not-empty ng-dirty ng-valid-parse ng-valid ng-valid-required" ng-model="user.username" required="" type="text">
+            <span ng-show="form.id_user.$dirty &amp;&amp; form.id_user.$error.required" class="help-block ng-hide">Usuário é Obrigatório</span>
         </div>
-
-teste
-
-
-
-
-
-
-
-
-
-
-
-
-
+        <div class="form-group" ng-class="{ 'has-error': form.senha.$dirty &amp;&amp; form.senha.$error.required }">
+            <label for="senha">Senha</label>
+            <input style="" name="senha" id="senha" class="form-control ng-untouched ng-not-empty ng-dirty ng-valid-parse ng-valid ng-valid-required" ng-model="user.password" required="" type="password">
+            <span ng-show="form.senha.$dirty &amp;&amp; form.senha.$error.required" class="help-block ng-hide">Senha é Obrigatória</span>
+        </div>
+        <hr>
+        <div class="form-actions">
+            <!-- <button type="submit" ng-disabled="form.$invalid" class="btn btn-primary">Login</button> -->
+            <button type="submit" class="btn btn-primary" ng-disabled="isDisabled"><span class="glyphicon glyphicon-log-in"></span> Entrar</button>
+        </div>
+    </form>
+        </div>
+    </div>
 </div>
+</ng-view>
+
+
+
+        </main>
+
+        <footer>
+
+    <nav class="navbar navbar-default" style="margin-top: 0px !important;">
+        <div class="container" style="line-height: 50px; text-align: center;">
+            © AvanTI - ML-Carreteiros - Magazine Luiza  - v.1.9.11
+        </div>
+    </nav>
+            
+        </footer>
 
     </body>
 </html>
