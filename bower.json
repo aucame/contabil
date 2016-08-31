@@ -1,0 +1,17 @@
+{
+  "name": "Contabil",
+  "homepage": "https://github.com/aucame/contabil",
+  "authors": [
+    "Aurelio <aucame@hotmail.com>"
+  ],
+  "description": "Contabil DRE",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
