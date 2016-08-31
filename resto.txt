@@ -117,7 +117,8 @@
 
 
 <main style="" class="graystyle" ng-class="{graystyle: !$root.user.id_user.length, whitestyle: $root.user.id_user.length}">
-   <!-- ngView: undefined --><ng-view style="" class="ng-scope">
+   <!-- ngView: undefined -->
+<ng-view style="" class="ng-scope">
 
 <div class="col-md-4 col-md-offset-4 ng-scope" style="margin-top: 20px;">
 

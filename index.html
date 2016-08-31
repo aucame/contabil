@@ -5,34 +5,67 @@
     <head>
         <title>Contabil</title>
         <meta charset="UTF-8">
-        <link rel="stylesheet" type="" href="bootstrap/css/bootstrap.css">
+        <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" media="" title="no title" charset="utf-8">
+        <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css" media="" title="no title" charset="utf-8">        
 
         <style type="text/css">
             .graystyle {background-color: #f5f5f5;}
             .whitestyle {background-color: #fff;}
-            .azulclaro {background-color: #1E90FF;}
-            .frentebranca { font-color: #FFFFFF }
+            .azulclaro {background-color: #66ccff;}
+            .frentebranca { font-color: #000000 }
         </style>
 
     </head>
 
-    <body>
-        <header>
-            <nav class="navbar navbar-default azulclaro" >
-                <div class="container-fluid">
-                    <a class="navbar-brand" href="/"><i class="frentebranca"></i>Sistema Contabil - DRE</a>                    
-                </div>
-            </nav>
-                
-        </header>
+    <body class="ng-scope" ng-app="ContabilApp">
 
-        <main class="graystyle" >
+        <div class="row">
+            <header>
+                <nav class="navbar navbar-default azulclaro" >
+                    <div class="container-fluid">
+                        <a class="navbar-brand" href="/"><i class="frentebranca"></i>Sistema Contabil - DRE</a>                    
+                    </div>
+                </nav>
+            </header>
+        </div>
 
-        </main>
+        <div class="row">
+                <main class="graystyle" >
+                    <div class="col-md-4 col-md-offset-4 ng-scope" style="margin-top: 20px;">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                    <h2><i class="fa fa-caret-square-o-right"></i> Log in</h2>
+                                    <form style="" class="ng-dirty ng-valid-parse ng-valid ng-valid-required" name="form" ng-submit="login(user)" role="form">
+                                        <hr>
+                                            <div class="form-group" ng-class="{ 'has-error': form.id_user.$dirty &amp;&amp; form.id_user.$error.required }">
+                                                <label for="id_user">Usuário</label>
+                                                <input style="" name="id_user" id="id_user" class="form-control ng-untouched ng-not-empty ng-dirty ng-valid-parse ng-valid ng-valid-required" ng-model="user.username" required="" type="text">
+                                                <span ng-show="form.id_user.$dirty &amp;&amp; form.id_user.$error.required" class="help-block ng-hide">Usuário é Obrigatório</span>
+                                            </div>
+                                            <div class="form-group" ng-class="{ 'has-error': form.senha.$dirty &amp;&amp; form.senha.$error.required }">
+                                                <label for="senha">Senha</label>
+                                                <input style="" name="senha" id="senha" class="form-control ng-untouched ng-not-empty ng-dirty ng-valid-parse ng-valid ng-valid-required" ng-model="user.password" required="" type="password">
+                                                <span ng-show="form.senha.$dirty &amp;&amp; form.senha.$error.required" class="help-block ng-hide">Senha é Obrigatória</span>
+                                            </div>
+                                        <hr>
+                                            <div class="form-actions">
+                                                <!-- <button type="submit" ng-disabled="form.$invalid" class="btn btn-primary">Login</button> -->
+                                                <button type="submit" class="btn btn-primary" ng-disabled="isDisabled"><span class="glyphicon glyphicon-log-in"></span> Entrar</button>
+                                            </div>
+                                    </form>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+        </div>
 
-        <footer>
-            
-        </footer>
+        <div class="row">
+            <footer>
+                    <div class="container" style="line-height: 50px; text-align: center;">
+                        © SoftSeven - Sis.Contabil - v.1.0
+                    </div>
+            </footer>
+        </div>
 
     </body>
 </html>
