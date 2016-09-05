@@ -9,7 +9,7 @@ class Web(tornado.web.Application):
         # productclustering/column_name/line/(family|family,family,...,family)/clusters/days
 
         handlers = [
-            (r'/usuarios/(.*)/(.*)/(.*)/([0-9]+)/([0-9]+)',Usuarios.Handler)
+        #    (r'/usuarios/(.*)/(.*)/(.*)/([0-9]+)/([0-9]+)',Usuarios.Handler)
         ]
 
         tornado.web.Application.__init__(self,handlers)
