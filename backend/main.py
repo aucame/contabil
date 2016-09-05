@@ -1,5 +1,5 @@
 import tornado.httpserver
-#from server import run
+from server import run
 
 def main():
     application_server = run.Web()
