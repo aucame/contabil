@@ -11,3 +11,8 @@ backend/local
 backend/pip-selfcheck.json
 backend/*.pyc
 
+backend/server/*.pyc
+backend/server/configuration/*.pyc
+backend/server/database/*.pyc
+backend/server/handlers/*.pyc
+backend/utils/*.pyc
