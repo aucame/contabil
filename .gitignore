@@ -4,8 +4,6 @@ bower_components/
 bootstrap/
 font-awesome/
 
-backend/bin
-backend/include
 backend/lib
 backend/local
 backend/pip-selfcheck.json
