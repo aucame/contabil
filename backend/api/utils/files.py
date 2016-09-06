@@ -1,7 +1,7 @@
 class FileUtils():
     def properties(self, context):
 
-        path = 'server/configuration/properties/'
+        path = 'configuration/properties/'
         props_result = []
 
         if context == 'server':
@@ -17,7 +17,6 @@ class FileUtils():
             path += 'dinah.properties'
 
         try:
-
             properties_file = open(path)
 
             for property in properties_file:

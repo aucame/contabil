@@ -1,9 +1,9 @@
 import codecs
 import tornado.web
-from database import query
+#from database import query
 
 class Handler(tornado.web.RequestHandler):
-    def get(self, subcategory_id, branch_id=False):
+    def get(self):
         result = {}
         #db_execute = query.OracleQuery()
 
@@ -11,4 +11,4 @@ class Handler(tornado.web.RequestHandler):
         self.set_header('Content-Type','application/json')
 
        	#self.write(db_execute.getLimitesSku(subcategory_id, branch_id))
-        self.write(result)
+        self.write('usuarios')

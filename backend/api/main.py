@@ -2,6 +2,9 @@ import tornado.httpserver
 from server import run
 
 def main():
+    
+    print('Servidor iniciado localhost:8080')
+
     application_server = run.Web()
 
     http_server = tornado.httpserver.HTTPServer(application_server)
