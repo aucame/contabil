@@ -17,6 +17,7 @@ class FileUtils():
             path += 'dinah.properties'
 
         try:
+            print(path)
 
             properties_file = open(path)
 
