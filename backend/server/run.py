@@ -1,6 +1,6 @@
 import tornado.web
 from configuration import server
-from handlers import *
+from handlers import skulimits
 
 class Web(tornado.web.Application):
     def __init__(self):
