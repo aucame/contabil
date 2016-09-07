@@ -11,7 +11,7 @@ class MySqlQuery():
         # Set database to query
         database_settings.setDatabase(db)
 
-        str_conn = '''oracle+cx_oracle://{0}:{1}@{2}:{3}/{4}
+        str_conn = '''mysql://{0}:{1}@{2}:{3}/{4}
             '''.format(database_settings.user(),
                        database_settings.password(),
                        database_settings.host(),
@@ -39,6 +39,8 @@ class MySqlQuery():
             result.append({'codigo': value[0]})
     
         retorno = {'usuarios': result}
+
+        #retorno = json.dumps(retorno, sort_keys = False, indent = 4)
 
         return retorno
 

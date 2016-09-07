@@ -13,15 +13,13 @@ class FileUtils():
         elif context == 'mlpsi2':
             path += 'mlpsi2.properties'
 
-        elif context == 'contabil':
+        elif context == 'new_schema':
             path += 'contabil.properties'
 
         elif context == 'dinah':
             path += 'dinah.properties'
 
         try:
-            print(path)
-
             properties_file = open(path)
 
             for property in properties_file:
