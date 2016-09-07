@@ -1,7 +1,7 @@
 class FileUtils():
     def properties(self, context):
 
-        path = 'server/configuration/properties/'
+        path = 'configuration/properties/'
         props_result = []
 
         if context == 'server':
@@ -12,6 +12,9 @@ class FileUtils():
 
         elif context == 'mlpsi2':
             path += 'mlpsi2.properties'
+
+        elif context == 'contabil':
+            path += 'contabil.properties'
 
         elif context == 'dinah':
             path += 'dinah.properties'
