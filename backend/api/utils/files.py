@@ -13,6 +13,9 @@ class FileUtils():
         elif context == 'mlpsi2':
             path += 'mlpsi2.properties'
 
+        elif context == 'new_schema':
+            path += 'contabil.properties'
+
         elif context == 'dinah':
             path += 'dinah.properties'
 

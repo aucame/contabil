@@ -19,22 +19,23 @@ class MySqlQuery():
                        database_settings.database())
 
         try:
-            engine = create_engine(str_conn)
-            connection = engine.connect()
+            engine  = create_engine(str_conn)
+            
+            conexao = engine.connect()
 
-            result = connection.execute(query)
+            result = conexao.execute(query)
 
             return result
 
         finally:
-            connection.close()
+            conexao.close()
 
     def get_usuarios(self):
         query = 'select * from new_table'
 
-        data = self.execute('new_schema', query)
-
         result = []
+
+        data = self.execute('new_schema', query)
         for value in data:
             result.append({'codigo': value[0]})
     
