@@ -3,10 +3,11 @@ import tornado.web
 from database import query
 
 class Handler(tornado.web.RequestHandler):
-    def get(self):
+    def get(self, id):
 
         db_execute = query.MySqlQuery()
-        result = db_execute.get_usuarios()
+        result = db_execute.get_usuarios(id)
+        
         self.set_header('Access-Control-Allow-Origin','*')
         self.set_header('Content-Type','application/json')
 

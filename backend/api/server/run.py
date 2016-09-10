@@ -4,13 +4,12 @@ from handlers import default, usuarios
 
 class Web(tornado.web.Application):
     def __init__(self):
-        # Endpoints
-        #
-        # productclustering/column_name/line/(family|family,family,...,family)/clusters/days
 
         handlers = [
-            (r'/',default.Handler),
-            (r'/usuarios',usuarios.Handler)
+            #(r'/',default.Handler),
+            #(r'/(\w+)',default.Handler)
+            #(r'/usuarios/?',usuarios.Handler),
+            (r'/usuarios/(\w+)',usuarios.Handler)
         ]
 
         tornado.web.Application.__init__(self,handlers)

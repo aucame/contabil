@@ -30,8 +30,13 @@ class MySqlQuery():
         finally:
             conexao.close()
 
-    def get_usuarios(self):
-        query = 'select * from new_table'
+    def get_usuarios(self, id):
+
+        print(id)
+        if (id == '0'):
+            query = 'select * from new_table'
+        else:
+            query = 'select * from new_table where idnew_table = {0}'.format(int(id))
 
         result = []
 
