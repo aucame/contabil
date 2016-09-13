@@ -15,3 +15,7 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+
+# sudo apt-get install python-dev libmysqlclient-dev  -- Precisa instalar esses pacotes para acesso ao mysql com sqlalchemy
+# pip install mysql-python

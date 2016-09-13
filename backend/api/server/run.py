@@ -9,7 +9,7 @@ class Web(tornado.web.Application):
             #(r'/',default.Handler),
             #(r'/(\w+)',default.Handler)
             #(r'/usuarios/?',usuarios.Handler),
-            (r'/usuarios/(\w+)',usuarios.Handler)
+            (r'/usuarios/([0-9]+)',usuarios.Handler)
         ]
 
         tornado.web.Application.__init__(self,handlers)
