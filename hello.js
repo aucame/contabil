@@ -15,7 +15,7 @@ app.controller('Hello', function($scope, $http) {
         });
     }
 
-    chamada();
+    //chamada();
 
 });
 
