@@ -1,14 +1,27 @@
 <!doctype html>
-<html ng-app="demo">
+<html  ng-app="appUsuarios">
 	<head>
 		<title>Chamada API</title>
-        <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
-		<script scr="bower_components/bootstrap/dist/js/bootstrap.min.js" ></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
+		<meta charset="UTF-8">
+
+     	<link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.css">
+		<link rel="styleSheet" type="text/css" href="bower_components/angular-ui-grid/ui-grid.min.css"/>
+
+		<script src="bower_components/angular/angular.min.js"></script>
+		<script src="bower_components/angular-ui-grid/ui-grid.min.js"></script>
+
     	<script src="hello.js"></script>
+
+		<style>
+			.myGrid {
+			width: 500px;
+			height: 250px;
+			}
+		</style>
+
 	</head>
 
-	<body  ng-controller="Hello">
+	<body ng-controller="ctlUsuarios">
 		<div>
 			<p>retorno {{retorno.usuarios}}</p>
 		</div>
@@ -23,6 +36,11 @@
 
 			<button type="button" ng-click='chamada()' class="btn btn-primary">Consultar</button>
 		</div>
+
+<div>
+	<div id="grid1" ui-grid="gridOptions" class="grid"></div>
+</div>
+
 
 	</body>
 </html>
