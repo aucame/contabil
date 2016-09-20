@@ -76,7 +76,8 @@ app.controller('ctlUsuarios', function($scope, $http) {
 	$scope.getusuarios = function() {
 		$http({
 			method: 	"GET",
-			url: 		"http://200.98.174.103:8080/usuarios/0",
+//			url: 		"http://200.98.174.103:8080/usuarios/0",
+			url: 		"http://127.0.0.1:8080/usuarios/0",
 			headers: {
 				'Content-Type': 'application/x-www-form-urlencoded'
 			}

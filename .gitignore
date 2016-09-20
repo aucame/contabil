@@ -7,5 +7,7 @@ font-awesome/
 backend/lib
 backend/local
 backend/pip-selfcheck.json
+backend/bin
+backend/share
 
 *.pyc
