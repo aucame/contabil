@@ -32,7 +32,7 @@ class MySqlQuery():
 
     def get_usuarios(self, id):
 
-        print(id)
+        #print(id)
         if (id == '0'):
             query = 'select * from new_table'
         else:
@@ -49,6 +49,17 @@ class MySqlQuery():
         #retorno = json.dumps(retorno, sort_keys = False, indent = 4)
 
         return retorno
+
+    def cria_usuario(self, data):
+
+        registro = json.loads(data)
+
+        #print(registro['id'])
+
+       
+        #query = 'insert into dbContabil.cadusuarios(idusuarios, nome, senha) value ({0}, {1}, {2})'.format(int(id), nome, senha)
+
+        #print(data)
 
     def getLimitesSku(self, codFamilia, codFilial=False):
         query = '''

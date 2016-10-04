@@ -1,5 +1,6 @@
 import codecs
 import tornado.web
+import json
 from database import query
 
 class Handler(tornado.web.RequestHandler):
@@ -19,11 +20,11 @@ class Handler(tornado.web.RequestHandler):
 
     def post(self, id):
     
-        result = { 'post': id }
-
-        result = self.request.body
-
-        self.write(result)
+        data = self.request.body
+        db_execute = query.MySqlQuery()
+        result = db_execute.cria_usuario(data)
+        
+        self.write(data)
 
     def put(self, id):
 
