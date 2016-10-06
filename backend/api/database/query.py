@@ -52,14 +52,11 @@ class MySqlQuery():
 
     def cria_usuario(self, data):
 
-        registro = json.loads(data)
+        reg = json.loads(data)
 
-        #print(registro['id'])
+        query = 'insert into new_schema.new_table(idnew_table) values ({0})'.format(int(reg['id']))
 
-       
-        #query = 'insert into dbContabil.cadusuarios(idusuarios, nome, senha) value ({0}, {1}, {2})'.format(int(id), nome, senha)
-
-        #print(data)
+        retorno = self.execute('new_schema', query)
 
     def getLimitesSku(self, codFamilia, codFilial=False):
         query = '''
