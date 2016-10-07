@@ -32,7 +32,6 @@ class MySqlQuery():
 
     def get_usuarios(self, id):
 
-        #print(id)
         if (id == '0'):
             query = 'select * from new_table'
         else:
@@ -46,8 +45,6 @@ class MySqlQuery():
     
         retorno = {'usuarios': result}
 
-        #retorno = json.dumps(retorno, sort_keys = False, indent = 4)
-
         return retorno
 
     def cria_usuario(self, data):
@@ -58,25 +55,36 @@ class MySqlQuery():
 
         retorno = self.execute('new_schema', query)
 
-    def getLimitesSku(self, codFamilia, codFilial=False):
-        query = '''
-              SELECT COD_FILIAL, COD_FAMILIA, SUM(NUM_RESTRICAO) QTD_LIMITES
-                FROM USR_GRPLOJAS.MAG_T_GL_LIMITE_SKU
-                WHERE cod_familia = {0}'''.format(int(codFamilia))
+    def deleta_usuario(self, data):
 
-     	if codFilial:
-            query += ''' AND COD_FILIAL = {0} '''.format(codFilial)
+        query = 'delete from new_schema.new_table where idnew_table = {0}'.format(int(data['id']))
 
-        query += '''GROUP BY COD_FILIAL, COD_FAMILIA'''
+        retorno = self.execute('new_schema', query)
 
-        data = self.execute('mlpsi2', query)
+    def altera_usuario(self, data):
 
-        result = []
-        for value in data:
-            result.append({'Filial': value[0], 'Familia': value[1], 'Limite': value[2] })
+        print(data)
 
-        skulimits = {'skulimits': result}
 
-        skulimits = json.dumps(skulimits, sort_keys = False, indent = 4)
-
-        return skulimits
+#    def getLimitesSku(self, codFamilia, codFilial=False):
+#        query = '''
+#              SELECT COD_FILIAL, COD_FAMILIA, SUM(NUM_RESTRICAO) QTD_LIMITES
+#                FROM USR_GRPLOJAS.MAG_T_GL_LIMITE_SKU
+#                WHERE cod_familia = {0}'''.format(int(codFamilia))
+#
+#     	if codFilial:
+#            query += ''' AND COD_FILIAL = {0} '''.format(codFilial)
+#
+#        query += '''GROUP BY COD_FILIAL, COD_FAMILIA'''
+#
+#        data = self.execute('mlpsi2', query)
+#
+#        result = []
+#        for value in data:
+#            result.append({'Filial': value[0], 'Familia': value[1], 'Limite': value[2] })
+#
+#        skulimits = {'skulimits': result}
+#
+#        skulimits = json.dumps(skulimits, sort_keys = False, indent = 4)
+#
+#        return skulimits

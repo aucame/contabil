@@ -28,12 +28,16 @@ class Handler(tornado.web.RequestHandler):
 
     def put(self, id):
 
-        result = { 'put': id }
+        data = self.request.body
+        db_execute = query.MySqlQuery()
+        result = db_execute.altera_usuario(data)
 
-        self.write(result)
+        self.write(data)
 
     def delete(self, id):
 
-        result = { 'delete': id }
+        data = { "id": int(id) }
+        db_execute = query.MySqlQuery()
+        result = db_execute.deleta_usuario(data)
 
-        self.write(result)
+        self.write(data)
