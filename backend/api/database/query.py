@@ -4,8 +4,12 @@ from configuration import database
 from datetime import date, timedelta
 from sqlalchemy import create_engine
 
+banco = 'new_schema'
+tb_usuarios = 'new_table'
+
 class MySqlQuery():
     def execute(self,db,query):
+        # Define os dados do banco
         database_settings = database.Settings()
 
         # Set database to query
@@ -20,26 +24,22 @@ class MySqlQuery():
 
         try:
             engine  = create_engine(str_conn)
-            
             conexao = engine.connect()
-
             result = conexao.execute(query)
-
             return result
 
         finally:
             conexao.close()
 
     def get_usuarios(self, id):
-
         if (id == '0'):
-            query = 'select * from new_table'
+            query = 'select * from {0}.{1}'.format(banco, tb_usuarios)
         else:
-            query = 'select * from new_table where idnew_table = {0}'.format(int(id))
+            query = 'select * from {0}.{1} where idnew_table = {2}'.format(banco, tb_usuarios, int(id))
 
         result = []
 
-        data = self.execute('new_schema', query)
+        data = self.execute(banco, query)
         for value in data:
             result.append({'codigo': value[0]})
     
@@ -48,21 +48,15 @@ class MySqlQuery():
         return retorno
 
     def cria_usuario(self, data):
-
         reg = json.loads(data)
-
-        query = 'insert into new_schema.new_table(idnew_table) values ({0})'.format(int(reg['id']))
-
+        query = 'insert into {0}.new_table(idnew_table) values ({1})'.format(banco,int(reg['id']))
         retorno = self.execute('new_schema', query)
 
     def deleta_usuario(self, data):
-
         query = 'delete from new_schema.new_table where idnew_table = {0}'.format(int(data['id']))
-
         retorno = self.execute('new_schema', query)
 
     def altera_usuario(self, data):
-
         print(data)
 
 

@@ -1,8 +1,6 @@
 # Diretorios retirados do git
 
 bower_components/
-bootstrap/
-font-awesome/
 
 backend/lib
 backend/local
