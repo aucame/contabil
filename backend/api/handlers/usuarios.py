@@ -36,7 +36,7 @@ class Handler(tornado.web.RequestHandler):
 
     def delete(self, id):
 
-        data = { "id": int(id) }
+        data = { "idusuarios": int(id) }
         db_execute = query.MySqlQuery()
         result = db_execute.deleta_usuario(data)
 

@@ -4,8 +4,8 @@ from configuration import database
 from datetime import date, timedelta
 from sqlalchemy import create_engine
 
-banco = 'new_schema'
-tb_usuarios = 'new_table'
+banco = 'dbContabil'
+tb_usuarios = 'cadusuarios'
 
 class MySqlQuery():
     def execute(self,db,query):
@@ -35,30 +35,42 @@ class MySqlQuery():
         if (id == '0'):
             query = 'select * from {0}.{1}'.format(banco, tb_usuarios)
         else:
-            query = 'select * from {0}.{1} where idnew_table = {2}'.format(banco, tb_usuarios, int(id))
+            query = 'select * from {0}.{1} where idusuarios = {2}'.format(banco, tb_usuarios, int(id))
 
         result = []
 
         data = self.execute(banco, query)
         for value in data:
-            result.append({'codigo': value[0]})
+            result.append({'idusuarios': value[0], 'nome': value[1]})
     
-        retorno = {'usuarios': result}
-
+        retorno = {'cadusuarios': result}
         return retorno
 
     def cria_usuario(self, data):
         reg = json.loads(data)
-        query = 'insert into {0}.new_table(idnew_table) values ({1})'.format(banco,int(reg['id']))
-        retorno = self.execute('new_schema', query)
+        query = 'insert into {0}.{1}(idusuarios, nome, senha, ativo) values ({2}, "{3}", "{4}", {5})'.format(banco, tb_usuarios, 
+            reg['idusuarios'], 
+            reg['nome'], 
+            reg['senha'], 
+            int(reg['ativo'])
+            )
+
+        retorno = self.execute(banco, query)
 
     def deleta_usuario(self, data):
-        query = 'delete from new_schema.new_table where idnew_table = {0}'.format(int(data['id']))
-        retorno = self.execute('new_schema', query)
+        query = 'delete from {0}.{1} where idusuarios = {2}'.format(banco, tb_usuarios, 
+            int(data['idusuarios'])
+            )
+        retorno = self.execute(banco, query)
 
     def altera_usuario(self, data):
         print(data)
-
+        reg = json.loads(data)
+        query = 'update table {0}.{1} set nome = "{2}", ativo = {3} where idusuarios = {4}'.format(banco, tb_usuarios, 
+            reg['nome'],
+            int(reg['ativo']), 
+            reg['idusuarios']
+            ) 
 
 #    def getLimitesSku(self, codFamilia, codFilial=False):
 #        query = '''
