@@ -41,7 +41,11 @@ class MySqlQuery():
 
         data = self.execute(banco, query)
         for value in data:
-            result.append({'idusuarios': value[0], 'nome': value[1]})
+            result.append({
+                'idusuarios': value['idusuarios'], 
+                'nome': value['nome'], 
+                'ativo': value['ativo']
+                })
     
         retorno = {'cadusuarios': result}
         return retorno

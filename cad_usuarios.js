@@ -12,17 +12,15 @@ app.controller('ctlUsuarios', function($scope, $http) {
 			//enableCellEditOnFocus: true,
 
 			columnDefs: [
-				{ field: 'codigo', enableCellEdit: false, minWidth: 50, width: 90, displayName: 'Codigo' },
-				//{ field: 'nome', enableCellEdit: false, minWidth: 120, width: 250, displayName: 'Nome' },
-				//{ field: 'endereco', enableCellEdit: false, minWidth: 120, width: 250, displayName: 'Endereço' },
-				//{ field: 'cidade', enableCellEdit: false, minWidth: 100, width: 150, displayName: 'Cidade' },
-				//{ field: 'cep', enableCellEdit: false, minWidth: 50, width: 100, displayName: 'CEP' },
+				{ field: 'idusuarios', enableCellEdit: false, minWidth: 50, width: 90, displayName: 'Codigo' },
+				{ field: 'nome', enableCellEdit: false, minWidth: 120, width: 250, displayName: 'Nome' },
+				{ field: 'ativo', enableCellEdit: false, minWidth: 120, width: 250, displayName: 'Ativo' },
 				{ name: 'Editar/Deletar', enableCellEdit: false, width: 200,
 				cellTemplate:'<button class="btn btn-primary" ng-click="grid.appScope.editcliente(row)">Editar</button>  <button class="btn btn-primary" ng-click="grid.appScope.delcliente(row)">Deletar</button>'  }		
 			],
 
 			data: [ 
-				{ 'codigo': "" }
+				{ 'idusuarios': "" }
 			]
 
 		}; 			
@@ -73,6 +71,8 @@ app.controller('ctlUsuarios', function($scope, $http) {
 		}
 	};
 
+//id="input1/(\w+)/\u\1/g" 
+
 	$scope.getusuarios = function() {
 		$http({
 			method: 	"GET",
@@ -82,7 +82,7 @@ app.controller('ctlUsuarios', function($scope, $http) {
 				'Content-Type': 'application/x-www-form-urlencoded'
 			}
 		}).then(function(response){
-			$scope.gridOptions.data = response.data.usuarios;
+			$scope.gridOptions.data = response.data.cadusuarios;
 		}, function(error){
 			console.log("Error = " + error);
 		});
