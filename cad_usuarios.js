@@ -3,27 +3,32 @@ var app = angular.module('appUsuarios', ['ui.grid']);
 
 app.controller('ctlUsuarios', function($scope, $http) {
 
-		$scope.gridOptions = {
-			enableSorting: false,
-			showGridFooter: true,
-			enableRowSelection: true,
-			enableSelectAll: false,
-			enableColumnResizing: true,
-			//enableCellEditOnFocus: true,
+//17520520
 
-			columnDefs: [
-				{ field: 'idusuarios', enableCellEdit: false, minWidth: 50, width: 90, displayName: 'Codigo' },
-				{ field: 'nome', enableCellEdit: false, minWidth: 120, width: 250, displayName: 'Nome' },
-				{ field: 'ativo', enableCellEdit: false, minWidth: 120, width: 250, displayName: 'Ativo' },
-				{ name: 'Editar/Deletar', enableCellEdit: false, width: 200,
-				cellTemplate:'<button class="btn btn-primary" ng-click="grid.appScope.editcliente(row)">Editar</button>  <button class="btn btn-primary" ng-click="grid.appScope.delcliente(row)">Deletar</button>'  }		
-			],
+	//$scope.http = "http://200.98.174.103:8080";
+	$scope.http = "http://127.0.0.1:8080";
 
-			data: [ 
-				{ 'idusuarios': "" }
-			]
+	$scope.gridOptions = {
+		enableSorting: false,
+		showGridFooter: true,
+		enableRowSelection: true,
+		enableSelectAll: false,
+		enableColumnResizing: true,
+		//enableCellEditOnFocus: true,
 
-		}; 			
+		columnDefs: [
+			{ field: 'idusuarios', enableCellEdit: false, minWidth: 50, width: 90, displayName: 'Codigo' },
+			{ field: 'nome', enableCellEdit: false, minWidth: 120, width: 250, displayName: 'Nome' },
+			{ field: 'ativo', enableCellEdit: false, minWidth: 120, width: 250, displayName: 'Ativo' },
+			{ name: 'Editar/Deletar', enableCellEdit: false, width: 200,
+			cellTemplate:'<button class="btn btn-primary" ng-click="grid.appScope.editcliente(row)">Editar</button>  <button class="btn btn-primary" ng-click="grid.appScope.delcliente(row)">Deletar</button>'  }		
+		],
+
+		data: [ 
+			{ 'idusuarios': "" }
+		]
+
+	}; 			
 
 	$scope.gridOptions.onRegisterApi = function(gridApi){
 		$scope.gridApi = gridApi;
@@ -76,8 +81,7 @@ app.controller('ctlUsuarios', function($scope, $http) {
 	$scope.getusuarios = function() {
 		$http({
 			method: 	"GET",
-//			url: 		"http://200.98.174.103:8080/usuarios/0",
-			url: 		"http://127.0.0.1:8080/usuarios/0",
+			url: 		$scope.http + "/usuarios/0",
 			headers: {
 				'Content-Type': 'application/x-www-form-urlencoded'
 			}

@@ -1,7 +1,84 @@
+    <div class="row">
+        <header>
+  			<nav class="navbar navbar-default">
+				<div class="container-fluid">
+					<div class="navbar-header">
+					<a class="navbar-brand">Sistema Contabil - DRE</a>
+					</div>
+					<ul class="nav navbar-nav">
+					<li class="active"><a href="#">Usuarios</a></li>
+					<li><a href="#">Clientes</a></li>
+					</ul>
+				</div>
+			</nav>
+        </header>
+    </div>
+
+    <div class="row">
+		<div class="container">
+		<h2>Cadastro de Usuarios</h2>
+		<form>
+			<div class="form-group">
+			<label for="email">Codigo</label>
+			<input type="email" class="form-control" id="codigo" placeholder="Digite codigo">
+			</div>
+			<div class="form-group">
+			<label for="pwd">Nome</label>
+			<input type="password" class="form-control" id="nome" placeholder="Digite nome">
+			</div>
+			<div class="checkbox">
+			<label><input type="checkbox">Ativo</label>
+			</div>
+			<button type="button" ng-click='chamada()' class="btn btn-primary">Consultar</button>
+		</form>
+		</div>
+    </div>
+
+    <div class="row">
+        <footer>
+            <div class="container" style="line-height: 50px; text-align: center;">
+                © SoftSeven - Sis.Contabil - v.1.0
+            </div>
+        </footer>
+    </div>
 
 
 
 
+
+
+
+
+
+        <div style="" class="row container" >
+
+			<div class="col-md-4 col-md-offset-4 ng-scope" style="margin-top: 20px;">
+
+				<label>Codigo</label>
+				<input type="text" name="" id="codigo" class="form-control" value="" pattern="" title="">
+				<label>Nome</label>
+				<input type="text" name="" id="nome" class="form-control" value="" pattern="" title="">
+				<label>Ativo</label>
+				<input type="text" name="" id="ativo" class="form-control" value="" pattern="" title="">
+
+				<button type="button" ng-click='chamada()' class="btn btn-primary">Consultar</button>
+			</div>
+        </div>
+
+        <div style="" class="row container" >
+			<div ui-grid="gridOptions" ui-grid-cellNav ui-grid-resize-columns ui-grid-edit ui-grid-selection class="telagrid" ></div>
+		</div>
+
+
+          <nav class="navbar navbar-default barratitulo textobranco" style="margin-bottom: 0px !important;">
+                <h3>&nbsp;&nbsp; Sistema Contabil - DRE</h3>
+            </nav>
+
+
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+      <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+    </ul>
 
 
 
