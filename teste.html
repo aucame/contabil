@@ -1,46 +1,182 @@
-<!doctype html>
-<html  ng-app="appUsuarios">
-	<head>
-		<title>Chamada API</title>
-		<meta charset="UTF-8">
+<!DOCTYPE html>
+<html>
+<head>
+	<title>teste</title>
+	<meta charset="UTF-8">
 
-     	<link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.css">
-		<link rel="styleSheet" type="text/css" href="bower_components/angular-ui-grid/ui-grid.min.css"/>
+	<link rel="stylesheet" type="text/css" href="lib/bootstrap/css/bootstrap.css">
+	<link rel="styleSheet" type="text/css" href="lib/uigrid/ui-grid.css"/>
 
-		<script src="bower_components/angular/angular.min.js"></script>
-		<script src="bower_components/angular-ui-grid/ui-grid.min.js"></script>
+	<script src="lib/angular/angular.js"></script>
+    <script src="lib/uigrid/ui-grid.js"></script>
 
-    	<script src="hello.js"></script>
+	<style>
+		.telanova{
+			width: 400px;
+			margin-left: auto;
+			margin-right: auto;
+			margin-top: 10px;
+		}
+		.telagrid{
+			width: 1100px;
+			margin-left: auto;
+			margin-right: auto;
+			margin-top: 10px;
+			height: 300px;
+		}
+	</style>
 
-		<style>
-			.myGrid {
-			width: 500px;
-			height: 250px;
+<script>
+	var app = angular.module('myapp', ['ui.grid', 'ui.grid.cellNav', 'ui.grid.resizeColumns', 'ui.grid.edit', 'ui.grid.selection']);
+
+	app.controller('mycontroller', function($scope, $http) {
+	
+			$scope.gridOptions = {
+				enableSorting: false,
+    			showGridFooter: true,
+				enableRowSelection: true,
+    			enableSelectAll: false,
+    			enableColumnResizing: true,
+    			//enableCellEditOnFocus: true,
+
+    			columnDefs: [
+      				{ field: 'codigo', enableCellEdit: false, minWidth: 50, width: 90, displayName: 'Codigo' },
+      				{ field: 'nome', enableCellEdit: false, minWidth: 120, width: 250, displayName: 'Nome' },
+      				{ field: 'endereco', enableCellEdit: false, minWidth: 120, width: 250, displayName: 'Endereço' },
+      				{ field: 'cidade', enableCellEdit: false, minWidth: 100, width: 150, displayName: 'Cidade' },
+      				{ field: 'cep', enableCellEdit: false, minWidth: 50, width: 100, displayName: 'CEP' },
+         			{ name: 'Editar/Deletar', enableCellEdit: false, width: 200,
+             		cellTemplate:'<button class="btn btn-primary" ng-click="grid.appScope.editcliente(row)">Editar</button>  <button class="btn btn-primary" ng-click="grid.appScope.delcliente(row)">Deletar</button>'  }		
+    			],
+
+    			data: [ 
+    				{ 'codigo': "", "nome": "", "endereco": "", "cidade": "", "cep": "" }
+    			]
+
+  			}; 			
+
+		$scope.gridOptions.onRegisterApi = function(gridApi){
+       		$scope.gridApi = gridApi;
+    	};
+
+    	$scope.novo = function() {
+    		$scope.cliente = { 'codigo': undefined, "nome": "", "endereco": "", "cidade": "", "cep": "" };
+    	};
+
+		$scope.gravar = function(cliente) {
+
+			if (cliente == undefined){
+				$scope.novo();
+				$scope.getcliente();
 			}
-		</style>
 
-	</head>
+			if (cliente.codigo == undefined){
+				//$http.post("http://localhost:8080/addcliente", $scope.cliente)
+				$http(
+					{
+						method: 	"post",
+						url: 		"http://localhost:8080/addcliente",
+						data: 		$scope.cliente,
+						headers: {
+							'Content-Type': 'application/json' 
+						}		
+					})
+				.then(function(data,status,headers,config){
+					$scope.novo();
+					$scope.getcliente();
+				});
+			} else {
+//				$http.post("insert.php?action=upd_cliente", $scope.cliente)
+				$http({
+						method: 	"post",
+						url: 		"http://localhost:8080/updcliente",
+						data: 		$scope.cliente,
+						headers: {
+							'Content-Type': 'application/json' 
+						}	
+				}).then(function(data,status,headers,config){
+					$scope.novo();
+					$scope.getcliente();					
+				});				
+			}
+		};
 
-	<body ng-controller="ctlUsuarios">
-		<div>
-			<p>retorno {{retorno.usuarios}}</p>
-		</div>
+		$scope.getcliente = function() {
+//			$http.get("insert.php?action=get_cliente")
+			$http.get("http://localhost:8080/getclientes")
+			.then(function(response){
+				$scope.gridOptions.data = response.data;
+			}, function(error){
+				console.log("Error = " + error);
+			});
+		};
 
-		<br>
+		$scope.editcliente = function(row){
 
-        <div class="col-md-4 col-md-offset-4 ng-scope" style="margin-top: 20px;">
+			var id = row.entity.codigo;
 
-			<label for="email">Codigo:</label>
+//			$http.post('insert.php?action=edit_cliente', { "id" : id }
+			$http.get('http://localhost:8080/getcliente/' + id
+			).then(function(response){
 
-			<input type="text" name="" id="input1/(\w+)/\u\1/g" class="form-control" value="" pattern="" title="">
+				$scope.posts = response.data;
 
-			<button type="button" ng-click='chamada()' class="btn btn-primary">Consultar</button>
-		</div>
+				$scope.cliente = {
+					'codigo': 	$scope.posts[0]['codigo'],
+					'nome': 	$scope.posts[0]['nome'],
+					'endereco': $scope.posts[0]['endereco'],
+					'cidade': 	$scope.posts[0]['cidade'],
+					'cep': 		$scope.posts[0]['cep']
+				};
 
-<div>
-	<div id="grid1" ui-grid="gridOptions" class="grid"></div>
+			}, function(error){
+				console.log("Error = " + error);
+			});
+
+		};
+
+		$scope.delcliente = function(row){
+			var id = row.entity.codigo;
+//			$http.post('insert.php?action=del_cliente', { "id" : id }
+//			$http.post('http://localhost:8080/delcliente/' + id
+			$http({
+				method: 	"delete",
+				url: 		"http://localhost:8080/delcliente/" + id,
+				headers: {
+					'Content-Type': 'application/x-www-form-urlencoded'
+				}
+			}).then(function(response){
+				$scope.novo();
+				$scope.getcliente();
+			}, function(error){
+				console.log("Error = " + error);
+			});
+
+		};
+
+		$scope.getcliente();
+
+	});
+</script>
+
+</head>
+<body ng-app="myapp"  ng-controller="mycontroller" >
+
+<div class="telanova">
+	<input type="text" maxlength="5" placeholder="Codigo" ng-model="cliente.codigo" class="form-control" disabled><br>
+	<input type="text" placeholder="Nome" ng-model="cliente.nome" class="form-control"><br>
+	<input type="text" placeholder="Endereço" ng-model="cliente.endereco" class="form-control"><br>
+	<input type="text" placeholder="Cidade" ng-model="cliente.cidade" class="form-control"><br>
+	<input type="text" placeholder="CEP" ng-model="cliente.cep" class="form-control"><br>
+	<input type="button" value="Novo" ng-click="novo()" class="btn btn-primary" />
+	<input type="button" value="Gravar" ng-click="gravar(cliente)" class="btn btn-primary" />
 </div>
 
+<br>
 
-	</body>
+<div>
+  <div ui-grid="gridOptions" ui-grid-cellNav ui-grid-resize-columns ui-grid-edit ui-grid-selection class="telagrid" ></div>
+</div>
+
+</body>
 </html>

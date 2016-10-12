@@ -49,21 +49,22 @@
 			<form>
 				<div class="form-group">
 				<label for="codigo">Codigo</label>
-				<input type="text" class="form-control" id="codigo" placeholder="Digite codigo">
+				<input type="text" ng-model="usuario.idusuario" class="form-control" id="codigo" placeholder="Digite Codigo">
 				</div>
 				<div class="form-group">
 				<label for="nome">Nome</label>
-				<input type="text" class="form-control" id="nome" placeholder="Digite nome">
+				<input type="text" ng-model="usuario.nome" class="form-control" id="nome" placeholder="Digite nome">
 				</div>
 				<div class="form-group">
 				<label for="senha">Senha</label>
-				<input type="password" class="form-control" id="nome" placeholder="Digite senha">
+				<input type="password" ng-model="usuario.senha" class="form-control" id="nome" placeholder="Digite senha">
 				</div>
 				<div class="checkbox">
-				<label><input type="checkbox">Usuario esta ativo</label>
+				<label><input type="checkbox" ng-model="usuario.ativo">Usuario esta ativo</label>
 				</div>
 				<br>
-				<button type="button" ng-click='chamada()' class="btn btn-primary">Consultar</button>
+				<button type="button" ng-click="novo()" class="btn btn-primary">Novo</button>
+				<button type="button" ng-click="gravar(usuario)" class="btn btn-primary">Gravar</button>
 			</form>
 
 			<div>

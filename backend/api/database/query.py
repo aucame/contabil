@@ -42,9 +42,10 @@ class MySqlQuery():
         data = self.execute(banco, query)
         for value in data:
             result.append({
-                'idusuarios': value['idusuarios'], 
+                'idusuario': value['idusuarios'], 
                 'nome': value['nome'], 
-                'ativo': value['ativo']
+                'ativo': False
+#                'ativo': value['ativo']
                 })
     
         retorno = {'cadusuarios': result}
@@ -53,7 +54,7 @@ class MySqlQuery():
     def cria_usuario(self, data):
         reg = json.loads(data)
         query = 'insert into {0}.{1}(idusuarios, nome, senha, ativo) values ({2}, "{3}", "{4}", {5})'.format(banco, tb_usuarios, 
-            reg['idusuarios'], 
+            reg['idusuario'], 
             reg['nome'], 
             reg['senha'], 
             int(reg['ativo'])
@@ -63,18 +64,24 @@ class MySqlQuery():
 
     def deleta_usuario(self, data):
         query = 'delete from {0}.{1} where idusuarios = {2}'.format(banco, tb_usuarios, 
-            int(data['idusuarios'])
+            int(data['idusuario'])
             )
         retorno = self.execute(banco, query)
 
     def altera_usuario(self, data):
+
         print(data)
+
         reg = json.loads(data)
-        query = 'update table {0}.{1} set nome = "{2}", ativo = {3} where idusuarios = {4}'.format(banco, tb_usuarios, 
+
+        query = 'update {0}.{1} set nome = "{2}" where idusuarios = {3}'.format(banco, tb_usuarios, 
             reg['nome'],
-            int(reg['ativo']), 
-            reg['idusuarios']
+            reg['idusuario']
             ) 
+
+        print(query)
+
+        retorno = self.execute(banco, query)
 
 #    def getLimitesSku(self, codFamilia, codFilial=False):
 #        query = '''

@@ -1,3 +1,30 @@
+			$http(
+				{
+					method: 	"post",
+					url: 		$scope.http + "/usuarios/0",
+					data: 		$scope.usuario,
+					headers: {
+						'Content-Type': 'application/json' 
+					}		
+				})
+			.then(function(data,status,headers,config){
+				$scope.novo();
+				$scope.getUsuarios();
+			});    
+    
+    
+			$http({
+					method: 	"post",
+					url: 		"http://localhost:8080/updcliente",
+					data: 		$scope.usuario,
+					headers: {
+						'Content-Type': 'application/json' 
+					}	
+			}).then(function(data,status,headers,config){
+				$scope.novo();
+				$scope.getUsuarios();					
+			});	
+    
     <div class="row">
         <header>
   			<nav class="navbar navbar-default">
