@@ -86,7 +86,9 @@ app.controller('ctlUsuarios', function($scope, $http) {
 				url: 		$scope.http + "/usuarios/0",
 				data: 		$scope.param,
 				headers: {
-					'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+                'Access-Control-Allow-Origin': '*',
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
 				}
 			}).then(function(response){
 				$scope.novo();
@@ -106,12 +108,15 @@ app.controller('ctlUsuarios', function($scope, $http) {
 			method: 	"GET",
 			url: 		$scope.http + "/usuarios/0",
 			headers: {
-				'Content-Type': 'application/x-www-form-urlencoded'
+				//'Access-Control-Allow-Origin': '*',
+                //'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+               // 'Access-Control-Allow-Headers': 'Content-Type, X-Requested-With',
+				'Content-Type': 'application/json'
 			}
 		}).then(function(response){
 			$scope.gridOptions.data = response.data.cadusuarios;
 		}, function(error){
-			console.log("Error... = " + error);
+			console.log("Error... = " + error.status);
 		});
 	};
 
@@ -120,7 +125,7 @@ app.controller('ctlUsuarios', function($scope, $http) {
 			method: 	"GET",
 			url: 		$scope.http + "/usuarios/" + row.entity.idusuario,
 			headers: {
-				'Content-Type': 'application/x-www-form-urlencoded'
+				'Content-Type': 'application/json'
 			}
 		}).then(function(response){
 			$scope.usuario = response.data.cadusuarios[0];
