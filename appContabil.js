@@ -1,9 +1,7 @@
 
-var app = angular.module('appUsuarios', ['ui.grid']);
+var app = angular.module('appContabil', ['ui.grid']);
 
-app.controller('ctlUsuarios', function($scope, $http, $location) {
-
-//17520520
+app.controller('ctlContabil', function($scope, $http, $location) {
 
 	$scope.http = "http://200.98.174.103:8080";
 	//$scope.http = "http://127.0.0.1:8080";
@@ -41,9 +39,9 @@ app.controller('ctlUsuarios', function($scope, $http, $location) {
 		$scope.gridApi = gridApi;
 	};
 
-	$scope.logout = function() {
+	$scope.cadUsuarios = function() {
 		//console.log($location.path('/contabil/'));
-		location.href = 'http://localhost/contabil/';
+		location.href = 'http://localhost/contabil/cad_usuarios.html';
 	};
 
 	$scope.novo = function() {

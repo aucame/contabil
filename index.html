@@ -1,14 +1,19 @@
 <!DOCTYPE html>
 
-<html lang="pt-br">
+<html ng-app="appContabil">
 
 <head>
     <title>Contabil - DRE</title>
     
     <meta charset="UTF-8">
     <link rel="icon" type="image/png" href="favicon.png" />
-    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" media="" title="no title" charset="utf-8">
-    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css" media="" title="no title" charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="styleSheet" type="text/css" href="bower_components/angular-ui-grid/ui-grid.min.css"/>
+
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/angular-ui-grid/ui-grid.min.js"></script>
+
+    <script src="appContabil.js"></script>
 
     <style type="text/css">
         .graystyle {
@@ -18,7 +23,7 @@
 
 </head>
 
-<body class="ng-scope" ng-app="ContabilApp">
+<body ng-controller="ctlContabil" class="ng-scope" >
 
     <header>
         <nav class="navbar navbar-default">
@@ -51,7 +56,7 @@
                         </div>
                         <hr>
                         <div class="form-actions">
-                            <button type="submit" class="btn btn-primary" ng-disabled="isDisabled"><span class="glyphicon glyphicon-log-in"></span> Entrar</button>
+                            <button type="submit" ng-click="cadUsuarios()" class="btn btn-primary" ng-disabled="isDisabled"><span class="glyphicon glyphicon-log-in"></span> Entrar</button>
                         </div>
                     </form>
                 </div>
