@@ -2,7 +2,7 @@
 
 <html ng-app="appUsuarios">
 	<head>
-		<title>Usuarios</title>
+		<title>Contabil - Usuarios</title>
 		<meta charset="UTF-8">
     	<link rel="icon" type="image/png" href="favicon.png" />
      	<link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.css">
@@ -11,7 +11,7 @@
 		<script src="bower_components/angular/angular.min.js"></script>
 		<script src="bower_components/angular-ui-grid/ui-grid.min.js"></script>
 
-    	<script src="cad_usuarios.js"></script>
+    	<script src="appUsuarios.js"></script>
 
 		<style>
 
@@ -37,11 +37,11 @@
 					</div>
 					<ul class="nav navbar-nav">
 					<li class="active"><a href="#">Usuarios</a></li>
-					<li><a href="#">Clientes</a></li>
-					<li><a href="#">Empresas</a></li>
-					<li><a href="#">Parametros</a></li>
-					<li><a href="#">Plano Contas</a></li>
-					<li><a href="#">Lancamentos</a></li>
+					<li><a href="#" ng-click="appCliente()">Clientes</a></li>
+					<li><a href="#" ng-click="appEmpresa()">Empresas</a></li>
+					<li><a href="#" ng-click="appParametro()">Parametros</a></li>
+					<li><a href="#" ng-click="appPlano()">Plano Contas</a></li>
+					<li><a href="#" ng-click="appLancamento()">Lancamentos</a></li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
 					<li><a href="#" ng-click="logout()" > Logout</a></li>
