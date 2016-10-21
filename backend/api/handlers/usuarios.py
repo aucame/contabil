@@ -13,7 +13,7 @@ class Handler(tornado.web.RequestHandler):
         #self.set_header("Access-Control-Allow-Headers" "Origin") #, X-Requested-With, Content-Type, Accept")
 
         self.set_header("Access-Control-Allow-Origin", "*")
-        self.set_header("Access-Control-Allow-Headers", "x-requested-with, Content-Type")
+        self.set_header("Access-Control-Allow-Headers", "x-requested-with, Content-Type, application/json")
         self.set_header('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, OPTIONS')        
 
     def get(self, id):
@@ -26,7 +26,9 @@ class Handler(tornado.web.RequestHandler):
     def post(self, id):
     
         data = self.request.body
+
         db_execute = query.MySqlQuery()
+
         result = db_execute.cria_usuario(data)
        
         self.write(data)
@@ -36,8 +38,6 @@ class Handler(tornado.web.RequestHandler):
         data = self.request.body
 
         db_execute = query.MySqlQuery()
-
-        #self.set_status(200, 'OK')
 
         result = db_execute.altera_usuario(data)
 

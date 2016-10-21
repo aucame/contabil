@@ -12,7 +12,7 @@ app.controller('ctlUsuarios', function($scope, $http, $location) {
 		'idusuario': undefined, 
 		'nome': undefined, 
 		'senha': undefined, 
-		'ativo': false 
+		'ativo': 0 
 	};
 
 	$scope.gridOptions = {
@@ -32,7 +32,7 @@ app.controller('ctlUsuarios', function($scope, $http, $location) {
 		],
 
 		data: [ 
-			{ 'idusuario': "", 'nome': '', 'ativo': false  }
+			{ 'idusuario': "", 'nome': '', 'ativo': 0  }
 		]
 
 	}; 			
@@ -70,7 +70,7 @@ app.controller('ctlUsuarios', function($scope, $http, $location) {
 	};
 
 	$scope.novo = function() {
-		$scope.usuario = { 'idusuario': undefined, 'nome': undefined, 'senha': undefined, 'ativo': undefined };
+		$scope.usuario = { 'idusuario': undefined, 'nome': undefined, 'senha': undefined, 'ativo': 0 };
 		//console.log($scope.usuario)
 	};
 
@@ -91,6 +91,10 @@ app.controller('ctlUsuarios', function($scope, $http, $location) {
 
 			console.log('POST')
 
+			usuario.idusuario = 0;
+
+			console.log($scope.param)
+
 			$http({
 				method: 	"POST",
 				url: 		$scope.http + "/usuarios/0",
@@ -108,6 +112,7 @@ app.controller('ctlUsuarios', function($scope, $http, $location) {
 		} else {
 
 			console.log('PUT')
+			console.log($scope.param)
 
 			$http({
 				method: 	"PUT",
