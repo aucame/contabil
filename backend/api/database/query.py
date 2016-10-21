@@ -53,6 +53,11 @@ class MySqlQuery():
 
     def cria_usuario(self, data):
         reg = json.loads(data)
+
+
+
+
+
         query = 'insert into {0}.{1}(idusuarios, nome, senha, ativo) values ({2}, "{3}", "{4}", {5})'.format(banco, tb_usuarios, 
             reg['idusuario'], 
             reg['nome'], 
@@ -60,6 +65,11 @@ class MySqlQuery():
             int(reg['ativo'])
             )
         retorno = self.execute(banco, query)
+
+    def proximo_codigo():
+
+        query = 'select * from {0}.{1}'
+
 
     def deleta_usuario(self, data):
         query = 'delete from {0}.{1} where idusuarios = {2}'.format(banco, tb_usuarios, 
