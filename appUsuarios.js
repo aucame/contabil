@@ -5,8 +5,8 @@ app.controller('ctlUsuarios', function($scope, $http, $location) {
 
 //17520520
 
-	$scope.http = "http://200.98.174.103:8080";
-	//$scope.http = "http://127.0.0.1:8080";
+	//$scope.http = "http://200.98.174.103:8080";
+	$scope.http = "http://127.0.0.1:8080";
 
 	$scope.usuario = { 
 		'idusuario': undefined, 
@@ -80,7 +80,7 @@ app.controller('ctlUsuarios', function($scope, $http, $location) {
 
 		$scope.param = angular.toJson(usuario);
 
-		//console.log($scope.param);
+		console.log($scope.param);
 
 		if (usuario == undefined){
 			$scope.novo();
@@ -96,7 +96,7 @@ app.controller('ctlUsuarios', function($scope, $http, $location) {
 				url: 		$scope.http + "/usuarios/0",
 				data: 		$scope.param,
 				headers: {
-					'Content-Type': 'application/json'
+				'Content-Type': 'application/json'
 				}
 			}).then(function(response){
 				$scope.novo();
@@ -114,9 +114,7 @@ app.controller('ctlUsuarios', function($scope, $http, $location) {
 				url: 		$scope.http + "/usuarios/0",
 				data: 		$scope.param,
 				headers: {
-                'Access-Control-Allow-Origin': '*',
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
+				'Content-Type': 'application/json'
 				}
 			}).then(function(response){
 				$scope.novo();
@@ -136,10 +134,7 @@ app.controller('ctlUsuarios', function($scope, $http, $location) {
 			method: 	"GET",
 			url: 		$scope.http + "/usuarios/0",
 			headers: {
-				//'Access-Control-Allow-Origin': '*',
-                //'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-               // 'Access-Control-Allow-Headers': 'Content-Type, X-Requested-With',
-				'Content-Type': 'application/json'
+			'Content-Type': 'application/json'
 			}
 		}).then(function(response){
 			$scope.gridOptions.data = response.data.cadusuarios;

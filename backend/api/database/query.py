@@ -44,7 +44,7 @@ class MySqlQuery():
             result.append({
                 'idusuario': value['idusuarios'], 
                 'nome': value['nome'], 
-                'ativo': False
+                'ativo': 0
 #                'ativo': value['ativo']
                 })
     
@@ -63,23 +63,27 @@ class MySqlQuery():
         retorno = self.execute(banco, query)
 
     def deleta_usuario(self, data):
+
         query = 'delete from {0}.{1} where idusuarios = {2}'.format(banco, tb_usuarios, 
             int(data['idusuario'])
             )
+
+        print(query)
+
         retorno = self.execute(banco, query)
 
     def altera_usuario(self, data):
 
-        print(data)
-
         reg = json.loads(data)
+
+        print(reg)
 
         query = 'update {0}.{1} set nome = "{2}" where idusuarios = {3}'.format(banco, tb_usuarios, 
             reg['nome'],
             reg['idusuario']
             ) 
 
-        print(query)
+#        print(query)
 
         retorno = self.execute(banco, query)
 
