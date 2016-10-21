@@ -5,14 +5,14 @@ app.controller('ctlUsuarios', function($scope, $http, $location) {
 
 //17520520
 
-	//$scope.http = "http://200.98.174.103:8080";
-	$scope.http = "http://127.0.0.1:8080";
+	$scope.http = "http://200.98.174.103:8080";
+	//$scope.http = "http://127.0.0.1:8080";
 
 	$scope.usuario = { 
 		'idusuario': undefined, 
-		'nome': undefined, 
+		'nome':  undefined, 
 		'senha': undefined, 
-		'ativo': 0 
+		'ativo': false 
 	};
 
 	$scope.gridOptions = {
@@ -32,7 +32,7 @@ app.controller('ctlUsuarios', function($scope, $http, $location) {
 		],
 
 		data: [ 
-			{ 'idusuario': "", 'nome': '', 'ativo': 0  }
+			{ 'idusuario': 0, 'nome': '', 'ativo': 0  }
 		]
 
 	}; 			
@@ -71,13 +71,9 @@ app.controller('ctlUsuarios', function($scope, $http, $location) {
 
 	$scope.novo = function() {
 		$scope.usuario = { 'idusuario': undefined, 'nome': undefined, 'senha': undefined, 'ativo': 0 };
-		//console.log($scope.usuario)
 	};
 
 	$scope.gravar = function(usuario) {
-
-		//console.log(usuario);
-
 		$scope.param = angular.toJson(usuario);
 
 		console.log($scope.param);
@@ -90,10 +86,6 @@ app.controller('ctlUsuarios', function($scope, $http, $location) {
 		if (usuario.idusuario == undefined){
 
 			console.log('POST')
-
-			usuario.idusuario = 0;
-
-			console.log($scope.param)
 
 			$http({
 				method: 	"POST",
@@ -110,10 +102,6 @@ app.controller('ctlUsuarios', function($scope, $http, $location) {
 			});
 
 		} else {
-
-			console.log('PUT')
-			console.log($scope.param)
-
 			$http({
 				method: 	"PUT",
 				url: 		$scope.http + "/usuarios/0",
@@ -127,9 +115,7 @@ app.controller('ctlUsuarios', function($scope, $http, $location) {
 			}, function(error){
 				console.log("Error... = " + error.status);
 			});
-		
 		}
-
 	};
 
 //id="input1/(\w+)/\u\1/g" 
@@ -153,11 +139,17 @@ app.controller('ctlUsuarios', function($scope, $http, $location) {
 			method: 	"GET",
 			url: 		$scope.http + "/usuarios/" + row.entity.idusuario,
 			headers: {
-				'Content-Type': 'application/json'
+			'Content-Type': 'application/json'
 			}
 		}).then(function(response){
 			$scope.usuario = response.data.cadusuarios[0];
-			console.log($scope.usuario)
+//			console.log($scope.usuario)
+
+
+			console.log($scope.usuario.ativo);
+
+
+
 		}, function(error){
 			console.log("Error... = " + error);
 		});
@@ -168,7 +160,8 @@ app.controller('ctlUsuarios', function($scope, $http, $location) {
 			method: 	"DELETE",
 			url: 		$scope.http + "/usuarios/" + row.entity.idusuario,
 			headers: {
-				'Content-Type': 'application/x-www-form-urlencoded'
+			'Content-Type': 'application/json'
+//				'Content-Type': 'application/x-www-form-urlencoded'
 			}
 		}).then(function(response){
 			$scope.novo();
@@ -181,5 +174,3 @@ app.controller('ctlUsuarios', function($scope, $http, $location) {
 	$scope.getUsuarios();
 
 });
-
-// http://stackoverflow.com/questions/35254742/tornado-server-enable-cors-requests

@@ -53,41 +53,26 @@ class MySqlQuery():
 
     def cria_usuario(self, data):
         reg = json.loads(data)
-
-        print('usuario = {0}'.format(reg['idusuario']))
-
         query = 'insert into {0}.{1}(idusuarios, nome, senha, ativo) values ({2}, "{3}", "{4}", {5})'.format(banco, tb_usuarios, 
             reg['idusuario'], 
             reg['nome'], 
             reg['senha'], 
             int(reg['ativo'])
             )
-
         retorno = self.execute(banco, query)
 
     def deleta_usuario(self, data):
-
         query = 'delete from {0}.{1} where idusuarios = {2}'.format(banco, tb_usuarios, 
-            int(data['idusuario'])
+            int(data)
             )
-
-        print(query)
-
         retorno = self.execute(banco, query)
 
     def altera_usuario(self, data):
-
         reg = json.loads(data)
-
-        print(reg)
-
         query = 'update {0}.{1} set nome = "{2}" where idusuarios = {3}'.format(banco, tb_usuarios, 
             reg['nome'],
             reg['idusuario']
             ) 
-
-#        print(query)
-
         retorno = self.execute(banco, query)
 
 #    def getLimitesSku(self, codFamilia, codFilial=False):

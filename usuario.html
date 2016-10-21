@@ -56,7 +56,7 @@
 			<form>
 				<div class="form-group">
 				<label for="codigo">Codigo</label>
-				<input type="text" ng-model="usuario.idusuario" class="form-control" id="codigo" placeholder="Digite Codigo">
+				<input type="text" ng-model="usuario.idusuario" class="form-control" id="codigo" ng-readonly="true" readonly>
 				</div>
 				<div class="form-group">
 				<label for="nome">Nome</label>
@@ -64,7 +64,7 @@
 				</div>
 				<div class="form-group">
 				<label for="senha">Senha</label>
-				<input type="password" ng-model="usuario.senha" class="form-control" id="nome" placeholder="Digite senha">
+				<input type="password" ng-model="usuario.senha" class="form-control" id="senha" placeholder="Digite senha">
 				</div>
 				<div class="checkbox">
 				<label><input type="checkbox" ng-model="usuario.ativo">Usuario esta ativo</label>
@@ -73,6 +73,8 @@
 				<button type="button" ng-click="novo()" class="btn btn-primary">Novo</button>
 				<button type="button" ng-click="gravar(usuario)" class="btn btn-primary">Gravar</button>
 			</form>
+
+ <tt>ativo = {{usuario.ativo}}</tt><br/>
 
 			<div>
 				<div ui-grid="gridOptions" ui-grid-cellNav ui-grid-resize-columns ui-grid-edit ui-grid-selection class="telagrid" ></div>
