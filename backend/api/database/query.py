@@ -35,7 +35,7 @@ class MySqlQuery():
         if (id == '0'):
             query = 'select * from {0}.{1}'.format(banco, tb_usuarios)
         else:
-            query = 'select *select * from {0}.{1} where idusuarios = {2}'.format(banco, tb_usuarios, int(id))
+            query = 'select * from {0}.{1} where idusuarios = {2}'.format(banco, tb_usuarios, int(id))
 
         result = []
 
@@ -55,35 +55,31 @@ class MySqlQuery():
         reg = json.loads(data)
 
         novo = self.proximo_codigo()
-        print(novo)
 
-        #query = 'insert into {0}.{1}(idusuarios, nome, senha, ativo, login) values ({2}, "{3}", "{4}", {5}, "{6}")'.format(banco, tb_usuarios, 
-        #    reg['idusuario'], 
-        #    reg['nome'], 
-        #    reg['senha'], 
-        #    int(reg['ativo']),
-        #    reg['login']
-        #    )
-        #retorno = self.execute(banco, query)
-
-    def proximo_codigo(self):
-        query = 'select max(idusuarios) from {0}.{1}'.format(banco, tb_usuarios)
-        print(query)
-
-        result = []
+        query = 'insert into {0}.{1}(idusuarios, nome, senha, ativo, login) values ({2}, "{3}", "{4}", "{5}", "{6}")'.format(banco, tb_usuarios, 
+            novo, 
+            reg['nome'], 
+            reg['senha'], 
+            reg['ativo'],
+            reg['login']
+            )
 
         retorno = self.execute(banco, query)
 
+    def proximo_codigo(self):
+        query = 'select max(idusuarios) from {0}.{1}'.format(banco, tb_usuarios)
+
+        prox = 0
+        retorno = self.execute(banco, query).fetchone()
+
         for value in retorno:
-            result.append({
-                'idusuario': value['idusuarios'], 
-                'nome': value['nome'], 
-                'ativo': value['ativo'],
-                'login': value['login']
-                })
+            prox = value
 
-        print(result)
+        if  prox == None:
+            prox = 0
 
+        prox = prox + 1
+        return prox
 
     def deleta_usuario(self, data):
         query = 'delete from {0}.{1} where idusuarios = {2}'.format(banco, tb_usuarios, 

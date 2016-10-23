@@ -34,7 +34,7 @@ app.controller('ctlUsuarios', function($scope, $http, $location) {
 		],
 
 		data: [ 
-			{ 'idusuario': 0, 'nome': '', 'login': '', 'ativo': false }
+			{ 'idusuario': 0, 'nome': '', 'login': '', 'ativo': '' }
 		]
 
 	}; 			
@@ -72,7 +72,13 @@ app.controller('ctlUsuarios', function($scope, $http, $location) {
 	};
 
 	$scope.novo = function() {
-		$scope.usuario = { 'idusuario': undefined, 'nome': undefined, 'login': undefined, 'senha': undefined, 'ativo': 0 };
+		$scope.usuario = { 
+						'idusuario': undefined, 
+						'nome':  '', 
+						'login': '', 
+						'senha': '', 
+						'ativo': '' 
+						};
 	};
 
 	$scope.gravar = function(usuario) {
