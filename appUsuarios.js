@@ -5,14 +5,15 @@ app.controller('ctlUsuarios', function($scope, $http, $location) {
 
 //17520520
 
-	$scope.http = "http://200.98.174.103:8080";
-	//$scope.http = "http://127.0.0.1:8080";
+	//$scope.http = "http://200.98.174.103:8080";
+	$scope.http = "http://127.0.0.1:8080";
 
 	$scope.usuario = { 
 		'idusuario': undefined, 
 		'nome':  undefined, 
 		'senha': undefined, 
-		'ativo': false 
+		'ativo': undefined,
+		'login': undefined
 	};
 
 	$scope.gridOptions = {
@@ -26,13 +27,14 @@ app.controller('ctlUsuarios', function($scope, $http, $location) {
 		columnDefs: [
 			{ field: 'idusuario', enableCellEdit: false, minWidth: 50, width: 90, displayName: 'Codigo' },
 			{ field: 'nome', enableCellEdit: false, minWidth: 120, width: 250, displayName: 'Nome' },
+			{ field: 'login', enableCellEdit: false, minWidth: 120, width: 250, displayName: 'Login' },
 			{ field: 'ativo', enableCellEdit: false, minWidth: 120, width: 250, displayName: 'Ativo' },
 			{ name: 'Opções', enableCellEdit: false, width: 200,
 			cellTemplate:'<button class="btn btn-primary" ng-click="grid.appScope.editUsuario(row)">Editar</button>  <button class="btn btn-primary" ng-click="grid.appScope.delusuario(row)">Deletar</button>'  }		
 		],
 
 		data: [ 
-			{ 'idusuario': 0, 'nome': '', 'ativo': 0  }
+			{ 'idusuario': 0, 'nome': '', 'login': '', 'ativo': false }
 		]
 
 	}; 			
@@ -70,7 +72,9 @@ app.controller('ctlUsuarios', function($scope, $http, $location) {
 	};
 
 	$scope.novo = function() {
-		$scope.usuario = { 'idusuario': undefined, 'nome': undefined, 'senha': undefined, 'ativo': 0 };
+		$scope.usuario = { 'idusuario': undefined, 'nome': undefined, 'login': undefined, 'senha': undefined, 'ativo': 0 };
+
+		console.log($scope.usuario);
 	};
 
 	$scope.gravar = function(usuario) {
@@ -78,43 +82,44 @@ app.controller('ctlUsuarios', function($scope, $http, $location) {
 
 		console.log($scope.param);
 
-		if (usuario == undefined){
+		if (usuario.nome == undefined){
 			$scope.novo();
 			$scope.getUsuarios();
-		}
+		}else{
 
-		if (usuario.idusuario == undefined){
+			if (usuario.idusuario == undefined){
 
-			console.log('POST')
+				console.log('POST')
 
-			$http({
-				method: 	"POST",
-				url: 		$scope.http + "/usuarios/0",
-				data: 		$scope.param,
-				headers: {
-				'Content-Type': 'application/json'
-				}
-			}).then(function(response){
-				$scope.novo();
-				$scope.getUsuarios();
-			}, function(error){
-				console.log("Error... = " + error.status);
-			});
+				$http({
+					method: 	"POST",
+					url: 		$scope.http + "/usuarios/0",
+					data: 		$scope.param,
+					headers: {
+					'Content-Type': 'application/json'
+					}
+				}).then(function(response){
+					$scope.novo();
+					$scope.getUsuarios();
+				}, function(error){
+					console.log("Error... = " + error.status);
+				});
 
-		} else {
-			$http({
-				method: 	"PUT",
-				url: 		$scope.http + "/usuarios/0",
-				data: 		$scope.param,
-				headers: {
-				'Content-Type': 'application/json'
-				}
-			}).then(function(response){
-				$scope.novo();
-				$scope.getUsuarios();
-			}, function(error){
-				console.log("Error... = " + error.status);
-			});
+			} else {
+				$http({
+					method: 	"PUT",
+					url: 		$scope.http + "/usuarios/0",
+					data: 		$scope.param,
+					headers: {
+					'Content-Type': 'application/json'
+					}
+				}).then(function(response){
+					$scope.novo();
+					$scope.getUsuarios();
+				}, function(error){
+					console.log("Error... = " + error.status);
+				});
+			}
 		}
 	};
 
@@ -143,12 +148,8 @@ app.controller('ctlUsuarios', function($scope, $http, $location) {
 			}
 		}).then(function(response){
 			$scope.usuario = response.data.cadusuarios[0];
-//			console.log($scope.usuario)
 
-
-			console.log($scope.usuario.ativo);
-
-
+			console.log($scope.usuario);
 
 		}, function(error){
 			console.log("Error... = " + error);
@@ -161,7 +162,6 @@ app.controller('ctlUsuarios', function($scope, $http, $location) {
 			url: 		$scope.http + "/usuarios/" + row.entity.idusuario,
 			headers: {
 			'Content-Type': 'application/json'
-//				'Content-Type': 'application/x-www-form-urlencoded'
 			}
 		}).then(function(response){
 			$scope.novo();

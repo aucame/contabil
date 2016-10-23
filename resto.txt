@@ -1,3 +1,32 @@
+<!DOCTYPE html>
+<html ng-app="app">
+  <head>
+    <link rel="stylesheet" href="style.css">
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular.min.js"></script>
+    <script src="script.js"></script>
+  </head>
+  <body ng-controller="myCtrl">
+    <form name="myForm" novalidate>
+      <div>
+        <label>First field*:</label>
+        <input type="text" name="myName" ng-model="myName" ng-minlength='{{validation.a.minlength}}' ng-maxlength="{{validation.a.maxlength}}" ng-required='validation.a.required'  />
+        <span ng-show="myForm.myName.$dirty && myForm.myName.$error.required">Required!</span>
+        <span ng-show="myForm.myName.$error.minlength">Too short!</span>
+        <span ng-show="myForm.myName.$error.maxlength">Too long!</span>
+      </div>
+      <div>
+        <label>Second field:</label>
+        <input type="text" name="myName1" ng-model="myName1" ng-minlength='{{validation.b.minlength}}' ng-maxlength="{{validation.b.maxlength}}" ng-required='validation.b.required' />
+        <span ng-show="myForm.myName.$dirty && myForm.myName1.$error.required">Required!</span>
+        <span ng-show="myForm.myName1.$error.minlength">Too short!</span>
+        <span ng-show="myForm.myName1.$error.maxlength">Too long!</span>
+      </div>
+   </form>
+  </body>
+</html>
+
+
+
 			$http(
 				{
 					method: 	"post",

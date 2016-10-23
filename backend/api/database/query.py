@@ -44,8 +44,8 @@ class MySqlQuery():
             result.append({
                 'idusuario': value['idusuarios'], 
                 'nome': value['nome'], 
-                'ativo': 0
-#                'ativo': value['ativo']
+                'ativo': value['ativo'],
+                'login': value['login']
                 })
     
         retorno = {'cadusuarios': result}
@@ -54,20 +54,16 @@ class MySqlQuery():
     def cria_usuario(self, data):
         reg = json.loads(data)
 
-
-
-
-
-        query = 'insert into {0}.{1}(idusuarios, nome, senha, ativo) values ({2}, "{3}", "{4}", {5})'.format(banco, tb_usuarios, 
+        query = 'insert into {0}.{1}(idusuarios, nome, senha, ativo, login) values ({2}, "{3}", "{4}", {5}, "{6}")'.format(banco, tb_usuarios, 
             reg['idusuario'], 
             reg['nome'], 
             reg['senha'], 
-            int(reg['ativo'])
+            int(reg['ativo']),
+            reg['login']
             )
         retorno = self.execute(banco, query)
 
     def proximo_codigo():
-
         query = 'select * from {0}.{1}'
 
 
@@ -79,9 +75,11 @@ class MySqlQuery():
 
     def altera_usuario(self, data):
         reg = json.loads(data)
-        query = 'update {0}.{1} set nome = "{2}" where idusuarios = {3}'.format(banco, tb_usuarios, 
+        query = 'update {0}.{1} set nome = "{2}", ativo = "{4}", login="{5}" where idusuarios = {3}'.format(banco, tb_usuarios, 
             reg['nome'],
-            reg['idusuario']
+            reg['idusuario'],
+            reg['ativo'],
+            reg['login']
             ) 
         retorno = self.execute(banco, query)
 
