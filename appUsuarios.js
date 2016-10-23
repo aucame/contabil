@@ -73,24 +73,16 @@ app.controller('ctlUsuarios', function($scope, $http, $location) {
 
 	$scope.novo = function() {
 		$scope.usuario = { 'idusuario': undefined, 'nome': undefined, 'login': undefined, 'senha': undefined, 'ativo': 0 };
-
-		console.log($scope.usuario);
 	};
 
 	$scope.gravar = function(usuario) {
 		$scope.param = angular.toJson(usuario);
-
-		console.log($scope.param);
-
 		if (usuario.nome == undefined){
 			$scope.novo();
 			$scope.getUsuarios();
 		}else{
 
 			if (usuario.idusuario == undefined){
-
-				console.log('POST')
-
 				$http({
 					method: 	"POST",
 					url: 		$scope.http + "/usuarios/0",
@@ -148,9 +140,6 @@ app.controller('ctlUsuarios', function($scope, $http, $location) {
 			}
 		}).then(function(response){
 			$scope.usuario = response.data.cadusuarios[0];
-
-			console.log($scope.usuario);
-
 		}, function(error){
 			console.log("Error... = " + error);
 		});

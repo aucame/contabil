@@ -35,7 +35,7 @@ class MySqlQuery():
         if (id == '0'):
             query = 'select * from {0}.{1}'.format(banco, tb_usuarios)
         else:
-            query = 'select * from {0}.{1} where idusuarios = {2}'.format(banco, tb_usuarios, int(id))
+            query = 'select *select * from {0}.{1} where idusuarios = {2}'.format(banco, tb_usuarios, int(id))
 
         result = []
 
@@ -54,17 +54,35 @@ class MySqlQuery():
     def cria_usuario(self, data):
         reg = json.loads(data)
 
-        query = 'insert into {0}.{1}(idusuarios, nome, senha, ativo, login) values ({2}, "{3}", "{4}", {5}, "{6}")'.format(banco, tb_usuarios, 
-            reg['idusuario'], 
-            reg['nome'], 
-            reg['senha'], 
-            int(reg['ativo']),
-            reg['login']
-            )
+        novo = self.proximo_codigo()
+        print(novo)
+
+        #query = 'insert into {0}.{1}(idusuarios, nome, senha, ativo, login) values ({2}, "{3}", "{4}", {5}, "{6}")'.format(banco, tb_usuarios, 
+        #    reg['idusuario'], 
+        #    reg['nome'], 
+        #    reg['senha'], 
+        #    int(reg['ativo']),
+        #    reg['login']
+        #    )
+        #retorno = self.execute(banco, query)
+
+    def proximo_codigo(self):
+        query = 'select max(idusuarios) from {0}.{1}'.format(banco, tb_usuarios)
+        print(query)
+
+        result = []
+
         retorno = self.execute(banco, query)
 
-    def proximo_codigo():
-        query = 'select * from {0}.{1}'
+        for value in retorno:
+            result.append({
+                'idusuario': value['idusuarios'], 
+                'nome': value['nome'], 
+                'ativo': value['ativo'],
+                'login': value['login']
+                })
+
+        print(result)
 
 
     def deleta_usuario(self, data):
@@ -82,26 +100,3 @@ class MySqlQuery():
             reg['login']
             ) 
         retorno = self.execute(banco, query)
-
-#    def getLimitesSku(self, codFamilia, codFilial=False):
-#        query = '''
-#              SELECT COD_FILIAL, COD_FAMILIA, SUM(NUM_RESTRICAO) QTD_LIMITES
-#                FROM USR_GRPLOJAS.MAG_T_GL_LIMITE_SKU
-#                WHERE cod_familia = {0}'''.format(int(codFamilia))
-#
-#     	if codFilial:
-#            query += ''' AND COD_FILIAL = {0} '''.format(codFilial)
-#
-#        query += '''GROUP BY COD_FILIAL, COD_FAMILIA'''
-#
-#        data = self.execute('mlpsi2', query)
-#
-#        result = []
-#        for value in data:
-#            result.append({'Filial': value[0], 'Familia': value[1], 'Limite': value[2] })
-#
-#        skulimits = {'skulimits': result}
-#
-#        skulimits = json.dumps(skulimits, sort_keys = False, indent = 4)
-#
-#        return skulimits
