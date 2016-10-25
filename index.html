@@ -9,6 +9,7 @@
     <link rel="icon" type="image/png" href="favicon.png" />
     <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.css">
     <link rel="styleSheet" type="text/css" href="bower_components/angular-ui-grid/ui-grid.min.css"/>
+    <link rel="styleSheet" type="text/css" href="bower_components/font-awesome/css/font-awesome.min.css"/>
 
     <script src="bower_components/angular/angular.min.js"></script>
     <script src="bower_components/angular-ui-grid/ui-grid.min.js"></script>
@@ -40,23 +41,21 @@
             <div class="panel panel-default">
                 <div class="panel-body">
                     <h2><i class="fa fa-caret-square-o-right"></i> Log in</h2>
-                    <form style="" class="ng-dirty ng-valid-parse ng-valid ng-valid-required" name="form" ng-submit="login(user)" role="form">
+                    <form style="" name="form" ng-submit="principal(user)" role="form">
                         <hr>
-                        <div class="form-group" ng-class="{ 'has-error': form.id_user.$dirty &amp;&amp; form.id_user.$error.required }">
+                        <div class="form-group">
                             <label for="id_user">Usuário</label>
-                            <input style="" name="id_user" id="id_user" class="form-control ng-untouched ng-not-empty ng-dirty ng-valid-parse ng-valid ng-valid-required"
-                                ng-model="user.username" required="" type="text">
-                            <span ng-show="form.id_user.$dirty &amp;&amp; form.id_user.$error.required" class="help-block ng-hide">Usuário é Obrigatório</span>
+                            <input style="" name="id_user" id="id_user" class="form-control"
+                                ng-model="user.username" type="text">
                         </div>
-                        <div class="form-group" ng-class="{ 'has-error': form.senha.$dirty &amp;&amp; form.senha.$error.required }">
+                        <div class="form-group">
                             <label for="senha">Senha</label>
-                            <input style="" name="senha" id="senha" class="form-control ng-untouched ng-not-empty ng-dirty ng-valid-parse ng-valid ng-valid-required"
-                                ng-model="user.password" required="" type="password">
-                            <span ng-show="form.senha.$dirty &amp;&amp; form.senha.$error.required" class="help-block ng-hide">Senha é Obrigatória</span>
+                            <input style="" name="senha" id="senha" class="form-control"
+                                ng-model="user.password" type="password">
                         </div>
                         <hr>
                         <div class="form-actions">
-                            <button type="submit" ng-click="principal()" class="btn btn-primary" ng-disabled="isDisabled"><span class="glyphicon glyphicon-log-in"></span> Entrar</button>
+                            <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-log-in"></span> Entrar</button>
                         </div>
                     </form>
                 </div>
