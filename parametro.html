@@ -3,13 +3,16 @@
 <html ng-app="appParametro">
 	<head>
 		<title>Contabil - Parametros</title>
+
 		<meta charset="UTF-8">
-    	<link rel="icon" type="image/png" href="favicon.png" />
-     	<link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.css">
+		<link rel="icon" type="image/png" href="favicon.png" />
+		<link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.css">
 		<link rel="styleSheet" type="text/css" href="bower_components/angular-ui-grid/ui-grid.min.css"/>
 
 		<script src="bower_components/angular/angular.min.js"></script>
 		<script src="bower_components/angular-ui-grid/ui-grid.min.js"></script>
+		<script src="bower_components/jquery/dist/jquery.min.js"></script>    
+		<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 
     	<script src="appParametro.js"></script>
 
@@ -32,7 +35,7 @@
 					<li><a href="#" ng-click="appLancamento()">Lancamentos</a></li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
-					<li><a href="#" ng-click="logout()" > Logout</a></li>
+					<li><a href="#" ng-click="logout()" ><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
 					</ul>
 				</div>
 			</nav>
