@@ -44,7 +44,7 @@
 					<li><a href="#" ng-click="appLancamento()">Lancamentos</a></li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
-					<li><a href="#" ng-click="logout()" > Logout</a></li>
+					<li><a href="#" ng-click="logout()"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
 					</ul>
 				</div>
 			</nav>
@@ -64,18 +64,18 @@
 				</div>
 				<div class="form-group">
 				<label for="login">Login</label>
-				<input type="text" maxlength="20" ng-model="usuario.login" class="form-control" id="login" placeholder="Digite login">
+				<input type="text" maxlength="20" ng-model="usuario.login" class="form-control" id="login" data-toggle="tooltip" title="Informe o Usuario" placeholder="Digite login">
 				</div>
 				<div class="form-group">
 				<label for="senha">Senha</label>
-				<input type="password" maxlength="30" ng-model="usuario.senha" class="form-control" id="senha" placeholder="Digite senha">
+				<input type="password" maxlength="30" ng-model="usuario.senha" class="form-control" id="senha" data-toggle="tooltip" title="Informe a senha" placeholder="Digite senha">
 				</div>
 				<div class="checkbox">
 				<label><input type="checkbox" ng-model="usuario.ativo" ng-true-value="'sim'" ng-false-value="'nao'">Usuario esta ativo</label>
 				</div>
 				<br>
-				<button type="button" ng-click="novo()" class="btn btn-primary">Novo</button>
-				<button type="button" ng-click="gravar(usuario)" class="btn btn-primary">Gravar</button>
+				<button type="button" ng-click="novo()" class="btn btn-primary"><span class="glyphicon glyphicon-ok"></span> Novo</button>
+				<button type="button" ng-click="gravar(usuario)" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk"></span> Gravar</button>
 			</form>
 
 			<div>
