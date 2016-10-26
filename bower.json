@@ -17,6 +17,7 @@
   "dependencies": {
     "bootstrap": "^3.3.7",
     "font-awesome": "fontawesome#^4.6.3",
-    "angular-ui-grid": "uigrid#^3.2.7"
+    "angular-ui-grid": "uigrid#^3.2.7",
+    "sweetalert": "^1.1.3"
   }
 }

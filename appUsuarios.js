@@ -155,18 +155,35 @@ app.controller('ctlUsuarios', function($scope, $http, $location) {
 	};
 
 	$scope.delusuario = function(row){
-		$http({
-			method: 	"DELETE",
-			url: 		$scope.http + "/usuarios/" + row.entity.idusuario,
-			headers: {
-			'Content-Type': 'application/json'
-			}
-		}).then(function(response){
-			$scope.novo();
-			$scope.getUsuarios();
-		}, function(error){
-			console.log("Error = " + error.status);
+
+		swal({
+			title: "",
+			text: "Deleta o registro ?",
+			type: "warning",
+			showCancelButton: true,
+			confirmButtonColor: "#DD6B55",
+			cancelButtonText: "Não",
+			confirmButtonText: "Sim",
+			closeOnConfirm: false
+		},
+		function(){
+
+			$http({
+				method: 	"DELETE",
+				url: 		$scope.http + "/usuarios/" + row.entity.idusuario,
+				headers: {
+				'Content-Type': 'application/json'
+				}
+			}).then(function(response){
+				$scope.novo();
+				$scope.getUsuarios();
+			}, function(error){
+				console.log("Error = " + error.status);
+			});
+
+			swal({title: "", text: "Registro deletado com sucesso.", type: "success"});
 		});
+
 	};
 
 	$scope.getUsuarios();
