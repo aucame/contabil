@@ -13,12 +13,37 @@
 
     <script src="bower_components/angular/angular.min.js"></script>
     <script src="bower_components/angular-ui-grid/ui-grid.min.js"></script>
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>    
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 
     <script src="appContabil.js"></script>
 
     <style type="text/css">
         .graystyle {
             background-color: #f5f5f5;
+        }
+        .hint + .tooltip > .tooltip-inner {
+            background-color: #337ab7; 
+            color: #FFFFFF; 
+            border: 1px solid black; 
+            padding: 15px;
+            font-size: 16px;
+        }
+        /* Tooltip on top */
+        .hint + .tooltip.top > .tooltip-arrow {
+            border-top: 5px solid black;
+        }
+        /* Tooltip on bottom */
+        .hint + .tooltip.bottom > .tooltip-arrow {
+            border-bottom: 5px solid black;
+        }
+        /* Tooltip on left */
+        .hint + .tooltip.left > .tooltip-arrow {
+            border-left: 5px solid black;
+        }
+        /* Tooltip on right */
+         .hint + .tooltip.right > .tooltip-arrow {
+            border-right: 5px solid black;
         }
     </style>
 

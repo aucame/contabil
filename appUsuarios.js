@@ -1,3 +1,6 @@
+$(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();
+});
 
 var app = angular.module('appUsuarios', ['ui.grid']);
 
@@ -30,7 +33,7 @@ app.controller('ctlUsuarios', function($scope, $http, $location) {
 			{ field: 'login', enableCellEdit: false, minWidth: 120, width: 250, displayName: 'Login' },
 			{ field: 'ativo', enableCellEdit: false, minWidth: 120, width: 250, displayName: 'Ativo' },
 			{ name: 'Opções', enableCellEdit: false, width: 200,
-			cellTemplate:'<button class="btn btn-primary" ng-click="grid.appScope.editUsuario(row)">Editar</button>  <button class="btn btn-primary" ng-click="grid.appScope.delusuario(row)">Deletar</button>'  }		
+			cellTemplate:'<button class="btn btn-primary" ng-click="grid.appScope.editUsuario(row)"><span class="glyphicon glyphicon-edit"></span> Editar</button>  <button class="btn btn-primary" ng-click="grid.appScope.delusuario(row)"><span class="glyphicon glyphicon-trash"></span> Deletar</button>'  }		
 		],
 
 		data: [ 
