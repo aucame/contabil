@@ -30,7 +30,8 @@ app.controller('ctlPrincipal', function($scope, $location, $window) {
 		location.href = 'http://' + $location.host() + '/contabil/';
 	};
 
-	$scope.login = $window.sessionStorage.getItem('login');
-	console.log($scope.login)
+
+	$scope.login = angular.fromJson($window.sessionStorage.getItem('login'));
+	console.log('Buscou da sessao = ' + $scope.login.username);
 
 });
