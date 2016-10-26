@@ -1,6 +1,6 @@
 var app = angular.module('appPrincipal',[]);
 
-app.controller('ctlPrincipal', function($scope, $location) {
+app.controller('ctlPrincipal', function($scope, $location, $window) {
 
 	$scope.appUsuario = function() {
 		location.href = 'http://' + $location.host() + '/contabil/usuario.html';
@@ -29,5 +29,8 @@ app.controller('ctlPrincipal', function($scope, $location) {
 	$scope.logout = function() {
 		location.href = 'http://' + $location.host() + '/contabil/';
 	};
+
+	$scope.login = $window.sessionStorage.getItem('login');
+	console.log($scope.login)
 
 });
