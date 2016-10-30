@@ -76,12 +76,12 @@ app.controller('ctlUsuarios', function($scope, $http, $location) {
 
 	$scope.novo = function() {
 		$scope.usuario = { 
-						'idusuario': undefined, 
-						'nome':  '', 
-						'login': '', 
-						'senha': '', 
-						'ativo': '' 
-						};
+		'idusuario': undefined, 
+		'nome':  '', 
+		'login': '', 
+		'senha': '', 
+		'ativo': '' 
+		};
 	};
 
 	$scope.gravar = function(usuario) {
@@ -162,8 +162,8 @@ app.controller('ctlUsuarios', function($scope, $http, $location) {
 			type: "warning",
 			showCancelButton: true,
 			confirmButtonColor: "#DD6B55",
-			cancelButtonText: "Não",
 			confirmButtonText: "Sim",
+			cancelButtonText: "Não",
 			closeOnConfirm: false
 		},
 		function(){

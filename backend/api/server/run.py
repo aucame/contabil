@@ -1,6 +1,6 @@
 import tornado.web
 from configuration import server
-from handlers import default, usuarios
+from handlers import default, usuarios, clientes
 
 class Web(tornado.web.Application):
     def __init__(self):
@@ -10,6 +10,7 @@ class Web(tornado.web.Application):
             #(r'/(\w+)',default.Handler)
             #(r'/usuarios/?',usuarios.Handler),
             (r'/usuarios/([0-9]+)',usuarios.Handler)
+            (r'/clientes/([0-9]+)',clientes.Handler)
         ]
 
         tornado.web.Application.__init__(self,handlers)

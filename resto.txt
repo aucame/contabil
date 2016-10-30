@@ -1,3 +1,57 @@
+<form>
+
+<div class="row">
+  <div class="col-sm-9">
+				<label for="codigo">Codigo</label>
+				<input type="text" maxlength="10" ng-model="cliente.idusuario" class="form-control hint" id="codigo" ng-readonly="true" disabled>
+				<label for="nome">Nome</label>
+				<input type="text" maxlength="50" ng-model="cliente.nome" class="form-control hint" id="nome" data-toggle="tooltip" title="Informe o Nome" placeholder="Digite nome">
+
+    <div class="row">
+      <div class="col-xs-8 col-sm-6">
+				<label for="fone">Fone Comercial</label>
+				<input type="text" maxlength="20" ng-model="cliente.fone" class="form-control hint" id="fone" data-toggle="tooltip" title="Informe o Telefone" placeholder="Digite telefone">
+
+      </div>
+      <div class="col-xs-4 col-sm-6">
+				<label for="fone">Fone Residencial</label>
+				<input type="text" maxlength="20" ng-model="cliente.fone" class="form-control hint" id="fone" data-toggle="tooltip" title="Informe o Telefone" placeholder="Digite telefone">
+
+      </div>
+    </div>
+  </div>
+</div>
+
+</form>
+
+
+
+			<form >
+				<div class="form-group">
+				<label for="codigo">Codigo</label>
+				<input type="text" maxlength="10" ng-model="cliente.idusuario" class="form-control hint" id="codigo" ng-readonly="true" disabled>
+				</div>
+
+				<div class="form-group">
+				<label for="nome">Nome</label>
+				<input type="text" maxlength="50" ng-model="cliente.nome" class="form-control hint" id="nome" data-toggle="tooltip" title="Informe o Nome" placeholder="Digite nome">
+				</div>
+
+				<div class="row">
+<div class="col-sm-6">
+				<label for="fone">Fone Comercial</label>
+				<input type="text" maxlength="20" ng-model="cliente.fone" class="form-control hint" id="fone" data-toggle="tooltip" title="Informe o Telefone" placeholder="Digite telefone">
+</div>
+				</div>
+			</form>
+			<br>
+			<div>
+				<button type="button" ng-click="novo()" class="btn btn-primary"><span class="glyphicon glyphicon-ok"></span> Novo</button>
+				<button type="button" ng-click="gravar(cliente)" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk"></span> Gravar</button>
+			</div>
+
+
+
 
 			swal({
 				title: "",
