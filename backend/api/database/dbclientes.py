@@ -57,7 +57,7 @@ class MySqlQuery():
 
         idcliente = self.proximo_codigo()
 
-        query = 'insert into {0}.{1}(idcliente, nome, endereco, atifonecomercialvo, foneresidencial) values ({2}, "{3}", "{4}", "{5}", "{6}")'.format(banco, tb_tabela, 
+        query = 'insert into {0}.{1}(idcliente, nome, endereco, fonecomercial, foneresidencial) values ({2}, "{3}", "{4}", "{5}", "{6}")'.format(banco, tb_tabela, 
             idcliente, 
             reg['nome'], 
             reg['endereco'], 
@@ -82,7 +82,7 @@ class MySqlQuery():
         prox = prox + 1
         return prox
 
-    def deleta_usuario(self, data):
+    def deleta_cliente(self, data):
         query = 'delete from {0}.{1} where idcliente = {2}'.format(banco, tb_tabela, 
             int(data)
             )

@@ -83,17 +83,19 @@ app.controller('ctlCliente', function($scope, $http, $location) {
 		};
 	};
 
-	$scope.gravar = function(usuario) {
+	$scope.gravar = function(cliente) {
+
 		$scope.param = angular.toJson(cliente);
+
 		if (cliente.nome == undefined){
 			$scope.novo();
 			$scope.getcliente();
 		}else{
 
-			if (usuario.idcliente == undefined){
+			if (cliente.idcliente == undefined){
 				$http({
 					method: 	"POST",
-					url: 		$scope.http + "/cliente/0",
+					url: 		$scope.http + "/clientes/0",
 					data: 		$scope.param,
 					headers: {
 					'Content-Type': 'application/json'
@@ -108,7 +110,7 @@ app.controller('ctlCliente', function($scope, $http, $location) {
 			} else {
 				$http({
 					method: 	"PUT",
-					url: 		$scope.http + "/cliente/0",
+					url: 		$scope.http + "/clientes/0",
 					data: 		$scope.param,
 					headers: {
 					'Content-Type': 'application/json'
@@ -128,12 +130,12 @@ app.controller('ctlCliente', function($scope, $http, $location) {
 	$scope.getcliente = function() {
 		$http({
 			method: 	"GET",
-			url: 		$scope.http + "/cliente/0",
+			url: 		$scope.http + "/clientes/0",
 			headers: {
 			'Content-Type': 'application/json'
 			}
 		}).then(function(response){
-			$scope.gridOptions.data = response.data.cadcliente;
+			$scope.gridOptions.data = response.data.cadclientes;
 		}, function(error){
 			console.log("Error... = " + error.status);
 		});
@@ -142,12 +144,12 @@ app.controller('ctlCliente', function($scope, $http, $location) {
 	$scope.editcliente = function(row){
 		$http({
 			method: 	"GET",
-			url: 		$scope.http + "/cliente/" + row.entity.idcliente,
+			url: 		$scope.http + "/clientes/" + row.entity.idcliente,
 			headers: {
 			'Content-Type': 'application/json'
 			}
 		}).then(function(response){
-			$scope.cliente = response.data.cadcliente[0];
+			$scope.cliente = response.data.cadclientes[0];
 		}, function(error){
 			console.log("Error... = " + error);
 		});
@@ -169,7 +171,7 @@ app.controller('ctlCliente', function($scope, $http, $location) {
 
 			$http({
 				method: 	"DELETE",
-				url: 		$scope.http + "/cliente/" + row.entity.idcliente,
+				url: 		$scope.http + "/clientes/" + row.entity.idcliente,
 				headers: {
 				'Content-Type': 'application/json'
 				}
