@@ -12,13 +12,19 @@ app.controller('ctlContabil', function($scope, $location, $window) {
       };
 
 	$scope.principal = function(user) {
+//		$scope.login = angular.toJson($scope.user);
 
-		if (user == undefined || user.username == undefined || user.password == undefined || user.username == '' || user.password == '' ) {
+		$scope.user = {"username": "admin", "password": "admin"}
+
+		if ($scope.user == undefined || 
+		    $scope.user.username == undefined || 
+			$scope.user.password == undefined ||  
+			$scope.user.username == '' || 
+			$scope.user.password == '' ) {
 			swal({title: "", text: "Informe usuario e senha !!!", type: "error"});
 		}else{
-			$scope.login = angular.toJson($scope.user);
-			$window.sessionStorage.setItem('login', $scope.login);
-
+			$scope.param = angular.toJson($scope.user)
+			$window.sessionStorage.setItem('login', $scope.param);
 			location.href = 'http://' + $location.host() + '/contabil/principal.html';
 		}
 		
