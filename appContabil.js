@@ -9,7 +9,7 @@ app.controller('ctlContabil', function($scope, $location, $window) {
 
 	$scope.doGreeting = function(greeting) {
         $window.alert('teste');
-      };
+    };
 
 	$scope.principal = function(user) {
 //		$scope.login = angular.toJson($scope.user);
@@ -29,5 +29,7 @@ app.controller('ctlContabil', function($scope, $location, $window) {
 		}
 		
 	};
+
+	$window.sessionStorage.removeItem('login');
 
 });

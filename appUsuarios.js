@@ -4,7 +4,7 @@ $(document).ready(function(){
 
 var app = angular.module('appUsuarios', ['ui.grid']);
 
-app.controller('ctlUsuarios', function($scope, $http, $location) {
+app.controller('ctlUsuarios', function($scope, $http, $location, $window) {
 
 //17520520
 
@@ -185,6 +185,18 @@ app.controller('ctlUsuarios', function($scope, $http, $location) {
 		});
 
 	};
+
+	try {
+		$scope.login = angular.fromJson($window.sessionStorage.getItem('login'));
+
+		if($scope.login == null){
+			$scope.logout();
+		};
+
+		} catch(e) {
+			console.log('erro');
+			$scope.logout();
+		};
 
 	$scope.getUsuarios();
 
