@@ -18,6 +18,7 @@
 		<script src="bower_components/jquery/dist/jquery.min.js"></script>    
 		<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 		<script src="bower_components/sweetalert/dist/sweetalert.min.js"></script>
+		<script src='bower_components/ngMask/dist/ngMask.min.js'></script>
 
     	<script src="appCliente.js"></script>
 
@@ -66,11 +67,11 @@
 				<div class="form-inline .col-md-6">
 					<div class="form-group">
 							<label for="fonecomercial">Fone Comercial</label>
-							<input type="text" maxlength="20" ng-model="cliente.fonecomercial" class="form-control hint" id="fone" data-toggle="tooltip" title="Informe o Telefone" placeholder="Digite telefone">
+							<input type="text" maxlength="20" mask="(99) 9?9999-9999" ng-model="cliente.fonecomercial" class="form-control hint" id="fone" data-toggle="tooltip" title="Informe o Telefone" placeholder="Digite telefone">
 					</div>
 					<div class="form-group">
 							<label for="foneresidencial">Fone Residencial</label>
-							<input type="text" maxlength="20" ng-model="cliente.foneresidencial" class="form-control hint" id="fone" data-toggle="tooltip" title="Informe o Telefone" placeholder="Digite telefone">
+							<input type="text" maxlength="20" mask="(99) 9?9999-9999" ng-model="cliente.foneresidencial" class="form-control hint" id="fone" data-toggle="tooltip" title="Informe o Telefone" placeholder="Digite telefone">
 					</div>
 				</div>
 				<br>

@@ -2,7 +2,7 @@ $(document).ready(function(){
     $('[data-toggle="tooltip"]').tooltip();
 });
 
-var app = angular.module('appCliente', ['ui.grid']);
+var app = angular.module('appCliente', ['ui.grid','ngMask']);
 
 app.controller('ctlCliente', function($scope, $http, $location) {
 
@@ -28,9 +28,9 @@ app.controller('ctlCliente', function($scope, $http, $location) {
 		columnDefs: [
 			{ field: 'idcliente', enableCellEdit: false, minWidth: 50, width: 80, displayName: 'Codigo' },
 			{ field: 'nome', enableCellEdit: false, minWidth: 120, width: 250, displayName: 'Nome' },
-			{ field: 'endereco', enableCellEdit: false, minWidth: 120, width: 250, displayName: 'Endereco' },
-			{ field: 'fonecomercial', enableCellEdit: false, minWidth: 120, width: 200, displayName: 'Fone Comercial' },
-			{ field: 'foneresidencial', enableCellEdit: false, minWidth: 120, width: 200, displayName: 'Fone Residencial' },
+			{ field: 'endereco', enableCellEdit: false, minWidth: 120, width: 300, displayName: 'Endereco' },
+			{ field: 'fonecomercial', enableCellEdit: false, minWidth: 120, width: 150, displayName: 'Fone Comercial' },
+			{ field: 'foneresidencial', enableCellEdit: false, minWidth: 120, width: 150, displayName: 'Fone Residencial' },
 			{ name: 'Opções', enableCellEdit: false, width: 200,
 			cellTemplate:'<button class="btn btn-primary" ng-click="grid.appScope.editcliente(row)"><span class="glyphicon glyphicon-edit"></span> Editar</button>  <button class="btn btn-primary" ng-click="grid.appScope.delcliente(row)"><span class="glyphicon glyphicon-trash"></span> Deletar</button>'  }		
 		],
