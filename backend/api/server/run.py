@@ -10,7 +10,8 @@ class Web(tornado.web.Application):
             #(r'/(\w+)',default.Handler)
             #(r'/usuarios/?',usuarios.Handler),
             (r'/usuarios/([0-9]+)',usuarios.Handler),
-            (r'/clientes/([0-9]+)',clientes.Handler)
+            (r'/clientes/([0-9]+)',clientes.Handler),
+            (r'/login/(.*)',login.Handler)
         ]
 
         tornado.web.Application.__init__(self,handlers)

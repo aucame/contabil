@@ -7,9 +7,9 @@ var app = angular.module('appContabil', []);
 
 app.controller('ctlContabil', function($scope, $location, $window) {
 
-	$scope.doGreeting = function(greeting) {
-        $window.alert('teste');
-    };
+	//$scope.doGreeting = function(greeting) {
+    //    $window.alert('teste');
+    //};
 
 	$scope.principal = function(user) {
 //		$scope.login = angular.toJson($scope.user);
