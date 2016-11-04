@@ -201,4 +201,9 @@ app.controller('ctlCliente', function($scope, $http, $location, $window) {
 
 	$scope.getcliente();
 
+})
+.directive('htmlversao', function() {
+  return {
+    templateUrl: 'versao.html'
+  };
 });

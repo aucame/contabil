@@ -19,13 +19,31 @@ db = create_engine(strconn)
 db.echo = False  # Try changing this to True and see what happens
 metadata = MetaData(db)
 
-cadcliente = Table('cadclientes', metadata,
-    Column('idcliente', Integer, primary_key=True),
-    Column('nome', String(40)),
-    Column('endereco', String(40)),
-    Column('fonecomercial', String(40)),
-    Column('foneresidencial', String(40)),
-    schema='dbContabil'
-)
+def cria_Usuario():
 
-cadcliente.create()
+    cadusuarios = Table('cadusuarios', metadata,
+        Column('idusuario', Integer, primary_key=True),
+        Column('nome', String(100)),
+        Column('login', String(20)),
+        Column('ativo', String(3)),
+        Column('login', String(20)),
+        schema='dbContabil'
+    )
+
+    cadusuarios.create()
+
+def cria_Cliente():
+
+    cadcliente = Table('cadclientes', metadata,
+        Column('idcliente', Integer, primary_key=True),
+        Column('nome', String(100)),
+        Column('endereco', String(50)),
+        Column('fonecomercial', String(20)),
+        Column('foneresidencial', String(20)),
+        schema=dba
+    )
+
+    cadcliente.create()
+
+#cria_Usuario()
+#cria_Cliente()

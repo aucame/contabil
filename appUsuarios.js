@@ -200,4 +200,9 @@ app.controller('ctlUsuarios', function($scope, $http, $location, $window) {
 
 	$scope.getUsuarios();
 
+})
+.directive('htmlversao', function() {
+  return {
+    templateUrl: 'versao.html'
+  };
 });
