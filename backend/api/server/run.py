@@ -1,6 +1,6 @@
 import tornado.web
 from configuration import server
-from handlers import default, usuarios, clientes
+from handlers import default, usuarios, clientes, login
 
 class Web(tornado.web.Application):
     def __init__(self):

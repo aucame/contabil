@@ -32,14 +32,13 @@ class MySqlQuery():
             conexao.close()
 
     def get_usuarios(self, id):
-        if (id == '0'):
-            query = 'select * from {0}.{1}'.format(banco, tb_usuarios)
-        else:
-            query = 'select * from {0}.{1} where idusuarios = {2}'.format(banco, tb_usuarios, int(id))
+
+        query = 'select * from {0}.{1} where login = "{2}"'.format(banco, tb_usuarios, id)
 
         result = []
 
         data = self.execute(banco, query)
+
         for value in data:
             result.append({
                 'idusuario': value['idusuarios'], 
@@ -48,6 +47,8 @@ class MySqlQuery():
                 'login': value['login'],
                 'senha': value['senha']
                 })
+
+        print(result)
     
         retorno = {'cadusuarios': result}
         return retorno
