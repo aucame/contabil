@@ -2,12 +2,12 @@ $(document).ready(function(){
     $('[data-toggle="tooltip"]').tooltip();
 });
 
-var app = angular.module('appCliente', ['ui.grid','ngMask']);
+var app = angular.module('appCliente', ['ui.grid','ngMask','Config']);
 
-app.controller('ctlCliente', function($scope, $http, $location, $window) {
+app.controller('ctlCliente', function($scope, $http, $location, $window, config) {
 
-	//$scope.http = "http://200.98.174.103:8080";
-	$scope.http = "http://127.0.0.1:8080";
+	$scope.http = config.link;
+	$scope.versao = config.versao;
 
 	$scope.cliente = { 
 		'idcliente': undefined, 

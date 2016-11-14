@@ -48,8 +48,6 @@ class MySqlQuery():
                 'senha': value['senha']
                 })
 
-        print(result)
-    
         retorno = {'cadusuarios': result}
         return retorno
 

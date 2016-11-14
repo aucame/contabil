@@ -21,6 +21,7 @@
 		<script src='bower_components/ngMask/dist/ngMask.min.js'></script>
 
     	<script src="appCliente.js"></script>
+    	<script src="appConfig.js"></script>
 
 	</head>
 
@@ -41,6 +42,7 @@
 					<li><a href="#" ng-click="appLancamento()">Lancamentos</a></li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
+					<li><a>Usuario: {{login.username}}</a></li>						
 					<li><a href="#" ng-click="logout()" ><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
 					</ul>
 				</div>

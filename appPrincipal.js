@@ -33,6 +33,8 @@ app.controller('ctlPrincipal', function($scope, $location, $window) {
 	//$scope.login = angular.fromJson($window.sessionStorage.getItem('login'));
 	//console.log('Buscou da sessao = ' + $scope.login.username);
 
+//	$scope.teste = 
+
 	try {
 		$scope.login = angular.fromJson($window.sessionStorage.getItem('login'));
 		//console.log($scope.login);

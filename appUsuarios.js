@@ -2,14 +2,14 @@ $(document).ready(function(){
     $('[data-toggle="tooltip"]').tooltip();
 });
 
-var app = angular.module('appUsuarios', ['ui.grid']);
+var app = angular.module('appUsuarios', ['ui.grid', 'Config']);
 
-app.controller('ctlUsuarios', function($scope, $http, $location, $window) {
+app.controller('ctlUsuarios', function($scope, $http, $location, $window, config) {
 
 //17520520
 
-	//$scope.http = "http://200.98.174.103:8080";
-	$scope.http = "http://127.0.0.1:8080";
+	$scope.http = config.link;
+	$scope.versao = config.versao;
 
 	$scope.usuario = { 
 		'idusuario': undefined, 
