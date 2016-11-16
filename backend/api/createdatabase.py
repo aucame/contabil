@@ -45,18 +45,18 @@ def cria_Cliente():
 
     cadcliente.create()
 
-def cria_Cliente():
+def cria_Empresa():
 
-    cadcliente = Table('cadclientes', metadata,
-        Column('idcliente', Integer, primary_key=True),
+    cadempresa = Table('cadempresa', metadata,
+        Column('idempresa', Integer, primary_key=True),
         Column('nome', String(100)),
         Column('endereco', String(50)),
         Column('fonecomercial', String(20)),
-        Column('foneresidencial', String(20)),
         schema=dba
     )
 
-    cadcliente.create()
+    cadempresa.create()
 
 #cria_Usuario()
 #cria_Cliente()
+cria_Empresa()
