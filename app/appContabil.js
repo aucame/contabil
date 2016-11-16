@@ -3,14 +3,19 @@ $(document).ready(function(){
     $('[data-toggle="tooltip"]').tooltip();   
 });
 
-var app = angular.module('appContabil', []);
+var app = angular.module('appContabil', ['Config']);
 
-app.controller('ctlContabil', function($scope, $location, $http, $window) {
+app.controller('ctlContabil', function($scope, $location, $http, $window, config) {
 
-	//$scope.http = "http://200.98.174.103:8080";
-	$scope.http = "http://127.0.0.1:8080";
+	$scope.http = config.link;
+	$scope.versao = config.versao;
 
 	$scope.principal = function(user) {
+
+		$scope.user = {
+			"username": "admin",
+			"password": "admin"
+		};
 
 		if ($scope.user == undefined || 
 		    $scope.user.username == undefined || 
@@ -27,7 +32,6 @@ app.controller('ctlContabil', function($scope, $location, $http, $window) {
 				'Content-Type': 'application/json'
 				}
 			}).then(function(response){
-
 				
 				$scope.dblogin = response.data.cadusuarios;
 				$scope.senha = $scope.dblogin[0]['senha'];
