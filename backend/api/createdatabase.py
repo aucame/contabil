@@ -27,10 +27,23 @@ def cria_Usuario():
         Column('login', String(20)),
         Column('ativo', String(3)),
         Column('login', String(20)),
-        schema='dbContabil'
+        schema=dba
     )
 
     cadusuarios.create()
+
+def cria_Cliente():
+
+    cadcliente = Table('cadclientes', metadata,
+        Column('idcliente', Integer, primary_key=True),
+        Column('nome', String(100)),
+        Column('endereco', String(50)),
+        Column('fonecomercial', String(20)),
+        Column('foneresidencial', String(20)),
+        schema=dba
+    )
+
+    cadcliente.create()
 
 def cria_Cliente():
 
