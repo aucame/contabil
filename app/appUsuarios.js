@@ -1,8 +1,4 @@
-$(document).ready(function(){
-    $('[data-toggle="tooltip"]').tooltip();
-});
-
-var app = angular.module('appUsuarios', ['ui.grid', 'Config']);
+var app = angular.module('appUsuarios', ['ui.grid', 'ui.grid.resizeColumns', 'Config']);
 
 app.controller('ctlUsuarios', function($scope, $http, $location, $window, config) {
 
@@ -20,10 +16,10 @@ app.controller('ctlUsuarios', function($scope, $http, $location, $window, config
 	};
 
 	$scope.gridOptions = {
-		enableSorting: false,
-		showGridFooter: true,
-		enableRowSelection: true,
-		enableSelectAll: false,
+		//enableSorting: false,
+		//showGridFooter: true,
+		//enableRowSelection: true,
+		//enableSelectAll: false,
 		enableColumnResizing: true,
 		//enableCellEditOnFocus: true,
 

@@ -1,7 +1,3 @@
-$(document).ready(function(){
-    $('[data-toggle="tooltip"]').tooltip();
-});
-
 var app = angular.module('appCliente', ['ui.grid','ngMask','Config']);
 
 app.controller('ctlCliente', function($scope, $http, $location, $window, config) {

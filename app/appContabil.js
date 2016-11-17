@@ -1,8 +1,3 @@
-
-$(document).ready(function(){
-    $('[data-toggle="tooltip"]').tooltip();   
-});
-
 var app = angular.module('appContabil', ['Config']);
 
 app.controller('ctlContabil', function($scope, $location, $http, $window, config) {
