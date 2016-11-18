@@ -57,6 +57,18 @@ def cria_Empresa():
 
     cadempresa.create()
 
+def cria_Parametro():
+
+    cadparam = Table('cadparam', metadata,
+        Column('idparam', Integer, primary_key=True),
+        Column('nome', String(100)),
+        Column('endereco', String(50)),
+        Column('fonecomercial', String(20)),
+        schema=dba
+    )
+
+    cadparam.create()
+
 #cria_Usuario()
 #cria_Cliente()
-cria_Empresa()
+#cria_Empresa()
