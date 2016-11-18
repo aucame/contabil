@@ -196,6 +196,8 @@ app.controller('ctlUsuarios', function($scope, $http, $location, $window, config
 
 	$scope.getUsuarios();
 
+	$('#nome').focus();
+
 })
 .directive('htmlversao', function() {
   return {
