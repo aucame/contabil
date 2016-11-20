@@ -61,9 +61,10 @@ def cria_Parametro():
 
     cadparam = Table('cadparam', metadata,
         Column('idparam', Integer, primary_key=True),
-        Column('nome', String(100)),
-        Column('endereco', String(50)),
-        Column('fonecomercial', String(20)),
+        Column('mes', Integer),
+        Column('ano', Integer),
+        Column('idempresa', Integer),
+        Column('diasuteis', Integer),
         schema=dba
     )
 
@@ -72,3 +73,4 @@ def cria_Parametro():
 #cria_Usuario()
 #cria_Cliente()
 #cria_Empresa()
+cria_Parametro()
