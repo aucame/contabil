@@ -70,7 +70,20 @@ def cria_Parametro():
 
     cadparam.create()
 
+def cria_Plano():
+
+    cadplano = Table('cadplano', metadata,
+        Column('idplano', Integer, primary_key=True),
+        Column('codigo', String(20)),
+        Column('descricao', String(100)),
+        Column('tipocd', String(1)),
+        schema=dba
+    )
+
+    cadplano.create()
+
 #cria_Usuario()
 #cria_Cliente()
 #cria_Empresa()
-cria_Parametro()
+#cria_Parametro()
+cria_Plano()

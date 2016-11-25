@@ -1,32 +1,16 @@
-var app = angular.module('appParametro', ['ui.grid','ngMask','Config']);
+var app = angular.module('appPlano', ['ui.grid','ngMask','Config']);
 
-app.controller('ctlParametro', function($scope, $http, $location, $window, config) {
+app.controller('ctlPlano', function($scope, $http, $location, $window, config) {
 
 	$scope.http = config.link;
 	$scope.versao = config.versao;
 
-	$scope.parametro = { 
-		'idparam': undefined, 
-		'mes':  undefined,
-		'ano': undefined, 
-		'idempresa': undefined,
-		'diasuteis': undefined
+	$scope.plano = { 
+		'idplano': undefined, 
+		'codigo':  undefined,
+		'descricao': undefined, 
+		'tipocd': undefined
 	};
-
-    $scope.nomemes = {
-        Janeiro : "Janeiro",
-        Fevereiro : "Fevereiro",
-        Março : "Março",
-        Abril : "Abril",
-        Maio : "Maio",
-        Junho : "Junho",
-        Julho : "Julho",
-        Agosto : "Agosto",
-        Setembro : "Setembro",
-        Outubro : "Outubro",
-        Novembro : "Novembro",
-        Dezembro : "Dezembro"
-    };
 
 	$scope.gridOptions = {
 		enableSorting: false,
@@ -37,17 +21,16 @@ app.controller('ctlParametro', function($scope, $http, $location, $window, confi
 		//enableCellEditOnFocus: true,
 
 		columnDefs: [
-			{ field: 'idparam', enableCellEdit: false, minWidth: 50, width: 80, displayName: 'Codigo' },
-			{ field: 'mes', enableCellEdit: false, minWidth: 120, width: 250, displayName: 'Mes' },
-			{ field: 'ano', enableCellEdit: false, minWidth: 120, width: 300, displayName: 'Ano' },
-			{ field: 'idempresa', enableCellEdit: false, minWidth: 120, width: 150, displayName: 'Empresa' },
-			{ field: 'diasuteis', enableCellEdit: false, minWidth: 120, width: 150, displayName: 'Dias Uteis' },
+			{ field: 'idplano', enableCellEdit: false, minWidth: 50, width: 80, displayName: 'Numero' },
+			{ field: 'codigo', enableCellEdit: false, minWidth: 120, width: 250, displayName: 'Codigo' },
+			{ field: 'descricao', enableCellEdit: false, minWidth: 120, width: 300, displayName: 'Descrição' },
+			{ field: 'tipocd', enableCellEdit: false, minWidth: 120, width: 150, displayName: 'Tipo Deb/Cre' },
 			{ name: 'Opções', enableCellEdit: false, width: 200,
 			cellTemplate:'<button class="btn btn-primary" ng-click="grid.appScope.editregistro(row)"><span class="glyphicon glyphicon-edit"></span> Editar</button>  <button class="btn btn-primary" ng-click="grid.appScope.delregistro(row)"><span class="glyphicon glyphicon-trash"></span> Deletar</button>'  }		
 		],
 
 		data: [ 
-			{ 'idparam': 0, 'mes': 0, 'ano': 0, 'idempresa': 0, 'diasuteis': 0 }
+			{ 'idplano': 0, 'codigo': 0, 'descricao': undefined, 'tipocd': undefined }
 		]
 
 	}; 			
@@ -85,29 +68,28 @@ app.controller('ctlParametro', function($scope, $http, $location, $window, confi
 	};
 
 	$scope.novo = function() {
-		$scope.parametro = { 
-		'idparam': undefined, 
-		'mes':  undefined,
-		'ano': undefined, 
-		'idempresa': undefined,
-		'diasuteis': undefined
+		$scope.plano = { 
+		'idplano': undefined, 
+		'codigo':  undefined,
+		'descricao': undefined, 
+		'tipocd': undefined
 		};
 	};
 
-	$scope.gravar = function(parametro) {
+	$scope.gravar = function(plano) {
 
-		$scope.parametro = angular.toJson(parametro);
+		$scope.plano = angular.toJson(plano);
 
-		if (parametro.mes == undefined){
+		if (plano.codigo == undefined){
 			$scope.novo();
 			$scope.getregistro();
 		}else{
 
-			if (parametro.idparam == undefined){
+			if (plano.idplano == undefined){
 				$http({
 					method: 	"POST",
-					url: 		$scope.http + "/parametro/0",
-					data: 		$scope.parametro,
+					url: 		$scope.http + "/planocontas/0",
+					data: 		$scope.plano,
 					headers: {
 					'Content-Type': 'application/json'
 					}
@@ -121,8 +103,8 @@ app.controller('ctlParametro', function($scope, $http, $location, $window, confi
 			} else {
 				$http({
 					method: 	"PUT",
-					url: 		$scope.http + "/parametro/0",
-					data: 		$scope.parametro,
+					url: 		$scope.http + "/planocontas/0",
+					data: 		$scope.plano,
 					headers: {
 					'Content-Type': 'application/json'
 					}
@@ -139,12 +121,12 @@ app.controller('ctlParametro', function($scope, $http, $location, $window, confi
 	$scope.getregistro = function() {
 		$http({
 			method: 	"GET",
-			url: 		$scope.http + "/parametro/0",
+			url: 		$scope.http + "/planocontas/0",
 			headers: {
 			'Content-Type': 'application/json'
 			}
 		}).then(function(response){
-			$scope.gridOptions.data = response.data.cadparam;
+			$scope.gridOptions.data = response.data.cadplano;
 		}, function(error){
 			console.log("Error... = " + error.status);
 		});
@@ -153,12 +135,12 @@ app.controller('ctlParametro', function($scope, $http, $location, $window, confi
 	$scope.editregistro = function(row){
 		$http({
 			method: 	"GET",
-			url: 		$scope.http + "/parametro/" + row.entity.idparam,
+			url: 		$scope.http + "/planocontas/" + row.entity.idplano,
 			headers: {
 			'Content-Type': 'application/json'
 			}
 		}).then(function(response){
-			$scope.parametro = response.data.cadparam[0];
+			$scope.plano = response.data.cadplano[0];
 		}, function(error){
 			console.log("Error... = " + error);
 		});
@@ -180,7 +162,7 @@ app.controller('ctlParametro', function($scope, $http, $location, $window, confi
 
 			$http({
 				method: 	"DELETE",
-				url: 		$scope.http + "/parametro/" + row.entity.idparam,
+				url: 		$scope.http + "/planocontas/" + row.entity.idplano,
 				headers: {
 				'Content-Type': 'application/json'
 				}
