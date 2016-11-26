@@ -210,9 +210,4 @@ app.controller('ctlParametro', function($scope, $http, $location, $window, confi
 
 	$scope.getregistro();
 
-})
-.directive('htmlversao', function() {
-  return {
-    templateUrl: 'versao.html'
-  };
 });

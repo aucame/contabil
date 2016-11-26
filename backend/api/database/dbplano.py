@@ -56,7 +56,7 @@ class MySqlQuery():
 
         novo = self.proximo_codigo()
 
-        query = 'insert into {0}.{1}(idplano, codigo, descricao, tipocd) values ({2}, {3}, {4}, {5}, {6})'.format(banco, tb_banco, 
+        query = 'insert into {0}.{1}(idplano, codigo, descricao, tipocd) values ({2}, {3}, {4}, {5})'.format(banco, tb_banco, 
             novo, 
             reg['codigo'], 
             reg['descricao'], 

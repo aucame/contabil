@@ -197,9 +197,4 @@ app.controller('ctlCliente', function($scope, $http, $location, $window, config)
 
 	$scope.getcliente();
 
-})
-.directive('htmlversao', function() {
-  return {
-    templateUrl: 'versao.html'
-  };
 });

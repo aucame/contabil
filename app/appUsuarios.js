@@ -198,9 +198,4 @@ app.controller('ctlUsuarios', function($scope, $http, $location, $window, config
 
 	$('#nome').focus();
 
-})
-.directive('htmlversao', function() {
-  return {
-    templateUrl: 'versao.html'
-  };
 });

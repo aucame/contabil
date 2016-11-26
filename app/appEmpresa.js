@@ -192,9 +192,4 @@ app.controller('ctlEmpresa', function($scope, $http, $location, $window, config)
 
 	$scope.getregistro();
 
-})
-.directive('htmlversao', function() {
-  return {
-    templateUrl: 'versao.html'
-  };
 });
