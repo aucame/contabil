@@ -3,19 +3,25 @@
 <html ng-app="appLancamento">
 	<head>
 		<title>Contabil - Lancamentos</title>
-
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta charset="UTF-8">
 		<link rel="icon" type="image/png" href="favicon.png" />
+
 		<link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.css">
 		<link rel="styleSheet" type="text/css" href="bower_components/angular-ui-grid/ui-grid.min.css"/>
-    	<link rel="stylesheet" type="text/css" href="site.css">
+		<link rel="styleSheet" type="text/css" href="bower_components/font-awesome/css/font-awesome.min.css"/>
+		<link rel="styleSheet" type="text/css" href="bower_components/sweetalert/dist/sweetalert.css"/>
+		<link rel="stylesheet" type="text/css" href="site.css">
 
 		<script src="bower_components/angular/angular.min.js"></script>
 		<script src="bower_components/angular-ui-grid/ui-grid.min.js"></script>
 		<script src="bower_components/jquery/dist/jquery.min.js"></script>    
 		<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+		<script src="bower_components/sweetalert/dist/sweetalert.min.js"></script>
+		<script src='bower_components/ngMask/dist/ngMask.min.js'></script>
 
-    	<script src="appLancamento.js"></script>
+    	<script src="app/appLancamento.js"></script>
+    	<script src="app/appConfig.js"></script>
 
 	</head>
 
@@ -36,6 +42,7 @@
 					<li class="active"><a href="#">Lancamentos</a></li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
+					<li><a>Usuario: {{login.username}}</a></li>						
 					<li><a href="#" ng-click="logout()" ><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
 					</ul>
 				</div>
@@ -44,10 +51,45 @@
 
 		<main>
 			<div class="container">
-			<h2>Lancamentos</h2><br>
+			<h2>Lançamentos</h2><br>
+
+			<form>
+				<div class="form-group">
+						<label for="numero">Numero</label>
+						<input type="text" maxlength="10" ng-model="lancamento.idlancamento" class="form-control hint" id="numero" ng-readonly="true" disabled>
+				</div>
+				<div class="form-group">
+						<label for="ano">Ano</label>
+						<input type="text" maxlength="4" ng-model="lancamento.ano" class="form-control hint" id="ano" data-toggle="tooltip" title="Informe Codigo da Conta" placeholder="Digite o Codigo da Conta">
+				</div>
+				<div class="form-group">
+						<label for="mes">Mes</label>
+						<input type="text" maxlength="2" ng-model="lancamento.mes" class="form-control hint" id="mes" data-toggle="tooltip" title="Informe Codigo da Conta" placeholder="Digite o Codigo da Conta">
+				</div>
+				<div class="form-group">
+						<label for="idplano">Plano de Contas</label>
+						<input type="text" maxlength="20" ng-model="lancamento.idplano" class="form-control hint" id="idplano" data-toggle="tooltip" title="Informe a Descrição" placeholder="Digite a Descrição">
+				</div>
+				<div class="form-group">
+						<label for="valor">Valor</label>
+						<input type="text" maxlength="10" ng-model="lancamento.valor" class="form-control hint" id="valor" data-toggle="tooltip" title="Informe Debito/Credito" placeholder="Digite Debito/Credito">
+				</div>
+				
+				<br>
+				<button type="button" ng-click="novo()" class="btn btn-primary"><span class="glyphicon glyphicon-ok"></span> Novo</button>
+				<button type="button" ng-click="gravar(plano)" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk"></span> Gravar</button>
+			</form>
+				<br>
+			<div>
+				<div ui-grid="gridOptions" ui-grid-cellNav ui-grid-resize-columns ui-grid-edit ui-grid-selection class="telagrid" ></div>
+			</div>
 
 			</div>
 		</main>
+
+		<footer>
+			  <div htmlversao></div>
+		</footer>
 
 	</body>
 </html>

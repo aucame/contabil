@@ -82,8 +82,22 @@ def cria_Plano():
 
     cadplano.create()
 
+def cria_Lancamento():
+
+    cadlancamento = Table('cadlancamento', metadata,
+        Column('idlancamento', Integer, primary_key=True),
+        Column('ano', Integer),
+        Column('mes', Integer),
+        Column('idplano', String(20)),
+        Column('valor', Numeric(8,2)),
+        schema=dba
+    )
+
+    cadlancamento.create()
+
 #cria_Usuario()
 #cria_Cliente()
 #cria_Empresa()
 #cria_Parametro()
-cria_Plano()
+#cria_Plano()
+cria_Lancamento()
