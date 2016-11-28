@@ -99,7 +99,7 @@ class MySqlQuery():
 
     def altera_registro(self, data):
         reg = json.loads(data)
-        query = 'update {0}.{1} set ano = {3}, mes = {4}, idplano="{5}", valor={6} where idplano = {2}'.format(banco, tb_banco, 
+        query = 'update {0}.{1} set ano = {3}, mes = {4}, idplano="{5}", valor={6} where idlancamento = {2}'.format(banco, tb_banco, 
             reg['idlancamento'],
             reg['ano'],
             reg['mes'],

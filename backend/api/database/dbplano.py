@@ -88,7 +88,7 @@ class MySqlQuery():
 
     def altera_registro(self, data):
         reg = json.loads(data)
-        query = 'update {0}.{1} set codigo = {3}, descricao = {4}, tipocd={5} where idplano = {2}'.format(banco, tb_banco, 
+        query = 'update {0}.{1} set codigo = {3}, descricao = "{4}", tipocd="{5}" where idplano = {2}'.format(banco, tb_banco, 
             reg['idplano'],
             reg['codigo'],
             reg['descricao'],
