@@ -100,4 +100,4 @@ def cria_Lancamento():
 #cria_Empresa()
 #cria_Parametro()
 #cria_Plano()
-cria_Lancamento()
+#cria_Lancamento()

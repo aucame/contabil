@@ -5,28 +5,32 @@ app.controller('ctlParametro', function($scope, $http, $location, $window, confi
 	$scope.http = config.link;
 	$scope.versao = config.versao;
 
+    $scope.meses =	[
+					{mes: "Selecione", numero: 00 },
+					{mes: "Janeiro", numero: 01 },
+        			{mes: "Fevereiro", numero: 02 },
+        			{mes: "Março", numero: 03 },
+					{mes: "Abril", numero: 04},
+					{mes: "Maio", numero: 05},
+					{mes: "Junho", numero: 06},
+					{mes: "Julho", numero: 07},
+					{mes: "Agosto", numero: 08},
+					{mes: "Setembro", numero: 09},
+					{mes: "Outubro", numero: 10},
+					{mes: "Novembro", numero: 11},
+					{mes: "Dezembro", numero: 12}
+    				];
+
 	$scope.parametro = { 
 		'idparam': undefined, 
-		'mes':  undefined,
+		'mes':  0,
 		'ano': undefined, 
 		'idempresa': undefined,
 		'diasuteis': undefined
 	};
 
-    $scope.nomemes = {
-        Janeiro : "Janeiro",
-        Fevereiro : "Fevereiro",
-        Março : "Março",
-        Abril : "Abril",
-        Maio : "Maio",
-        Junho : "Junho",
-        Julho : "Julho",
-        Agosto : "Agosto",
-        Setembro : "Setembro",
-        Outubro : "Outubro",
-        Novembro : "Novembro",
-        Dezembro : "Dezembro"
-    };
+    $scope.options = $scope.meses;
+    $scope.selectedOption = $scope.options[0];
 
 	$scope.gridOptions = {
 		enableSorting: false,
@@ -92,9 +96,12 @@ app.controller('ctlParametro', function($scope, $http, $location, $window, confi
 		'idempresa': undefined,
 		'diasuteis': undefined
 		};
+        $scope.selectedOption = $scope.options[0];
 	};
 
 	$scope.gravar = function(parametro) {
+
+		$scope.parametro.mes = $scope.selectedOption.numero;		
 
 		$scope.parametro = angular.toJson(parametro);
 
@@ -159,6 +166,8 @@ app.controller('ctlParametro', function($scope, $http, $location, $window, confi
 			}
 		}).then(function(response){
 			$scope.parametro = response.data.cadparam[0];
+			mes = response.data.cadparam[0].mes;
+            $scope.selectedOption = $scope.options[mes];
 		}, function(error){
 			console.log("Error... = " + error);
 		});
