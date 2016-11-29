@@ -1,4 +1,4 @@
-import json
+import simplejson as json
 import codecs
 from configuration import database
 from datetime import date, timedelta
@@ -6,7 +6,6 @@ from sqlalchemy import create_engine
 
 banco = 'dbContabil'
 tb_banco = 'cadlancamento'
-json.encoder.FLOAT_REPR = lambda f: ("%.2f" % f)
 
 class MySqlQuery():
     def execute(self,db,query):
@@ -43,7 +42,15 @@ class MySqlQuery():
         data = self.execute(banco, query)
 
 #        for v in data:
+#            print(v)
+
 #            for column, value in v.items():
+#                a = column
+#                b = json.dumps(value)
+#                c = {a:b}
+#                print(c)
+#                result.append(c)
+
 #                result.append({column: value})
 
 #                result.append({'{0}: {1}'.format(column, value)})
@@ -54,7 +61,7 @@ class MySqlQuery():
                 'ano': value['ano'], 
                 'mes': value['mes'],
                 'idplano': value['idplano'],
-                'valor': 11.37
+                'valor': json.dumps(value['valor'])
 #                'valor': value['valor']
                 })
     

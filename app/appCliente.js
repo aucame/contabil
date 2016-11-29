@@ -4,6 +4,7 @@ app.controller('ctlCliente', function($scope, $http, $location, $window, config)
 
 	$scope.http = config.link;
 	$scope.versao = config.versao;
+	$scope.local = config.local;
 
 	$scope.cliente = { 
 		'idcliente': undefined, 
@@ -42,11 +43,13 @@ app.controller('ctlCliente', function($scope, $http, $location, $window, config)
 	};
 
 	$scope.appUsuario = function() {
-		location.href = 'http://' + $location.host() + '/contabil/usuario.html';
+		location.href = $scope.local + 'usuario.html';
+//		location.href = 'http://' + $location.host() + '/contabil/usuario.html';
 	};
 
 	$scope.appCliente = function() {
-		location.href = 'http://' + $location.host() + '/contabil/cliente.html';
+		location.href = $scope.local + 'cliente.html';
+//		location.href = 'http://' + $location.host() + '/contabil/cliente.html';
 	};
 
 	$scope.appEmpresa = function() {
