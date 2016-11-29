@@ -6,6 +6,7 @@ app.controller('ctlUsuarios', function($scope, $http, $location, $window, config
 
 	$scope.http = config.link;
 	$scope.versao = config.versao;
+	$scope.local = config.local;
 
 	$scope.usuario = { 
 		'idusuario': undefined, 
@@ -43,31 +44,31 @@ app.controller('ctlUsuarios', function($scope, $http, $location, $window, config
 	};
 
 	$scope.appUsuario = function() {
-		location.href = 'http://' + $location.host() + '/contabil/usuario.html';
+		location.href = $scope.local + 'usuario.html';
 	};
 
 	$scope.appCliente = function() {
-		location.href = 'http://' + $location.host() + '/contabil/cliente.html';
+		location.href = $scope.local + 'cliente.html';
 	};
 
 	$scope.appEmpresa = function() {
-		location.href = 'http://' + $location.host() + '/contabil/empresa.html';
+		location.href = $scope.local + 'empresa.html';
 	};
 
 	$scope.appParametro = function() {
-		location.href = 'http://' + $location.host() + '/contabil/parametro.html';
+		location.href = $scope.local + 'parametro.html';
 	};
 
 	$scope.appPlano = function() {
-		location.href = 'http://' + $location.host() + '/contabil/plano.html';
+		location.href = $scope.local + 'plano.html';
 	};
 
 	$scope.appLancamento = function() {
-		location.href = 'http://' + $location.host() + '/contabil/lancamento.html';
+		location.href = $scope.local + 'lancamento.html';
 	};
 
 	$scope.logout = function() {
-		location.href = 'http://' + $location.host() + '/contabil/';
+		location.href = $scope.local;
 	};
 
 	$scope.novo = function() {

@@ -1,3 +1,39 @@
+
+{
+"idlancamento": 0, 
+"ano": 1, 
+"mes": 1, 
+"idplano": 1, 
+"valor": 1.1
+}
+
+DEPRECATION: The default format will switch to columns in the future. 
+You can use --format=(legacy|columns) (or define a format=(legacy|columns) in your pip.conf 
+under the [list] section) to disable this warning.
+
+					<li class="dropdown">
+					  <a href="#" class="dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+					    Relatórios<span class="caret"></span>
+					  </a>
+					  <ul class="dropdown-menu" >
+					    <li><a href="#">P.E. 2016 Oficial</a></li>
+					    <li><a href="#">DRE 2016 Sintética</a></li>
+					    <li><a href="#">DRE 2015 Sintética</a></li>
+					    <li><a href="#">DRE 2016 Trimestral</a></li>
+					    <li><a href="#">DRE 2015 Trimestral</a></li>
+					    <li><a href="#">DRE Sintetico 2016x2015</a></li>
+					    <li><a href="#">Faturamento por Linha</a></li>
+					    <li><a href="#">Preço Medio por Linha</a></li>
+					  </ul>
+					</li>
+
+	$scope.appUsuario = function() {
+		location.href = 'http://' + $location.host() + '/contabil/usuario.html';
+	};
+
+
+
+
 <form>
 
 <div class="row">
