@@ -13,6 +13,25 @@ app.controller('ctlLancamento', function($scope, $http, $location, $window, conf
 		'valor': undefined
 	};
 
+    $scope.meses =	[
+					{mes: "Selecione", numero: 00 },
+					{mes: "Janeiro", numero: 01 },
+        			{mes: "Fevereiro", numero: 02 },
+        			{mes: "Março", numero: 03 },
+					{mes: "Abril", numero: 04},
+					{mes: "Maio", numero: 05},
+					{mes: "Junho", numero: 06},
+					{mes: "Julho", numero: 07},
+					{mes: "Agosto", numero: 08},
+					{mes: "Setembro", numero: 09},
+					{mes: "Outubro", numero: 10},
+					{mes: "Novembro", numero: 11},
+					{mes: "Dezembro", numero: 12}
+    				];
+
+    $scope.options = $scope.meses;
+    $scope.selectedOption = $scope.options[0];
+
 	$scope.gridOptions = {
 		enableSorting: false,
 		showGridFooter: true,
@@ -77,9 +96,12 @@ app.controller('ctlLancamento', function($scope, $http, $location, $window, conf
 		'idplano': undefined,
 		'valor': undefined
 		};
+        $scope.selectedOption = $scope.options[0];
 	};
 
 	$scope.gravar = function(lancamento) {
+
+		$scope.lancamento.mes = $scope.selectedOption.numero;		
 
 		$scope.lancamento = angular.toJson(lancamento);
 
@@ -144,6 +166,8 @@ app.controller('ctlLancamento', function($scope, $http, $location, $window, conf
 			}
 		}).then(function(response){
 			$scope.lancamento = response.data.cadlancamento[0];
+			mes = response.data.cadlancamento[0].mes;
+            $scope.selectedOption = $scope.options[mes];
 		}, function(error){
 			console.log("Error... = " + error);
 		});

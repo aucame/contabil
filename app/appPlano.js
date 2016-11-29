@@ -12,6 +12,15 @@ app.controller('ctlPlano', function($scope, $http, $location, $window, config) {
 		'tipocd': undefined
 	};
 
+	$scope.debcre = [
+		{tipocd: "Selecione", valor: ""},
+		{tipocd: "Debito", valor: "D"},
+		{tipocd: "Credito", valor: "C"}
+	];
+
+    $scope.options = $scope.debcre;
+    $scope.selectedOption = $scope.options[0];
+
 	$scope.gridOptions = {
 		enableSorting: false,
 		showGridFooter: true,
@@ -74,15 +83,18 @@ app.controller('ctlPlano', function($scope, $http, $location, $window, config) {
 		'descricao': undefined, 
 		'tipocd': undefined
 		};
+   	    $scope.selectedOption = $scope.options[0];
 	};
 
 	$scope.gravar = function(plano) {
 
+		plano.tipocd = $scope.selectedOption.valor;
 		$scope.plano = angular.toJson(plano);
 
 		if (plano.codigo == undefined){
 			$scope.novo();
 			$scope.getregistro();
+       	    $scope.selectedOption = $scope.options[0];
 		}else{
 
 			if (plano.idplano == undefined){
@@ -96,11 +108,13 @@ app.controller('ctlPlano', function($scope, $http, $location, $window, config) {
 				}).then(function(response){
 					$scope.novo();
 					$scope.getregistro();
+            	    $scope.selectedOption = $scope.options[0];
 				}, function(error){
 					console.log("Error... = " + error.status);
 				});
 
 			} else {
+
 				$http({
 					method: 	"PUT",
 					url: 		$scope.http + "/planocontas/0",
@@ -114,8 +128,10 @@ app.controller('ctlPlano', function($scope, $http, $location, $window, config) {
 				}, function(error){
 					console.log("Error... = " + error.status);
 				});
+
 			}
 		}
+
 	};
 
 	$scope.getregistro = function() {
@@ -141,6 +157,12 @@ app.controller('ctlPlano', function($scope, $http, $location, $window, config) {
 			}
 		}).then(function(response){
 			$scope.plano = response.data.cadplano[0];
+			debcre = response.data.cadplano[0].tipocd;
+			if(debcre == "D") {
+            	$scope.selectedOption = $scope.options[1];
+			} else {
+            	$scope.selectedOption = $scope.options[2];
+			}
 		}, function(error){
 			console.log("Error... = " + error);
 		});

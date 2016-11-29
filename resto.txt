@@ -1,4 +1,12 @@
 
+						
+						<input type="text" maxlength="1" ng-model="plano.tipocd" class="form-control hint" id="tipocd" data-toggle="tooltip" title="Informe Debito/Credito" placeholder="Digite Debito/Credito">
+
+
+						<input type="text" maxlength="2" ng-model="lancamento.mes" class="form-control hint" id="mes" data-toggle="tooltip" title="Informe o mes" placeholder="Digite o Mes">
+
+
+
 {
 "idlancamento": 0, 
 "ano": 1, 
