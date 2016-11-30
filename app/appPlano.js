@@ -214,4 +214,6 @@ app.controller('ctlPlano', function($scope, $http, $location, $window, config) {
 
 	$scope.getregistro();
 
+	$('#codigo').focus();
+
 });

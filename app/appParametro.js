@@ -219,4 +219,6 @@ app.controller('ctlParametro', function($scope, $http, $location, $window, confi
 
 	$scope.getregistro();
 
+	$('#ano').focus();
+
 });

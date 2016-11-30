@@ -1,3 +1,11 @@
+
+$(function() {
+//	$("#valor").maskMoney({prefix:'R$ ', allowNegative: true, thousands:',', decimal:'.', affixesStay: false});
+
+$("#valor").maskMoney();
+
+});
+
 var app = angular.module('appLancamento', ['ui.grid','ngMask','Config']);
 
 app.controller('ctlLancamento', function($scope, $http, $location, $window, config) {
@@ -218,5 +226,7 @@ app.controller('ctlLancamento', function($scope, $http, $location, $window, conf
 		};
 
 	$scope.getregistro();
+
+	$('#ano').focus();
 
 });

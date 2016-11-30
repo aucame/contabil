@@ -199,5 +199,7 @@ app.controller('ctlCliente', function($scope, $http, $location, $window, config)
 		};
 
 	$scope.getcliente();
-
+	
+	$('#nome').focus();
+	
 });

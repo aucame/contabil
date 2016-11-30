@@ -192,4 +192,6 @@ app.controller('ctlEmpresa', function($scope, $http, $location, $window, config)
 
 	$scope.getregistro();
 
+	$('#nome').focus();
+
 });
