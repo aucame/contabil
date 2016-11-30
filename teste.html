@@ -12,24 +12,22 @@
 <body>
 
 <div class="container">
-  <h3>Tooltip Example</h3>
-  <p>The data-placement attribute specifies the tooltip position.</p>
-  <ul class="list-inline">
-    <li><a href="#" class="btn" data-toggle="tooltip" data-placement="top" title="Hooray!">Top</a></li>
-    <li><a href="#" class="btn" data-toggle="tooltip" data-placement="bottom" title="Hooray!">Bottom</a></li>
-    <li><a href="#" class="btn" data-toggle="tooltip" data-placement="left" title="Hooray!">Left</a></li>
-    <li><a href="#" class="btn" data-toggle="tooltip" data-placement="right" title="Hooray!">Right</a></li>
-  </ul>
-  <input style="" name="senha" id="senha" class="form-control senha"
-	ng-model="user.password" type="password" data-toggle="tooltip">
+  
+<h3>Client side IP geolocation using <a href="http://ipinfo.io">ipinfo.io</a></h3>
+
+<hr/>
+<div id="ip"></div>
+<div id="address"></div>
+<hr/>Full response: <pre id="details"></pre>
   
 </div>
 
 <script>
-$(document).ready(function(){
-    $('.btn').tooltip({title: "Hooray sdsdsdsdsdsdsd"}); 
-    $('.senha').tooltip({title: "Informe uma senha valida"}); 
-});
+$.get("http://ipinfo.io", function (response) {
+    $("#ip").html("IP: " + response.ip);
+    $("#address").html("Location: " + response.city + ", " + response.region);
+    $("#details").html(JSON.stringify(response, null, 4));
+}, "jsonp");
 </script>
 
 </body>

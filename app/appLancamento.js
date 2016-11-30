@@ -1,9 +1,7 @@
 
 $(function() {
 //	$("#valor").maskMoney({prefix:'R$ ', allowNegative: true, thousands:',', decimal:'.', affixesStay: false});
-
-$("#valor").maskMoney();
-
+	$("#valor").maskMoney();
 });
 
 var app = angular.module('appLancamento', ['ui.grid','ngMask','Config']);
