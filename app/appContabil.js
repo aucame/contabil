@@ -5,12 +5,15 @@
 //    $("#details").html(JSON.stringify(response, null, 4));
 //}, "jsonp");
 
+//curl 'https://api.ipify.org?format=json'
+
 var app = angular.module('appContabil', ['Config']);
 
 app.controller('ctlContabil', function($scope, $location, $http, $window, config) {
 
 	$scope.http = config.link;
 	$scope.versao = config.versao;
+	$scope.local = config.local;
 
 	$scope.principal = function(user) {
 
@@ -37,13 +40,13 @@ app.controller('ctlContabil', function($scope, $location, $http, $window, config
 				
 				$scope.dblogin = response.data.cadusuarios;
 				$scope.senha = $scope.dblogin[0]['senha'];
-
-				console.log($scope.senha);
+				$scope.remoteip = $scope.dblogin[0]['remoteip'];
 
 				if($scope.user.password == $scope.senha){
 					$scope.param = angular.toJson($scope.user)
 					$window.sessionStorage.setItem('login', $scope.param);
-					location.href = 'http://' + $location.host() + '/contabil/principal.html';
+					$window.sessionStorage.setItem('remoteip', $scope.remoteip);
+					location.href = $scope.local + 'principal.html';
 				}else{
 					swal({title: "", text: "Senha invalida !!!", type: "error"});
 				}				

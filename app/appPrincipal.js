@@ -1,33 +1,35 @@
-var app = angular.module('appPrincipal',[]);
+var app = angular.module('appPrincipal',['Config']);
 
-app.controller('ctlPrincipal', function($scope, $location, $window) {
+app.controller('ctlPrincipal', function($scope, $location, $window, config) {
+
+	$scope.local = config.local;
 
 	$scope.appUsuario = function() {
-		location.href = 'http://' + $location.host() + '/contabil/usuario.html';
+		location.href = $scope.local + 'usuario.html';
 	};
 
 	$scope.appCliente = function() {
-		location.href = 'http://' + $location.host() + '/contabil/cliente.html';
+		location.href = $scope.local + 'cliente.html';
 	};
 
 	$scope.appEmpresa = function() {
-		location.href = 'http://' + $location.host() + '/contabil/empresa.html';
+		location.href = $scope.local + 'empresa.html';
 	};
 
 	$scope.appParametro = function() {
-		location.href = 'http://' + $location.host() + '/contabil/parametro.html';
+		location.href = $scope.local + 'parametro.html';
 	};
 
 	$scope.appPlano = function() {
-		location.href = 'http://' + $location.host() + '/contabil/plano.html';
+		location.href = $scope.local + 'plano.html';
 	};
 
 	$scope.appLancamento = function() {
-		location.href = 'http://' + $location.host() + '/contabil/lancamento.html';
+		location.href = $scope.local + 'lancamento.html';
 	};
 
 	$scope.logout = function() {
-		location.href = 'http://' + $location.host() + '/contabil/';
+		location.href = $scope.local;
 	};
 
 	//$scope.login = angular.fromJson($window.sessionStorage.getItem('login'));
@@ -37,6 +39,7 @@ app.controller('ctlPrincipal', function($scope, $location, $window) {
 
 	try {
 		$scope.login = angular.fromJson($window.sessionStorage.getItem('login'));
+		//$scope.remoteip = $window.sessionStorage.getItem('remoteip');
 		//console.log($scope.login);
 
 		if($scope.login == null){
@@ -44,7 +47,7 @@ app.controller('ctlPrincipal', function($scope, $location, $window) {
 		};
 
 		} catch(e) {
-			console.log('erro');
+			console.log(e.message);
 		};
 
 });

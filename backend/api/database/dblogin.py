@@ -31,7 +31,7 @@ class MySqlQuery():
         finally:
             conexao.close()
 
-    def get_usuarios(self, id):
+    def get_usuarios(self, id, remoteip):
 
         query = 'select * from {0}.{1} where login = "{2}"'.format(banco, tb_usuarios, id)
 
@@ -45,8 +45,11 @@ class MySqlQuery():
                 'nome': value['nome'], 
                 'ativo': value['ativo'],
                 'login': value['login'],
-                'senha': value['senha']
+                'senha': value['senha'],
+                'remoteip': remoteip
                 })
+
+        #result.append({'remoteip': remoteip})
 
         retorno = {'cadusuarios': result}
         return retorno

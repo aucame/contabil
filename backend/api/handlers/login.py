@@ -11,8 +11,12 @@ class Handler(tornado.web.RequestHandler):
         self.set_header('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, OPTIONS')        
 
     def get(self, id):
+
+        #print(self.request.remote_ip)
+        remoteip = self.request.remote_ip
+
         db_execute = dblogin.MySqlQuery()
-        result = db_execute.get_usuarios(id)
+        result = db_execute.get_usuarios(id, remoteip)
         self.write(result)
 
     def post(self, id):

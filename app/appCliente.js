@@ -44,32 +44,30 @@ app.controller('ctlCliente', function($scope, $http, $location, $window, config)
 
 	$scope.appUsuario = function() {
 		location.href = $scope.local + 'usuario.html';
-//		location.href = 'http://' + $location.host() + '/contabil/usuario.html';
 	};
 
 	$scope.appCliente = function() {
 		location.href = $scope.local + 'cliente.html';
-//		location.href = 'http://' + $location.host() + '/contabil/cliente.html';
 	};
 
 	$scope.appEmpresa = function() {
-		location.href = 'http://' + $location.host() + '/contabil/empresa.html';
+		location.href = $scope.local + 'empresa.html';
 	};
 
 	$scope.appParametro = function() {
-		location.href = 'http://' + $location.host() + '/contabil/parametro.html';
+		location.href = $scope.local + 'parametro.html';
 	};
 
 	$scope.appPlano = function() {
-		location.href = 'http://' + $location.host() + '/contabil/plano.html';
+		location.href = $scope.local + 'plano.html';
 	};
 
 	$scope.appLancamento = function() {
-		location.href = 'http://' + $location.host() + '/contabil/lancamento.html';
+		location.href = $scope.local + 'lancamento.html';
 	};
 
 	$scope.logout = function() {
-		location.href = 'http://' + $location.host() + '/contabil/';
+		location.href = $scope.local;
 	};
 
 	$scope.novo = function() {
