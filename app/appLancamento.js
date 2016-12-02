@@ -17,7 +17,8 @@ app.controller('ctlLancamento', function($scope, $http, $location, $window, conf
 		'ano':  undefined,
 		'mes': undefined, 
 		'idplano': undefined,
-		'valor': undefined
+		'valor': undefined,
+		'idcliente': undefined
 	};
 
     $scope.meses =	[
@@ -48,17 +49,18 @@ app.controller('ctlLancamento', function($scope, $http, $location, $window, conf
 		//enableCellEditOnFocus: true,
 
 		columnDefs: [
-			{ field: 'idlancamento', enableCellEdit: false, minWidth: 50, width: 80, displayName: 'Numero' },
-			{ field: 'ano', enableCellEdit: false, minWidth: 120, width: 250, displayName: 'Ano' },
-			{ field: 'mes', enableCellEdit: false, minWidth: 120, width: 300, displayName: 'Mes' },
-			{ field: 'idplano', enableCellEdit: false, minWidth: 120, width: 150, displayName: 'Plano' },
-			{ field: 'valor', enableCellEdit: false, minWidth: 120, width: 150, displayName: 'Valor' },
+			{ field: 'idlancamento', enableCellEdit: false, minWidth: 50, width: 100, displayName: 'Numero' },
+			{ field: 'idcliente', enableCellEdit: false, minWidth: 50, width: 100, displayName: 'Cliente' },
+			{ field: 'ano', enableCellEdit: false, minWidth: 50, width: 100, displayName: 'Ano' },
+			{ field: 'mes', enableCellEdit: false, minWidth: 50, width: 100, displayName: 'Mes' },
+			{ field: 'idplano', enableCellEdit: false, minWidth: 50, width: 100, displayName: 'Plano' },
+			{ field: 'valor', enableCellEdit: false, minWidth: 50, width: 100, displayName: 'Valor' },
 			{ name: 'Opções', enableCellEdit: false, width: 200,
 			cellTemplate:'<button class="btn btn-primary" ng-click="grid.appScope.editregistro(row)"><span class="glyphicon glyphicon-edit"></span> Editar</button>  <button class="btn btn-primary" ng-click="grid.appScope.delregistro(row)"><span class="glyphicon glyphicon-trash"></span> Deletar</button>'  }		
 		],
 
 		data: [ 
-			{ 'idlancamento': 0, 'ano': 0, 'mes': undefined, 'idplano': undefined, 'valor': undefined }
+			{ 'idlancamento': 0, 'ano': 0, 'mes': undefined, 'idplano': undefined, 'valor': undefined, 'idcliente': undefined }
 		]
 
 	}; 			
@@ -101,7 +103,8 @@ app.controller('ctlLancamento', function($scope, $http, $location, $window, conf
 		'ano':  undefined,
 		'mes': undefined, 
 		'idplano': undefined,
-		'valor': undefined
+		'valor': undefined,
+		'idcliente': undefined
 		};
         $scope.selectedOption = $scope.options[0];
 	};
@@ -226,6 +229,6 @@ app.controller('ctlLancamento', function($scope, $http, $location, $window, conf
 
 	$scope.getregistro();
 
-	$('#ano').focus();
+	$('#idcliente').focus();
 
 });
