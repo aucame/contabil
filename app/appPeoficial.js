@@ -2,9 +2,9 @@ var app = angular.module('appPeoficial', ['ui.grid','ngMask','Config']);
 
 app.controller('ctlPeoficial', function($scope, $http, $location, $window, config) {
 
-	$scope.http = config.link;
+	$scope.linkapi = config.linkapi;
 	$scope.versao = config.versao;
-	$scope.local = config.local;
+	$scope.linksite = config.linksite;
 
     $scope.meses =	[
 					{mes: "Selecione", numero: 00 },
@@ -63,9 +63,9 @@ app.controller('ctlPeoficial', function($scope, $http, $location, $window, confi
 
 	$scope.appMenu = function(menu) {
 		if(menu == 'logout'){
-			location.href = $scope.local;
+			location.href = $scope.linksite;
 		} else {
-			location.href = $scope.local + menu + '.html';
+			location.href = $scope.linksite + menu + '.html';
 		}
 	};
 
@@ -94,7 +94,7 @@ app.controller('ctlPeoficial', function($scope, $http, $location, $window, confi
 			if (parametro.idparam == undefined){
 				$http({
 					method: 	"POST",
-					url: 		$scope.http + "/parametro/0",
+					url: 		$scope.linkapi + "/parametro/0",
 					data: 		$scope.parametro,
 					headers: {
 					'Content-Type': 'application/json'
@@ -109,7 +109,7 @@ app.controller('ctlPeoficial', function($scope, $http, $location, $window, confi
 			} else {
 				$http({
 					method: 	"PUT",
-					url: 		$scope.http + "/parametro/0",
+					url: 		$scope.linkapi + "/parametro/0",
 					data: 		$scope.parametro,
 					headers: {
 					'Content-Type': 'application/json'
@@ -127,7 +127,7 @@ app.controller('ctlPeoficial', function($scope, $http, $location, $window, confi
 	$scope.getregistro = function() {
 		$http({
 			method: 	"GET",
-			url: 		$scope.http + "/parametro/0",
+			url: 		$scope.linkapi + "/parametro/0",
 			headers: {
 			'Content-Type': 'application/json'
 			}
@@ -141,7 +141,7 @@ app.controller('ctlPeoficial', function($scope, $http, $location, $window, confi
 	$scope.editregistro = function(row){
 		$http({
 			method: 	"GET",
-			url: 		$scope.http + "/parametro/" + row.entity.idparam,
+			url: 		$scope.linkapi + "/parametro/" + row.entity.idparam,
 			headers: {
 			'Content-Type': 'application/json'
 			}
@@ -170,7 +170,7 @@ app.controller('ctlPeoficial', function($scope, $http, $location, $window, confi
 
 			$http({
 				method: 	"DELETE",
-				url: 		$scope.http + "/parametro/" + row.entity.idparam,
+				url: 		$scope.linkapi + "/parametro/" + row.entity.idparam,
 				headers: {
 				'Content-Type': 'application/json'
 				}

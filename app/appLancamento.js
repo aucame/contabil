@@ -8,9 +8,9 @@ var app = angular.module('appLancamento', ['ui.grid','ngMask','Config']);
 
 app.controller('ctlLancamento', function($scope, $http, $location, $window, config) {
 
-	$scope.http = config.link;
+	$scope.linkapi = config.linkapi;
 	$scope.versao = config.versao;
-	$scope.local = config.local;
+	$scope.linksite = config.linksite;
 
 	$scope.lancamento = { 
 		'idlancamento': undefined, 
@@ -71,9 +71,9 @@ app.controller('ctlLancamento', function($scope, $http, $location, $window, conf
 
 	$scope.appMenu = function(menu) {
 		if(menu == 'logout'){
-			location.href = $scope.local;
+			location.href = $scope.linksite;
 		} else {
-			location.href = $scope.local + menu + '.html';
+			location.href = $scope.linksite + menu + '.html';
 		}
 	};
 
@@ -103,7 +103,7 @@ app.controller('ctlLancamento', function($scope, $http, $location, $window, conf
 			if (lancamento.idlancamento == undefined){
 				$http({
 					method: 	"POST",
-					url: 		$scope.http + "/lancamentos/0",
+					url: 		$scope.linkapi + "/lancamentos/0",
 					data: 		$scope.lancamento,
 					headers: {
 					'Content-Type': 'application/json'
@@ -118,7 +118,7 @@ app.controller('ctlLancamento', function($scope, $http, $location, $window, conf
 			} else {
 				$http({
 					method: 	"PUT",
-					url: 		$scope.http + "/lancamentos/0",
+					url: 		$scope.linkapi + "/lancamentos/0",
 					data: 		$scope.lancamento,
 					headers: {
 					'Content-Type': 'application/json'
@@ -136,7 +136,7 @@ app.controller('ctlLancamento', function($scope, $http, $location, $window, conf
 	$scope.getregistro = function() {
 		$http({
 			method: 	"GET",
-			url: 		$scope.http + "/lancamentos/0",
+			url: 		$scope.linkapi + "/lancamentos/0",
 			headers: {
 			'Content-Type': 'application/json'
 			}
@@ -150,7 +150,7 @@ app.controller('ctlLancamento', function($scope, $http, $location, $window, conf
 	$scope.editregistro = function(row){
 		$http({
 			method: 	"GET",
-			url: 		$scope.http + "/lancamentos/" + row.entity.idlancamento,
+			url: 		$scope.linkapi + "/lancamentos/" + row.entity.idlancamento,
 			headers: {
 			'Content-Type': 'application/json'
 			}
@@ -179,7 +179,7 @@ app.controller('ctlLancamento', function($scope, $http, $location, $window, conf
 
 			$http({
 				method: 	"DELETE",
-				url: 		$scope.http + "/lancamentos/" + row.entity.idlancamento,
+				url: 		$scope.linkapi + "/lancamentos/" + row.entity.idlancamento,
 				headers: {
 				'Content-Type': 'application/json'
 				}

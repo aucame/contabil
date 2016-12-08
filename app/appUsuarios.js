@@ -4,9 +4,9 @@ app.controller('ctlUsuarios', function($scope, $http, $location, $window, config
 
 //17520520
 
-	$scope.http = config.link;
+	$scope.linkapi = config.linkapi;
 	$scope.versao = config.versao;
-	$scope.local = config.local;
+	$scope.linksite = config.linksite;
 
 	$scope.usuario = { 
 		'idusuario': undefined, 
@@ -45,9 +45,9 @@ app.controller('ctlUsuarios', function($scope, $http, $location, $window, config
 
 	$scope.appMenu = function(menu) {
 		if(menu == 'logout'){
-			location.href = $scope.local;
+			location.href = $scope.linksite;
 		} else {
-			location.href = $scope.local + menu + '.html';
+			location.href = $scope.linksite + menu + '.html';
 		}
 	};
 
@@ -71,7 +71,7 @@ app.controller('ctlUsuarios', function($scope, $http, $location, $window, config
 			if (usuario.idusuario == undefined){
 				$http({
 					method: 	"POST",
-					url: 		$scope.http + "/usuarios/0",
+					url: 		$scope.linkapi + "/usuarios/0",
 					data: 		$scope.param,
 					headers: {
 					'Content-Type': 'application/json'
@@ -86,7 +86,7 @@ app.controller('ctlUsuarios', function($scope, $http, $location, $window, config
 			} else {
 				$http({
 					method: 	"PUT",
-					url: 		$scope.http + "/usuarios/0",
+					url: 		$scope.linkapi + "/usuarios/0",
 					data: 		$scope.param,
 					headers: {
 					'Content-Type': 'application/json'
@@ -106,7 +106,7 @@ app.controller('ctlUsuarios', function($scope, $http, $location, $window, config
 	$scope.getUsuarios = function() {
 		$http({
 			method: 	"GET",
-			url: 		$scope.http + "/usuarios/0",
+			url: 		$scope.linkapi + "/usuarios/0",
 			headers: {
 			'Content-Type': 'application/json'
 			}
@@ -120,7 +120,7 @@ app.controller('ctlUsuarios', function($scope, $http, $location, $window, config
 	$scope.editUsuario = function(row){
 		$http({
 			method: 	"GET",
-			url: 		$scope.http + "/usuarios/" + row.entity.idusuario,
+			url: 		$scope.linkapi + "/usuarios/" + row.entity.idusuario,
 			headers: {
 			'Content-Type': 'application/json'
 			}
@@ -147,7 +147,7 @@ app.controller('ctlUsuarios', function($scope, $http, $location, $window, config
 
 			$http({
 				method: 	"DELETE",
-				url: 		$scope.http + "/usuarios/" + row.entity.idusuario,
+				url: 		$scope.linkapi + "/usuarios/" + row.entity.idusuario,
 				headers: {
 				'Content-Type': 'application/json'
 				}

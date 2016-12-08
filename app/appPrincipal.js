@@ -2,13 +2,13 @@ var app = angular.module('appPrincipal',['Config']);
 
 app.controller('ctlPrincipal', function($scope, $location, $window, config) {
 
-	$scope.local = config.local;
+	$scope.linksite = config.linksite;
 
 	$scope.appMenu = function(menu) {
 		if(menu == 'logout'){
-			location.href = $scope.local;
+			location.href = $scope.linksite;
 		} else {
-			location.href = $scope.local + menu + '.html';
+			location.href = $scope.linksite + menu + '.html';
 		}
 	};
 

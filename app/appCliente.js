@@ -2,9 +2,9 @@ var app = angular.module('appCliente', ['ui.grid','ngMask','Config']);
 
 app.controller('ctlCliente', function($scope, $http, $location, $window, config) {
 
-	$scope.http = config.link;
+	$scope.linkapi = config.linkapi;
 	$scope.versao = config.versao;
-	$scope.local = config.local;
+	$scope.linksite = config.linksite;
 
 	$scope.cliente = { 
 		'idcliente': undefined, 
@@ -44,9 +44,9 @@ app.controller('ctlCliente', function($scope, $http, $location, $window, config)
 
 	$scope.appMenu = function(menu) {
 		if(menu == 'logout'){
-			location.href = $scope.local;
+			location.href = $scope.linksite;
 		} else {
-			location.href = $scope.local + menu + '.html';
+			location.href = $scope.linksite + menu + '.html';
 		}
 	};
 
@@ -72,7 +72,7 @@ app.controller('ctlCliente', function($scope, $http, $location, $window, config)
 			if (cliente.idcliente == undefined){
 				$http({
 					method: 	"POST",
-					url: 		$scope.http + "/clientes/0",
+					url: 		$scope.linkapi + "/clientes/0",
 					data: 		$scope.param,
 					headers: {
 					'Content-Type': 'application/json'
@@ -87,7 +87,7 @@ app.controller('ctlCliente', function($scope, $http, $location, $window, config)
 			} else {
 				$http({
 					method: 	"PUT",
-					url: 		$scope.http + "/clientes/0",
+					url: 		$scope.linkapi + "/clientes/0",
 					data: 		$scope.param,
 					headers: {
 					'Content-Type': 'application/json'
@@ -107,7 +107,7 @@ app.controller('ctlCliente', function($scope, $http, $location, $window, config)
 	$scope.getcliente = function() {
 		$http({
 			method: 	"GET",
-			url: 		$scope.http + "/clientes/0",
+			url: 		$scope.linkapi + "/clientes/0",
 			headers: {
 			'Content-Type': 'application/json'
 			}
@@ -121,7 +121,7 @@ app.controller('ctlCliente', function($scope, $http, $location, $window, config)
 	$scope.editcliente = function(row){
 		$http({
 			method: 	"GET",
-			url: 		$scope.http + "/clientes/" + row.entity.idcliente,
+			url: 		$scope.linkapi + "/clientes/" + row.entity.idcliente,
 			headers: {
 			'Content-Type': 'application/json'
 			}
@@ -148,7 +148,7 @@ app.controller('ctlCliente', function($scope, $http, $location, $window, config)
 
 			$http({
 				method: 	"DELETE",
-				url: 		$scope.http + "/clientes/" + row.entity.idcliente,
+				url: 		$scope.linkapi + "/clientes/" + row.entity.idcliente,
 				headers: {
 				'Content-Type': 'application/json'
 				}

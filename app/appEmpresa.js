@@ -2,9 +2,9 @@ var app = angular.module('appEmpresa', ['ui.grid','ngMask','Config']);
 
 app.controller('ctlEmpresa', function($scope, $http, $location, $window, config) {
 
-	$scope.http = config.link;
+	$scope.linkapi = config.linkapi;
 	$scope.versao = config.versao;
-	$scope.local = config.local;
+	$scope.linksite = config.linksite;
 
 	$scope.empresa = { 
 		'idempresa': undefined, 
@@ -42,9 +42,9 @@ app.controller('ctlEmpresa', function($scope, $http, $location, $window, config)
 
 	$scope.appMenu = function(menu) {
 		if(menu == 'logout'){
-			location.href = $scope.local;
+			location.href = $scope.linksite;
 		} else {
-			location.href = $scope.local + menu + '.html';
+			location.href = $scope.linksite + menu + '.html';
 		}
 	};
 
@@ -69,7 +69,7 @@ app.controller('ctlEmpresa', function($scope, $http, $location, $window, config)
 			if (empresa.idempresa == undefined){
 				$http({
 					method: 	"POST",
-					url: 		$scope.http + "/empresas/0",
+					url: 		$scope.linkapi + "/empresas/0",
 					data: 		$scope.param,
 					headers: {
 					'Content-Type': 'application/json'
@@ -84,7 +84,7 @@ app.controller('ctlEmpresa', function($scope, $http, $location, $window, config)
 			} else {
 				$http({
 					method: 	"PUT",
-					url: 		$scope.http + "/empresas/0",
+					url: 		$scope.linkapi + "/empresas/0",
 					data: 		$scope.param,
 					headers: {
 					'Content-Type': 'application/json'
@@ -102,7 +102,7 @@ app.controller('ctlEmpresa', function($scope, $http, $location, $window, config)
 	$scope.getregistro = function() {
 		$http({
 			method: 	"GET",
-			url: 		$scope.http + "/empresas/0",
+			url: 		$scope.linkapi + "/empresas/0",
 			headers: {
 			'Content-Type': 'application/json'
 			}
@@ -116,7 +116,7 @@ app.controller('ctlEmpresa', function($scope, $http, $location, $window, config)
 	$scope.editregistro = function(row){
 		$http({
 			method: 	"GET",
-			url: 		$scope.http + "/empresas/" + row.entity.idempresa,
+			url: 		$scope.linkapi + "/empresas/" + row.entity.idempresa,
 			headers: {
 			'Content-Type': 'application/json'
 			}
@@ -143,7 +143,7 @@ app.controller('ctlEmpresa', function($scope, $http, $location, $window, config)
 
 			$http({
 				method: 	"DELETE",
-				url: 		$scope.http + "/empresas/" + row.entity.idempresa,
+				url: 		$scope.linkapi + "/empresas/" + row.entity.idempresa,
 				headers: {
 				'Content-Type': 'application/json'
 				}

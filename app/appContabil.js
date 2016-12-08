@@ -11,9 +11,9 @@ var app = angular.module('appContabil', ['Config']);
 
 app.controller('ctlContabil', function($scope, $location, $http, $window, config) {
 
-	$scope.http = config.link;
+	$scope.linkapi = config.linkapi;
 	$scope.versao = config.versao;
-	$scope.local = config.local;
+	$scope.linksite = config.linksite;
 
 	$scope.principal = function(user) {
 
@@ -32,7 +32,7 @@ app.controller('ctlContabil', function($scope, $location, $http, $window, config
 
 			$http({
 				method: 	"GET",
-				url: 		$scope.http + "/login/" + $scope.user.username,
+				url: 		$scope.linkapi + "/login/" + $scope.user.username,
 				headers: {
 				'Content-Type': 'application/json'
 				}
@@ -46,7 +46,7 @@ app.controller('ctlContabil', function($scope, $location, $http, $window, config
 					$scope.param = angular.toJson($scope.user)
 					$window.sessionStorage.setItem('login', $scope.param);
 					$window.sessionStorage.setItem('remoteip', $scope.remoteip);
-					location.href = $scope.local + 'principal.html';
+					location.href = $scope.linksite + 'principal.html';
 				}else{
 					swal({title: "", text: "Senha invalida !!!", type: "error"});
 				}				

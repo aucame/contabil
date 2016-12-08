@@ -2,9 +2,9 @@ var app = angular.module('appPlano', ['ui.grid','ngMask','Config']);
 
 app.controller('ctlPlano', function($scope, $http, $location, $window, config) {
 
-	$scope.http = config.link;
+	$scope.linkapi = config.linkapi;
 	$scope.versao = config.versao;
-	$scope.local = config.local;
+	$scope.linksite = config.linksite;
 
 	$scope.plano = { 
 		'idplano': undefined, 
@@ -51,9 +51,9 @@ app.controller('ctlPlano', function($scope, $http, $location, $window, config) {
 
 	$scope.appMenu = function(menu) {
 		if(menu == 'logout'){
-			location.href = $scope.local;
+			location.href = $scope.linksite;
 		} else {
-			location.href = $scope.local + menu + '.html';
+			location.href = $scope.linksite + menu + '.html';
 		}
 	};
 
@@ -81,7 +81,7 @@ app.controller('ctlPlano', function($scope, $http, $location, $window, config) {
 			if (plano.idplano == undefined){
 				$http({
 					method: 	"POST",
-					url: 		$scope.http + "/planocontas/0",
+					url: 		$scope.linkapi + "/planocontas/0",
 					data: 		$scope.plano,
 					headers: {
 					'Content-Type': 'application/json'
@@ -98,7 +98,7 @@ app.controller('ctlPlano', function($scope, $http, $location, $window, config) {
 
 				$http({
 					method: 	"PUT",
-					url: 		$scope.http + "/planocontas/0",
+					url: 		$scope.linkapi + "/planocontas/0",
 					data: 		$scope.plano,
 					headers: {
 					'Content-Type': 'application/json'
@@ -118,7 +118,7 @@ app.controller('ctlPlano', function($scope, $http, $location, $window, config) {
 	$scope.getregistro = function() {
 		$http({
 			method: 	"GET",
-			url: 		$scope.http + "/planocontas/0",
+			url: 		$scope.linkapi + "/planocontas/0",
 			headers: {
 			'Content-Type': 'application/json'
 			}
@@ -132,7 +132,7 @@ app.controller('ctlPlano', function($scope, $http, $location, $window, config) {
 	$scope.editregistro = function(row){
 		$http({
 			method: 	"GET",
-			url: 		$scope.http + "/planocontas/" + row.entity.idplano,
+			url: 		$scope.linkapi + "/planocontas/" + row.entity.idplano,
 			headers: {
 			'Content-Type': 'application/json'
 			}
@@ -165,7 +165,7 @@ app.controller('ctlPlano', function($scope, $http, $location, $window, config) {
 
 			$http({
 				method: 	"DELETE",
-				url: 		$scope.http + "/planocontas/" + row.entity.idplano,
+				url: 		$scope.linkapi + "/planocontas/" + row.entity.idplano,
 				headers: {
 				'Content-Type': 'application/json'
 				}
