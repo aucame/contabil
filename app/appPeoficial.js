@@ -1,25 +1,10 @@
+var app = angular.module('appPeoficial', ['ui.grid','ngMask','Config']);
 
-$(function() {
-//	$("#valor").maskMoney({prefix:'R$ ', allowNegative: true, thousands:',', decimal:'.', affixesStay: false});
-	$("#valor").maskMoney();
-});
-
-var app = angular.module('appLancamento', ['ui.grid','ngMask','Config']);
-
-app.controller('ctlLancamento', function($scope, $http, $location, $window, config) {
+app.controller('ctlPeoficial', function($scope, $http, $location, $window, config) {
 
 	$scope.http = config.link;
 	$scope.versao = config.versao;
 	$scope.local = config.local;
-
-	$scope.lancamento = { 
-		'idlancamento': undefined, 
-		'ano':  undefined,
-		'mes': undefined, 
-		'idplano': undefined,
-		'valor': undefined,
-		'idcliente': undefined
-	};
 
     $scope.meses =	[
 					{mes: "Selecione", numero: 00 },
@@ -37,6 +22,14 @@ app.controller('ctlLancamento', function($scope, $http, $location, $window, conf
 					{mes: "Dezembro", numero: 12}
     				];
 
+	$scope.parametro = { 
+		'idparam': undefined, 
+		'mes':  0,
+		'ano': undefined, 
+		'idempresa': undefined,
+		'diasuteis': undefined
+	};
+
     $scope.options = $scope.meses;
     $scope.selectedOption = $scope.options[0];
 
@@ -49,18 +42,17 @@ app.controller('ctlLancamento', function($scope, $http, $location, $window, conf
 		//enableCellEditOnFocus: true,
 
 		columnDefs: [
-			{ field: 'idlancamento', enableCellEdit: false, minWidth: 50, width: 100, displayName: 'Numero' },
-			{ field: 'idcliente', enableCellEdit: false, minWidth: 50, width: 100, displayName: 'Cliente' },
-			{ field: 'ano', enableCellEdit: false, minWidth: 50, width: 100, displayName: 'Ano' },
-			{ field: 'mes', enableCellEdit: false, minWidth: 50, width: 100, displayName: 'Mes' },
-			{ field: 'idplano', enableCellEdit: false, minWidth: 50, width: 100, displayName: 'Plano' },
-			{ field: 'valor', enableCellEdit: false, minWidth: 50, width: 100, displayName: 'Valor' },
+			{ field: 'idparam', enableCellEdit: false, minWidth: 50, width: 80, displayName: 'Codigo' },
+			{ field: 'mes', enableCellEdit: false, minWidth: 120, width: 250, displayName: 'Mes' },
+			{ field: 'ano', enableCellEdit: false, minWidth: 120, width: 300, displayName: 'Ano' },
+			{ field: 'idempresa', enableCellEdit: false, minWidth: 120, width: 150, displayName: 'Empresa' },
+			{ field: 'diasuteis', enableCellEdit: false, minWidth: 120, width: 150, displayName: 'Dias Uteis' },
 			{ name: 'Opções', enableCellEdit: false, width: 200,
 			cellTemplate:'<button class="btn btn-primary" ng-click="grid.appScope.editregistro(row)"><span class="glyphicon glyphicon-edit"></span> Editar</button>  <button class="btn btn-primary" ng-click="grid.appScope.delregistro(row)"><span class="glyphicon glyphicon-trash"></span> Deletar</button>'  }		
 		],
 
 		data: [ 
-			{ 'idlancamento': 0, 'ano': 0, 'mes': undefined, 'idplano': undefined, 'valor': undefined, 'idcliente': undefined }
+			{ 'idparam': 0, 'mes': 0, 'ano': 0, 'idempresa': 0, 'diasuteis': 0 }
 		]
 
 	}; 			
@@ -78,33 +70,32 @@ app.controller('ctlLancamento', function($scope, $http, $location, $window, conf
 	};
 
 	$scope.novo = function() {
-		$scope.lancamento = { 
-		'idlancamento': undefined, 
-		'ano':  undefined,
-		'mes': undefined, 
-		'idplano': undefined,
-		'valor': undefined,
-		'idcliente': undefined
+		$scope.parametro = { 
+		'idparam': undefined, 
+		'mes':  undefined,
+		'ano': undefined, 
+		'idempresa': undefined,
+		'diasuteis': undefined
 		};
         $scope.selectedOption = $scope.options[0];
 	};
 
-	$scope.gravar = function(lancamento) {
+	$scope.gravar = function(parametro) {
 
-		$scope.lancamento.mes = $scope.selectedOption.numero;		
+		$scope.parametro.mes = $scope.selectedOption.numero;		
 
-		$scope.lancamento = angular.toJson(lancamento);
+		$scope.parametro = angular.toJson(parametro);
 
-		if (lancamento.ano == undefined){
+		if (parametro.mes == undefined){
 			$scope.novo();
 			$scope.getregistro();
 		}else{
 
-			if (lancamento.idlancamento == undefined){
+			if (parametro.idparam == undefined){
 				$http({
 					method: 	"POST",
-					url: 		$scope.http + "/lancamentos/0",
-					data: 		$scope.lancamento,
+					url: 		$scope.http + "/parametro/0",
+					data: 		$scope.parametro,
 					headers: {
 					'Content-Type': 'application/json'
 					}
@@ -118,8 +109,8 @@ app.controller('ctlLancamento', function($scope, $http, $location, $window, conf
 			} else {
 				$http({
 					method: 	"PUT",
-					url: 		$scope.http + "/lancamentos/0",
-					data: 		$scope.lancamento,
+					url: 		$scope.http + "/parametro/0",
+					data: 		$scope.parametro,
 					headers: {
 					'Content-Type': 'application/json'
 					}
@@ -136,12 +127,12 @@ app.controller('ctlLancamento', function($scope, $http, $location, $window, conf
 	$scope.getregistro = function() {
 		$http({
 			method: 	"GET",
-			url: 		$scope.http + "/lancamentos/0",
+			url: 		$scope.http + "/parametro/0",
 			headers: {
 			'Content-Type': 'application/json'
 			}
 		}).then(function(response){
-			$scope.gridOptions.data = response.data.cadlancamento;
+			$scope.gridOptions.data = response.data.cadparam;
 		}, function(error){
 			console.log("Error... = " + error.status);
 		});
@@ -150,13 +141,13 @@ app.controller('ctlLancamento', function($scope, $http, $location, $window, conf
 	$scope.editregistro = function(row){
 		$http({
 			method: 	"GET",
-			url: 		$scope.http + "/lancamentos/" + row.entity.idlancamento,
+			url: 		$scope.http + "/parametro/" + row.entity.idparam,
 			headers: {
 			'Content-Type': 'application/json'
 			}
 		}).then(function(response){
-			$scope.lancamento = response.data.cadlancamento[0];
-			mes = response.data.cadlancamento[0].mes;
+			$scope.parametro = response.data.cadparam[0];
+			mes = response.data.cadparam[0].mes;
             $scope.selectedOption = $scope.options[mes];
 		}, function(error){
 			console.log("Error... = " + error);
@@ -179,7 +170,7 @@ app.controller('ctlLancamento', function($scope, $http, $location, $window, conf
 
 			$http({
 				method: 	"DELETE",
-				url: 		$scope.http + "/lancamentos/" + row.entity.idlancamento,
+				url: 		$scope.http + "/parametro/" + row.entity.idparam,
 				headers: {
 				'Content-Type': 'application/json'
 				}
@@ -209,6 +200,6 @@ app.controller('ctlLancamento', function($scope, $http, $location, $window, conf
 
 	$scope.getregistro();
 
-	$('#idcliente').focus();
+	$('#ano').focus();
 
 });

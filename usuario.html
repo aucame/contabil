@@ -27,42 +27,7 @@
 	<body ng-controller="ctlUsuarios">
 
 		<header>
-			<nav class="navbar navbar-default">
-				<div class="container-fluid">
-					<div class="navbar-header">
-					<a class="navbar-brand">Sistema Contabil - DRE</a>
-					</div>
-					<ul class="nav navbar-nav">
-					<li class="active"><a href="#">Usuarios</a></li>
-					<li><a href="#" ng-click="appCliente()">Clientes</a></li>
-					<li><a href="#" ng-click="appEmpresa()">Empresas</a></li>
-					<li><a href="#" ng-click="appParametro()">Parametros</a></li>
-					<li><a href="#" ng-click="appPlano()">Plano Contas</a></li>
-					<li><a href="#" ng-click="appLancamento()">Lançamentos</a></li>
-					
-					<li class="dropdown">
-					  <a href="#" class="dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-					    Relatórios<span class="caret"></span>
-					  </a>
-					  <ul class="dropdown-menu" >
-					    <li><a href="#">P.E. 2016 Oficial</a></li>
-					    <li><a href="#">DRE 2016 Sintética</a></li>
-					    <li><a href="#">DRE 2015 Sintética</a></li>
-					    <li><a href="#">DRE 2016 Trimestral</a></li>
-					    <li><a href="#">DRE 2015 Trimestral</a></li>
-					    <li><a href="#">DRE Sintetico 2016x2015</a></li>
-					    <li><a href="#">Faturamento por Linha</a></li>
-					    <li><a href="#">Preço Medio por Linha</a></li>
-					  </ul>
-					</li>
-					
-					</ul>
-					<ul class="nav navbar-nav navbar-right">
-					<li><a>Usuario: {{login.username}}</a></li>						
-					<li><a href="#" ng-click="logout()"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
-					</ul>
-				</div>
-			</nav>
+            <div htmlmenu></div>
 		</header>
 
 		<main>
