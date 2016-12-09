@@ -6,6 +6,10 @@ app.controller('ctlPeoficial', function($scope, $http, $location, $window, confi
 	$scope.versao = config.versao;
 	$scope.linksite = config.linksite;
 
+	$scope.printPeoficial = function(){
+		$window.print();
+	};
+
     $scope.meses =	[
 					{mes: "Selecione", numero: 00 },
 					{mes: "Janeiro", numero: 01 },
