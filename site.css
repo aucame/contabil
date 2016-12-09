@@ -29,3 +29,13 @@
     .hint + .tooltip.right > .tooltip-arrow {
     border-right: 5px solid black;
 }
+
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+    background-color: #286090;
+    color: #FFFFFF;
+}
+
+.dropdown-menu > .active > a,.dropdown-menu > .active > a:hover.dropdown-menu > .active > a:focus {
+    color: #555555!important; 
+    background-color: #e7e7e7!important;
+}
