@@ -2,10 +2,12 @@
 
 bower_components/
 
+backend/include
 backend/lib
 backend/local
 backend/pip-selfcheck.json
 backend/share
 backend/bin
+carreteiro/
 
 *.pyc
