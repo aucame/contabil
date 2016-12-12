@@ -1,7 +1,7 @@
 
 $(function() {
 //	$("#valor").maskMoney({prefix:'R$ ', allowNegative: true, thousands:',', decimal:'.', affixesStay: false});
-	$("#valor").maskMoney();
+//	$("#valor").maskMoney();
 });
 
 var app = angular.module('appLancamento', ['ui.grid','ngMask','Config']);
@@ -90,6 +90,8 @@ app.controller('ctlLancamento', function($scope, $http, $location, $window, conf
 	};
 
 	$scope.gravar = function(lancamento) {
+
+		console.log(lancamento.valor);
 
 		$scope.lancamento.mes = $scope.selectedOption.numero;		
 
