@@ -1,3 +1,5 @@
+# coding=UTF-8
+
 import json
 import codecs
 from configuration import database
@@ -52,18 +54,23 @@ class MySqlQuery():
         return retorno
 
     def cria_registro(self, data):
+
+        print('antes = ' + data)
+
         reg = json.loads(data)
 
-        novo = self.proximo_codigo()
+        print(reg)
+ 
+#        novo = self.proximo_codigo()
 
-        query = 'insert into {0}.{1}(idplano, codigo, descricao, tipocd) values ({2}, {3}, {4}, "{5}")'.format(banco, tb_banco, 
-            novo, 
-            reg['codigo'], 
-            reg['descricao'], 
-            reg['tipocd']
-            )
+#        query = 'insert into {0}.{1}(idplano, codigo, descricao, tipocd) values ({2}, {3}, "{4}", "{5}")'.format(banco, tb_banco, 
+#            novo, 
+#            reg['codigo'], 
+#            reg['descricao'], 
+#            reg['tipocd']
+#            )
 
-        retorno = self.execute(banco, query)
+#        retorno = self.execute(banco, query)
 
     def proximo_codigo(self):
         query = 'select max(idplano) from {0}.{1}'.format(banco, tb_banco)

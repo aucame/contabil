@@ -69,8 +69,12 @@ app.controller('ctlPlano', function($scope, $http, $location, $window, config) {
 
 	$scope.gravar = function(plano) {
 
+		console.log("antes = "+plano)
+
 		plano.tipocd = $scope.selectedOption.valor;
 		$scope.plano = angular.toJson(plano);
+
+		console.log("depois = " + $scope.plano)
 
 		if (plano.codigo == undefined){
 			$scope.novo();
@@ -101,7 +105,7 @@ app.controller('ctlPlano', function($scope, $http, $location, $window, config) {
 					url: 		$scope.linkapi + "/planocontas/0",
 					data: 		$scope.plano,
 					headers: {
-					'Content-Type': 'application/json'
+					'Content-Type': 'application/json, charset=UTF-8'
 					}
 				}).then(function(response){
 					$scope.novo();
