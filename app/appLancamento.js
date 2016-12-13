@@ -4,7 +4,7 @@ $(function() {
 //	$("#valor").maskMoney();
 });
 
-var app = angular.module('appLancamento', ['ui.grid','Config']);
+var app = angular.module('appLancamento', ['ui.utils.masks','ui.grid','Config']);
 
 app.controller('ctlLancamento', function($scope, $http, $location, $window, config) {
 
@@ -53,7 +53,7 @@ app.controller('ctlLancamento', function($scope, $http, $location, $window, conf
 			{ field: 'idcliente', enableCellEdit: false, minWidth: 50, width: 100, displayName: 'Cliente' },
 			{ field: 'ano', enableCellEdit: false, minWidth: 50, width: 100, displayName: 'Ano' },
 			{ field: 'mes', enableCellEdit: false, minWidth: 50, width: 100, displayName: 'Mes' },
-			{ field: 'idplano', enableCellEdit: false, minWidth: 50, width: 100, displayName: 'Plano' },
+			{ field: 'idplano', enableCellEdit: false, minWidth: 50, width: 200, displayName: 'Plano' },
 			{ field: 'valor', enableCellEdit: false, minWidth: 50, width: 100, displayName: 'Valor' },
 			{ name: 'Opções', enableCellEdit: false, width: 200,
 			cellTemplate:'<button class="btn btn-primary" ng-click="grid.appScope.editregistro(row)"><span class="glyphicon glyphicon-edit"></span> Editar</button>  <button class="btn btn-primary" ng-click="grid.appScope.delregistro(row)"><span class="glyphicon glyphicon-trash"></span> Deletar</button>'  }		
