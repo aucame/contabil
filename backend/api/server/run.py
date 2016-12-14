@@ -1,3 +1,5 @@
+# coding=UTF-8
+
 import tornado.web
 from configuration import server
 from handlers import default, usuarios, clientes, login, empresas, param, plano, lancamento

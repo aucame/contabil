@@ -22,7 +22,8 @@ class MySqlQuery():
                        database_settings.password(),
                        database_settings.host(),
                        database_settings.port(),
-                       database_settings.database())
+                       database_settings.database()
+                       )
 
         try:
             engine  = create_engine(str_conn)
@@ -42,35 +43,60 @@ class MySqlQuery():
         result = []
 
         data = self.execute(banco, query)
-        for value in data:
+
+        rows = data.fetchall()
+
+        #print dir(data)
+
+        #print data.rowcount
+
+        for row in rows:
+            print(row['idplano'])   
+            print(row['codigo'])   
+            print(row['descricao'])   
+            print(row['tipocd'])
+
+            desc = row['descricao']
+            print desc.decode('utf8')
+
             result.append({
-                'idplano': value['idplano'], 
-                'codigo': value['codigo'], 
-                'descricao': value['descricao'],
-                'tipocd': value['tipocd']
-                })
+                "idplano": row['idplano'],
+                "codigo": row['codigo']
+            })   
+
+
+        print result
+
+ #       for value in data:
+ #           result.append({
+ #               'idplano': value['idplano'], 
+ #               'codigo': value['codigo'], 
+ #               'descricao': value['descricao'],
+ #               'tipocd': value['tipocd']
+ #               })
     
         retorno = {'cadplano': result}
         return retorno
 
     def cria_registro(self, data):
 
-        print('antes = ' + data)
-
         reg = json.loads(data)
 
-        print(reg)
- 
-#        novo = self.proximo_codigo()
+        novo = self.proximo_codigo()
+
+        query = 'insert into ' + banco + '.' + tb_banco + ' (idplano, codigo, descricao, tipocd) values (' + str(novo) + ',' + str(reg['codigo']) + ',"' + reg['descricao'] + '","' + reg['tipocd'] + '")'
+
+#        print query
 
 #        query = 'insert into {0}.{1}(idplano, codigo, descricao, tipocd) values ({2}, {3}, "{4}", "{5}")'.format(banco, tb_banco, 
 #            novo, 
 #            reg['codigo'], 
-#            reg['descricao'], 
+#            nome.encode('ascii', 'ignore'), #.decode('utf-8'), 
+#            reg['descricao'],
 #            reg['tipocd']
 #            )
 
-#        retorno = self.execute(banco, query)
+        retorno = self.execute(banco, query)
 
     def proximo_codigo(self):
         query = 'select max(idplano) from {0}.{1}'.format(banco, tb_banco)

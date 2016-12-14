@@ -1,3 +1,5 @@
+# coding=UTF-8
+
 import codecs
 import tornado.web
 import json
