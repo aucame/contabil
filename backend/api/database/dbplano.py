@@ -1,5 +1,3 @@
-# coding=UTF-8
-
 import json
 import codecs
 from configuration import database
@@ -46,35 +44,14 @@ class MySqlQuery():
 
         rows = data.fetchall()
 
-        #print dir(data)
-
-        #print data.rowcount
-
         for row in rows:
-            print(row['idplano'])   
-            print(row['codigo'])   
-            print(row['descricao'])   
-            print(row['tipocd'])
-
-            desc = row['descricao']
-            print desc.decode('utf8')
-
             result.append({
                 "idplano": row['idplano'],
-                "codigo": row['codigo']
+                "codigo": row['codigo'],
+                "descricao": row['descricao'].decode('latin1'),
+                "tipocd": row['tipocd']
             })   
 
-
-        print result
-
- #       for value in data:
- #           result.append({
- #               'idplano': value['idplano'], 
- #               'codigo': value['codigo'], 
- #               'descricao': value['descricao'],
- #               'tipocd': value['tipocd']
- #               })
-    
         retorno = {'cadplano': result}
         return retorno
 
@@ -84,10 +61,9 @@ class MySqlQuery():
 
         novo = self.proximo_codigo()
 
-        query = 'insert into ' + banco + '.' + tb_banco + ' (idplano, codigo, descricao, tipocd) values (' + str(novo) + ',' + str(reg['codigo']) + ',"' + reg['descricao'] + '","' + reg['tipocd'] + '")'
+        query = 'insert into ' + banco + '.' + tb_banco + ' (idplano, codigo, descricao, tipocd) values (' + str(novo) + ',' + str(reg['codigo']) + ',"' + reg['descricao'].decode('latin1') + '","' + reg['tipocd'] + '")'
 
 #        print query
-
 #        query = 'insert into {0}.{1}(idplano, codigo, descricao, tipocd) values ({2}, {3}, "{4}", "{5}")'.format(banco, tb_banco, 
 #            novo, 
 #            reg['codigo'], 
@@ -120,11 +96,23 @@ class MySqlQuery():
         retorno = self.execute(banco, query)
 
     def altera_registro(self, data):
+
+        print data
+
         reg = json.loads(data)
-        query = 'update {0}.{1} set codigo = {3}, descricao = "{4}", tipocd="{5}" where idplano = {2}'.format(banco, tb_banco, 
-            reg['idplano'],
-            reg['codigo'],
-            reg['descricao'],
-            reg['tipocd']
-            )
+
+        print reg
+
+        print reg['descricao']
+
+        query = 'update ' + banco + '.' + tb_banco + ' set codigo=' + reg['codigo'] + ', descricao="' + reg['descricao'] + '", tipocd="' + reg['tipocd'] + '" where idplano = 1' #+ int(reg['idplano'])
+
+        # query = 'update {0}.{1} set codigo = {3}, descricao = "{4}", tipocd="{5}" where idplano = {2}'.format(banco, tb_banco, 
+        #      reg['idplano'],
+        #      reg['codigo'],
+        #      reg['descricao'].encode('latin1'),
+        #      reg['tipocd']
+        #      )
+
+        #print query
         retorno = self.execute(banco, query)
