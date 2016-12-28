@@ -43,8 +43,8 @@ class MySqlQuery():
         for value in data:
             result.append({
                 'idempresa': value['idempresa'], 
-                'nome': value['nome'], 
-                'endereco': value['endereco'],
+                'nome': value['nome'].decode('latin1'), 
+                'endereco': value['endereco'].decode('latin1'),
                 'fonecomercial': value['fonecomercial']
                 })
     
@@ -56,12 +56,14 @@ class MySqlQuery():
 
         novo = self.proximo_codigo()
 
-        query = 'insert into {0}.{1}(idempresa, nome, endereco, fonecomercial) values ({2}, "{3}", "{4}", "{5}")'.format(banco, tb_banco, 
-            novo, 
-            reg['nome'], 
-            reg['endereco'], 
-            reg['fonecomercial']
-            )
+        query = 'insert into ' + banco + '.' + tb_banco + ' (idempresa, nome, endereco, fonecomercial) values (' + str(novo) + ', "' + reg['nome'] + '", "' + reg['endereco'] + '" , "' + reg['fonecomercial'] + '" )'
+
+        # query = 'insert into {0}.{1}(idempresa, nome, endereco, fonecomercial) values ({2}, "{3}", "{4}", "{5}")'.format(banco, tb_banco, 
+        #     novo, 
+        #     reg['nome'], 
+        #     reg['endereco'], 
+        #     reg['fonecomercial']
+        #     )
 
         retorno = self.execute(banco, query)
 
@@ -81,17 +83,23 @@ class MySqlQuery():
         return prox
 
     def deleta_registro(self, data):
-        query = 'delete from {0}.{1} where idempresa = {2}'.format(banco, tb_banco, 
-            int(data)
-            )
+        query = 'delete from {0}.{1} where idempresa = {2}'.format(banco, tb_banco, int(data) )
         retorno = self.execute(banco, query)
 
     def altera_registro(self, data):
         reg = json.loads(data)
-        query = 'update {0}.{1} set nome = "{2}", endereco = "{4}", fonecomercial="{5}" where idempresa = {3}'.format(banco, tb_banco, 
-            reg['nome'],
-            reg['idempresa'],
-            reg['endereco'],
-            reg['fonecomercial']
-            ) 
+
+        print reg
+
+        query = 'update ' + banco + '.' + tb_banco + ' set nome ="' + reg['nome'] + '", endereco="' + reg['endereco'] + '", fonecomercial="' + reg['fonecomercial'] + '" where idempresa = ' + str(reg['idempresa'] )
+
+        print query
+        
+        # query = 'update {0}.{1} set nome = "{2}", endereco = "{4}", fonecomercial="{5}" where idempresa = {3}'.format(banco, tb_banco, 
+        #     reg['nome'],
+        #     reg['idempresa'],
+        #     reg['endereco'],
+        #     reg['fonecomercial']
+        #     ) 
+
         retorno = self.execute(banco, query)

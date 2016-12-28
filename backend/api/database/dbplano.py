@@ -90,20 +90,11 @@ class MySqlQuery():
         return prox
 
     def deleta_registro(self, data):
-        query = 'delete from {0}.{1} where idplano = {2}'.format(banco, tb_banco, 
-            int(data)
-            )
+        query = 'delete from {0}.{1} where idplano = {2}'.format(banco, tb_banco, int(data) )
         retorno = self.execute(banco, query)
 
     def altera_registro(self, data):
-
-        print data
-
         reg = json.loads(data)
-
-        print reg
-
-        print reg['descricao']
 
         query = 'update ' + banco + '.' + tb_banco + ' set codigo=' + reg['codigo'] + ', descricao="' + reg['descricao'] + '", tipocd="' + reg['tipocd'] + '" where idplano = ' + str(reg['idplano'])
 
@@ -114,5 +105,4 @@ class MySqlQuery():
         #      reg['tipocd']
         #      )
 
-        #print query
         retorno = self.execute(banco, query)

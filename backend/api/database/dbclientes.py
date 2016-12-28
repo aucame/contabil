@@ -54,12 +54,9 @@ class MySqlQuery():
 
     def cria_cliente(self, data):
         reg = json.loads(data)
-
         idcliente = self.proximo_codigo()
-
         query = 'insert into ' + banco + '.' + tb_tabela + ' (idcliente, nome, endereco, fonecomercial, foneresidencial) values (' + str(idcliente) + ',"' + reg['nome'] + '","' + reg['endereco'] + '","' + reg['fonecomercial'] + '","' + reg['foneresidencial'] + '")'
-
-        # print query
+        retorno = self.execute(banco, query)
 
         # query = 'insert into {0}.{1}(idcliente, nome, endereco, fonecomercial, foneresidencial) values ({2}, "{3}", "{4}", "{5}", "{6}")'.format(banco, tb_tabela, 
         #     idcliente, 
@@ -68,8 +65,6 @@ class MySqlQuery():
         #     reg['fonecomercial'],
         #     reg['foneresidencial']
         #     )
-
-        retorno = self.execute(banco, query)
 
     def proximo_codigo(self):
         query = 'select max(idcliente) from {0}.{1}'.format(banco, tb_tabela)
@@ -87,15 +82,13 @@ class MySqlQuery():
         return prox
 
     def deleta_cliente(self, data):
-        query = 'delete from {0}.{1} where idcliente = {2}'.format(banco, tb_tabela, 
-            int(data)
-            )
+        query = 'delete from {0}.{1} where idcliente = {2}'.format(banco, tb_tabela, int(data) )
         retorno = self.execute(banco, query)
 
     def altera_cliente(self, data):
         reg = json.loads(data)
-
-        query = 'update ' + banco + '.' + tb_tabela + ' set nome="' + reg['nome'] + '", endereco="' + reg['endereco'] + '", fonecomercial="' + reg['fonecomercial'] + '", foneresidencial="' + reg['foneresidencial'] + '", where idcliente = ' + str(reg['idcliente'])
+        query = 'update ' + banco + '.' + tb_tabela + ' set nome="' + reg['nome'] + '", endereco="' + reg['endereco'] + '", fonecomercial="' + reg['fonecomercial'] + '", foneresidencial="' + reg['foneresidencial'] + '" where idcliente = ' + str(reg['idcliente'])
+        retorno = self.execute(banco, query)
 
         # query = 'update {0}.{1} set nome = "{2}", endereco = "{4}", fonecomercial="{5}", foneresidencial="{6}" where idcliente = {3}'.format(banco, tb_tabela, 
         #     reg['nome'],
@@ -104,4 +97,3 @@ class MySqlQuery():
         #     reg['fonecomercial'],
         #     reg['foneresidencial']
         #     ) 
-        retorno = self.execute(banco, query)
