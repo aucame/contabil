@@ -43,9 +43,9 @@ class MySqlQuery():
         for value in data:
             result.append({
                 'idusuario': value['idusuarios'], 
-                'nome': value['nome'], 
+                'nome': value['nome'].decode('latin1'), 
                 'ativo': value['ativo'],
-                'login': value['login']
+                'login': value['login'].decode('latin1')
                 })
     
         retorno = {'cadusuarios': result}
@@ -53,18 +53,18 @@ class MySqlQuery():
 
     def cria_usuario(self, data):
         reg = json.loads(data)
-
         novo = self.proximo_codigo()
-
-        query = 'insert into {0}.{1}(idusuarios, nome, senha, ativo, login) values ({2}, "{3}", "{4}", "{5}", "{6}")'.format(banco, tb_usuarios, 
-            novo, 
-            reg['nome'], 
-            reg['senha'], 
-            reg['ativo'],
-            reg['login']
-            )
-
+        query = 'insert into ' + banco + '.' + tb_usuarios + ' (idusuarios, nome, senha, ativo, login) values (' + str(novo) + ',"' + reg['nome'] + '", "' + reg['senha'] + '","' + reg['ativo'] + '","' + reg['login'] + '")'
         retorno = self.execute(banco, query)
+
+        # query = 'insert into {0}.{1}(idusuarios, nome, senha, ativo, login) values ({2}, "{3}", "{4}", "{5}", "{6}")'.format(banco, tb_usuarios, 
+        #     novo, 
+        #     reg['nome'], 
+        #     reg['senha'], 
+        #     reg['ativo'],
+        #     reg['login']
+        #     )
+
 
     def proximo_codigo(self):
         query = 'select max(idusuarios) from {0}.{1}'.format(banco, tb_usuarios)
@@ -82,17 +82,18 @@ class MySqlQuery():
         return prox
 
     def deleta_usuario(self, data):
-        query = 'delete from {0}.{1} where idusuarios = {2}'.format(banco, tb_usuarios, 
-            int(data)
-            )
+        query = 'delete from {0}.{1} where idusuarios = {2}'.format(banco, tb_usuarios, int(data) )
         retorno = self.execute(banco, query)
 
     def altera_usuario(self, data):
         reg = json.loads(data)
-        query = 'update {0}.{1} set nome = "{2}", ativo = "{4}", login="{5}" where idusuarios = {3}'.format(banco, tb_usuarios, 
-            reg['nome'],
-            reg['idusuario'],
-            reg['ativo'],
-            reg['login']
-            ) 
+        query = 'update ' + banco + '.' + tb_usuarios + ' set nome = "' + reg['nome'] + '", ativo = "' + reg['ativo'] + '", login = "' + reg['login'] + '" where idusuarios = ' + str(reg['idusuario'])
         retorno = self.execute(banco, query)
+
+        # query = 'update {0}.{1} set nome = "{2}", ativo = "{4}", login="{5}" where idusuarios = {3}'.format(banco, tb_usuarios, 
+        #     reg['nome'],
+        #     reg['idusuario'],
+        #     reg['ativo'],
+        #     reg['login']
+        #     ) 
+
