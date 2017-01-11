@@ -1,36 +1,57 @@
+# coding=utf-8
+
 import xlrd
 import MySQLdb
 
 # Open the workbook and define the worksheet
-book = xlrd.open_workbook(“importExcel.xls”)
+book = xlrd.open_workbook("DRE2016X2015.xls")
 
-sheet = book.sheet_by_name(“Client_Data”)
-//sheet = book.sheet_by_index(0)
+sheet = book.sheet_by_name("DRE 2.016 X 2.015")
+#sheet = book.sheet_by_index(0)
 
 # Establish a MySQL Connection
-database = MySQLdb.connect (host=“localhost”, user=“root”, passwd=“”, db=“mysqlPython)
+database = MySQLdb.connect (host="127.0.0.1", user="root", passwd="123456", db="dbContabil")
 
 # Get the cursor, which is used to traverse the database, line by line
 cursor = database.cursor()
 
-# Create the INSERT INTO sql query
-query = “””INSERT INTO order (job_code, date, client, description, status, project_manager) VALUES (%s, %s, %s, %s, %s,%s)”””
+idchave = 0
+contador = 0
+contlancto = 0
 
 # Create a for loop to iterate through each row in the xls file, starting from row 2
 for r in range(1, sheet.nrows):
-    product = sheet.cell(r,0).value
-    customer = sheet.cell(r,1).value
-    rep = sheet.cell(r,2).value
-    date = sheet.cell(r,3).value
-    actual = sheet.cell(r,4).value
-    expected = sheet(r,5).value
-    open_opportunities = sheet(r,6).value
 
-    # Assign values from each row
-    values = (job_code, date, client, description, status, project_manager)
+    codigo = sheet.cell(r,0).value
+    descri = sheet.cell(r,1).value
+    valor  = sheet.cell(r,3).value
+    if  (valor == ''):
+        valor = "0.00"
+    if  (valor == 'JANEIRO'):
+        valor = "0.00"
 
-    # Execute sql query
-    cursor.execute(query, values)
+    if  (codigo[1:2] == '.'):
+        registro = codigo[0:12]
+        contador = contador + 1
+
+        query = 'insert into dbContabil.cadplano (idplano, codigo, descricao, tipocd) values (' + str(contador) + ',"' + registro + '","' + descri + '","C")'
+        cursor.execute(query)
+
+        contlancto = contlancto + 1
+        query = 'insert into {0}.{1} (idlancamento, ano, mes, idplano, valor, idcliente) values ({2}, {3}, {4}, "{5}", {6}, {7})'.format("dbContabil", "cadlancamento", 
+            contlancto, 
+            2016, 
+            01, 
+            registro,
+            valor,
+            1
+            )
+
+        print query
+
+        cursor.execute(query)
+
+
 
 # Close the cursor
 cursor.close()
@@ -40,9 +61,9 @@ database.commit()
 #Close the database connection
 database.close()
 #Print results
-print “”
-print “Data Imported successfully!!!”
-print “”
-columns = str(sheet.ncols)
-rows = str(sheet.nrows)
-print “Summary of data imported: “ + columns + “ columns and “ + rows + ” rows”
+# print “”
+# print “Data Imported successfully!!!”
+# print “”
+# columns = str(sheet.ncols)
+# rows = str(sheet.nrows)
+# print "Summary of data imported: " + columns + " columns and " + rows + " rows"

@@ -61,7 +61,7 @@ class MySqlQuery():
 
         novo = self.proximo_codigo()
 
-        query = 'insert into ' + banco + '.' + tb_banco + ' (idplano, codigo, descricao, tipocd) values (' + str(novo) + ',' + str(reg['codigo']) + ',"' + reg['descricao'] + '","' + reg['tipocd'] + '")'
+        query = 'insert into ' + banco + '.' + tb_banco + ' (idplano, codigo, descricao, tipocd) values (' + str(novo) + ',"' + str(reg['codigo']) + '","' + reg['descricao'] + '","' + reg['tipocd'] + '")'
 
 #        print query
 #        query = 'insert into {0}.{1}(idplano, codigo, descricao, tipocd) values ({2}, {3}, "{4}", "{5}")'.format(banco, tb_banco, 
@@ -96,7 +96,7 @@ class MySqlQuery():
     def altera_registro(self, data):
         reg = json.loads(data)
 
-        query = 'update ' + banco + '.' + tb_banco + ' set codigo=' + reg['codigo'] + ', descricao="' + reg['descricao'] + '", tipocd="' + reg['tipocd'] + '" where idplano = ' + str(reg['idplano'])
+        query = 'update ' + banco + '.' + tb_banco + ' set codigo="' + reg['codigo'] + '", descricao="' + reg['descricao'] + '", tipocd="' + reg['tipocd'] + '" where idplano = ' + str(reg['idplano'])
 
         # query = 'update {0}.{1} set codigo = {3}, descricao = "{4}", tipocd="{5}" where idplano = {2}'.format(banco, tb_banco, 
         #      reg['idplano'],

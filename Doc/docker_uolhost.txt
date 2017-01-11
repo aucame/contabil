@@ -1,0 +1,5 @@
+docker run --name frontend-nginx -p 80:80 -v /usr/share/nginx/html:/usr/share/nginx/html -d nginx
+
+docker run --name backend-mysql -v /usr/share/mysql:/var/lib/mysql -e MYSQL_ROOT_PASSWORD= -p=3306:3306 -d mysql
+
+
