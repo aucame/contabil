@@ -2,17 +2,22 @@
 
 import xlrd
 import MySQLdb
+from sqlalchemy import create_engine
 
 def verificasetem(codigo):
-    query = 'select count(*) total from dbContabil.cadplano where idplano = "' + codigo + '"'
-    data = cursor.execute(query)
+    query = 'select * from dbContabil.cadplano where codigo = "' + codigo + '"'
 
-    print str(data)
+    # print query + str(dir(data))
 
-    # for x in data:
-    #     print x
+    engine = create_engine('mysql://root:123456@127.0.0.1/dbContabil')
+    connection = engine.connect()
+    result = connection.execute(query)
+    print query + ' - ' + str(result.rowcount)
 
-    # return retorno
+    # for row in result:
+    #     print("codigo: ", row['codigo'])
+
+    connection.close()
 
 # Open the workbook and define the worksheet
 book = xlrd.open_workbook("DRE2016X2015.xls")
@@ -37,6 +42,8 @@ contador = 0
 contplano = 0
 contlancto = 0
 contalinha = 0
+contlancto2 = 0
+
 flag = 'S'
 valor = 0.0
 valor2 = 0.0
@@ -101,7 +108,7 @@ for r in range(1, sheet.nrows):
         # print(str(contalinha) + ' --- ' + flag + ' --- ' + str(valor))
 
     if  flag == 'S':
-        contador = contador + 1
+        contplano = contplano + 1
 
         tipocd = ''
 
@@ -111,7 +118,7 @@ for r in range(1, sheet.nrows):
         if  (codigo[0:1] == '3'):
             tipocd = 'D'
 
-        query = 'insert into dbContabil.cadplano (idplano, codigo, descricao, tipocd) values (' + str(contador) + ',"' + registro + '","' + descri + '","' + tipocd + '")'
+        query = 'insert into dbContabil.cadplano (idplano, codigo, descricao, tipocd) values (' + str(contplano) + ',"' + registro + '","' + descri + '","' + tipocd + '")'
         cursor.execute(query)
 
         contlancto = contlancto + 1
@@ -128,9 +135,9 @@ for r in range(1, sheet.nrows):
 
         # cursor.execute(query)
 
-        contlancto = contlancto + 1
+        contlancto2 = contlancto2 + 1
         query = 'insert into {0}.{1} (idlancamento, ano, mes, idplano, valor, idcliente) values ({2}, {3}, {4}, "{5}", {6}, {7})'.format("dbContabil", "cadlancamento", 
-            contlancto, 
+            contlancto2, 
             2015, 
             01, 
             registro,
@@ -138,7 +145,7 @@ for r in range(1, sheet.nrows):
             1
             )
 
-        # cursor.execute(query)
+        cursor.execute(query)
 
 # Close the cursor
 cursor.close()
