@@ -5,19 +5,24 @@ import MySQLdb
 from sqlalchemy import create_engine
 
 def verificasetem(codigo):
-    query = 'select * from dbContabil.cadplano where codigo = "' + codigo + '"'
-
-    # print query + str(dir(data))
-
     engine = create_engine('mysql://root:123456@127.0.0.1/dbContabil')
     connection = engine.connect()
-    result = connection.execute(query)
-    print query + ' - ' + str(result.rowcount)
 
-    # for row in result:
-    #     print("codigo: ", row['codigo'])
+    flag = 'S'
+    while   (flag == 'S'):
+        query = 'select * from dbContabil.cadplano where codigo = "' + codigo + '"'
+        print(query)
+        result = connection.execute(query)
+        numero = int(codigo[9:12])
+        if  result.rowcount > 0:
+            numero = numero + 1
+            codigo = codigo[0:9] + str(numero).zfill(3)
+        else:
+            flag = 'N'
 
     connection.close()
+
+    return codigo
 
 # Open the workbook and define the worksheet
 book = xlrd.open_workbook("DRE2016X2015.xls")
@@ -63,6 +68,9 @@ for r in range(1, sheet.nrows):
     if  descri == '':
         flag = 'N'
 
+    if  registro == '':
+        flag = 'N'
+
     if  valor == '':
         valor = '0.00'
         valor = float(valor)
@@ -73,37 +81,34 @@ for r in range(1, sheet.nrows):
     if  flag == 'S':
         flag = 'N'
         if  contalinha >= 11 and contalinha <= 13:
-            # print('entrei ' + str(contalinha) + ' - ' + registro)
             flag = 'S'
-        # if  contalinha >= 22 and contalinha <= 23:
-        #     flag = 'S'
-        # if  contalinha >= 56 and contalinha <= 72:
-        #     flag = 'S'
-        # if  contalinha >= 91 and contalinha <= 98:
-        #     flag = 'S'
-        # if  contalinha >= 119 and contalinha <= 147:
-        #     flag = 'S'
-        # if  contalinha >= 158 and contalinha <= 172:
-        #     flag = 'S'
-
-    if  contalinha  <   20:
+        if  contalinha >= 21 and contalinha <= 22:
+            flag = 'S'
+        if  contalinha >= 55 and contalinha <= 71:
+            flag = 'S'
+        if  contalinha >= 90 and contalinha <= 97:
+            flag = 'S'
+        if  contalinha >= 118 and contalinha <= 146:
+            flag = 'S'
+        if  contalinha >= 157 and contalinha <= 171:
+            flag = 'S'
 
         # print(str(contalinha) + ' - ' + flag + ' - ' + str(valor) + ' - ' )
 
-        if  flag == 'S':
-            try:
-                valor = round(valor,2)
-            except Exception as e:
-                flag = 'N'
-            
-        if  flag == 'S':
-            try:
-                valor2 = round(valor2,2)
-            except Exception as e:
-                flag = 'N'
+    if  flag == 'S':
+        try:
+            valor = round(valor,2)
+        except Exception as e:
+            flag = 'N'
+        
+    if  flag == 'S':
+        try:
+            valor2 = round(valor2,2)
+        except Exception as e:
+            flag = 'N'
 
-        if  flag == 'S':
-            verificasetem(registro)
+    if  flag == 'S':
+        registro = verificasetem(registro)
 
         # print(str(contalinha) + ' --- ' + flag + ' --- ' + str(valor))
 
@@ -146,6 +151,9 @@ for r in range(1, sheet.nrows):
             )
 
         cursor.execute(query)
+
+        database.commit()
+
 
 # Close the cursor
 cursor.close()
