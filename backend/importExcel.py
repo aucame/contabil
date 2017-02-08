@@ -11,7 +11,7 @@ def verificasetem(codigo):
     flag = 'S'
     while   (flag == 'S'):
         query = 'select * from dbContabil.cadplano where codigo = "' + codigo + '"'
-        print(query)
+        # print(query)
         result = connection.execute(query)
         numero = int(codigo[9:12])
         if  result.rowcount > 0:
@@ -92,6 +92,18 @@ for r in range(1, sheet.nrows):
             flag = 'S'
         if  contalinha >= 157 and contalinha <= 171:
             flag = 'S'
+        if  contalinha >= 183 and contalinha <= 204:
+            flag = 'S'
+        if  contalinha >= 215 and contalinha <= 242:
+            flag = 'S'
+        if  contalinha >= 253 and contalinha <= 316:
+            flag = 'S'
+        if  contalinha >= 327 and contalinha <= 342:
+            flag = 'S'
+        if  contalinha >= 353 and contalinha <= 363:
+            flag = 'S'
+        if  contalinha >= 383 and contalinha <= 385:
+            flag = 'S'
 
         # print(str(contalinha) + ' - ' + flag + ' - ' + str(valor) + ' - ' )
 
@@ -136,7 +148,7 @@ for r in range(1, sheet.nrows):
             1
             )
 
-        # print query
+        print query
 
         # cursor.execute(query)
 
