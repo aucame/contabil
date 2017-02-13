@@ -1,3 +1,4 @@
+
 SELECT a.codigo, 
        a.descricao,
        (select b.valor 

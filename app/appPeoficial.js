@@ -7,7 +7,9 @@ app.controller('ctlPeoficial', function($scope, $http, $location, $window, confi
 	$scope.linksite = config.linksite;
 
 	$scope.printPeoficial = function(){
-		$window.print();
+//		$window.print();
+		$scope.site = 'http://127.0.0.1/contabil/backend/html.pdf';
+		window.open($scope.site);
 	};
 
     $scope.meses =	[
