@@ -89,7 +89,7 @@ def cria_Lancamento():
         Column('ano', Integer),
         Column('mes', Integer),
         Column('idplano', String(20)),
-        Column('valor', Numeric(8,2)),
+        Column('valor', Numeric(10,2)),
         schema=dba
     )
 
