@@ -8,7 +8,7 @@ app.controller('ctlPeoficial', function($scope, $http, $location, $window, confi
 
 	$scope.printPeoficial = function(){
 //		$window.print();
-		$scope.site = $scope.linksite + 'backend/html.pdf';
+		$scope.site = 'http://127.0.0.1/contabil/backend/html.pdf';
 		window.open($scope.site);
 	};
 
