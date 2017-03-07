@@ -25,6 +25,25 @@ def verificasetem(codigo, ipservidor, usuario, senha, banco):
 
     return codigo
 
+def gravaPlano(contplano, registro, descri, tipocd):
+    query = 'insert into dbContabil.cadplano (idplano, codigo, descricao, tipocd) values (' + str(contplano) + ',"' + registro + '","' + descri + '","' + tipocd + '")'
+    cursor.execute(query)
+
+def gravaLancamento(idlancamento, ano, mes, idplano, valor, idcliente):
+    query = 'insert into {0}.{1} (idlancamento, ano, mes, idplano, valor, idcliente) values ({2}, {3}, {4}, "{5}", {6}, {7})'.format("dbContabil", "cadlancamento",
+        idlancamento, ano, mes, idplano, valor, idcliente )
+    cursor.execute(query)
+
+def gravaParametro(idparam, mes, ano, idempresa, diasuteis, meddiafat, paramostra):
+    query = 'insert into {0}.{1} (idparam, mes, ano, idempresa, diasuteis, meddiafat) values ({2}, {3}, {4}, "{5}", {6}, {7})'.format("dbContabil", "cadparam", 
+        idparam, mes, ano, idempresa, diasuteis, meddiafat, paramostra )
+    cursor.execute(query)
+
+def regravaParametro(idparam, mes, ano, idempresa, diasuteis, meddiafat, paramostra):
+    if  paramostra > 0:
+        query   =   'update dbContabil.cadparam set paramostra = ' + str(paramostra) + ' where mes = ' + str(mes) + ' and ano = ' + str(ano) + ' and idempresa = ' + str(idempresa)
+        cursor.execute(query)
+
 # Open the workbook and define the worksheet
 book = xlrd.open_workbook("DRE2016X2015.xls")
 
@@ -50,12 +69,16 @@ cursor.execute(query)
 query = 'truncate table dbContabil.cadlancamento' 
 cursor.execute(query)
 
+query = 'truncate table dbContabil.cadparam' 
+cursor.execute(query)
+
 idchave = 0
 contador = 0
 contplano = 0
 contlancto = 0
 contalinha = 0
 contlancto2 = 0
+contparam = 0
 
 flag = 'S'
 valor  = 0.0
@@ -221,6 +244,95 @@ for r in range(1, sheet.nrows):
         valor122 = '0.00'
         valor122 = float(valor122)
 
+    if  contalinha == 9:
+
+        contparam = contparam + 1
+        gravaParametro(contparam, 1, 2016, 1, round(valor,0), 0, 0)
+        contparam = contparam + 1
+        gravaParametro(contparam, 1, 2015, 1, round(valor2,0), 0, 0)
+
+        contparam = contparam + 1
+        gravaParametro(contparam, 2, 2016, 1, round(valor3,0), 0, 0)
+        contparam = contparam + 1
+        gravaParametro(contparam, 2, 2015, 1, round(valor4,0), 0, 0)
+
+        contparam = contparam + 1
+        gravaParametro(contparam, 3, 2016, 1, round(valor5,0), 0, 0)
+        contparam = contparam + 1
+        gravaParametro(contparam, 3, 2015, 1, round(valor6,0), 0, 0)
+
+        contparam = contparam + 1
+        gravaParametro(contparam, 4, 2016, 1, round(valor041,0), 0, 0)
+        contparam = contparam + 1
+        gravaParametro(contparam, 4, 2015, 1, round(valor042,0), 0, 0)
+
+        contparam = contparam + 1
+        gravaParametro(contparam, 5, 2016, 1, round(valor051,0), 0, 0)
+        contparam = contparam + 1
+        gravaParametro(contparam, 5, 2015, 1, round(valor052,0), 0, 0)
+
+        contparam = contparam + 1
+        gravaParametro(contparam, 6, 2016, 1, round(valor061,0), 0, 0)
+        contparam = contparam + 1
+        gravaParametro(contparam, 6, 2015, 1, round(valor062,0), 0, 0)
+
+        contparam = contparam + 1
+        gravaParametro(contparam, 7, 2016, 1, round(valor071,0), 0, 0)
+        contparam = contparam + 1
+        gravaParametro(contparam, 7, 2015, 1, round(valor072,0), 0, 0)
+
+        contparam = contparam + 1
+        gravaParametro(contparam, 8, 2016, 1, round(valor081,0), 0, 0)
+        contparam = contparam + 1
+        gravaParametro(contparam, 8, 2015, 1, round(valor082,0), 0, 0)
+
+        contparam = contparam + 1
+        gravaParametro(contparam, 9, 2016, 1, round(valor091,0), 0, 0)
+        contparam = contparam + 1
+        gravaParametro(contparam, 9, 2015, 1, round(valor092,0), 0, 0)
+
+        contparam = contparam + 1
+        gravaParametro(contparam, 10, 2016, 1, round(valor101,0), 0, 0)
+        contparam = contparam + 1
+        gravaParametro(contparam, 10, 2015, 1, round(valor102,0), 0, 0)
+
+        contparam = contparam + 1
+        gravaParametro(contparam, 11, 2016, 1, round(valor111,0), 0, 0)
+        contparam = contparam + 1
+        gravaParametro(contparam, 11, 2015, 1, round(valor112,0), 0, 0)
+
+        contparam = contparam + 1
+        gravaParametro(contparam, 12, 2016, 1, round(valor121,0), 0, 0)
+        contparam = contparam + 1
+        gravaParametro(contparam, 12, 2015, 1, round(valor122,0), 0, 0)
+
+
+    if  contalinha == 26:
+        regravaParametro(0, 1, 2016, 1, 0, 0, round(valor,0))
+        regravaParametro(0, 1, 2015, 1, 0, 0, round(valor2,0))
+        regravaParametro(0, 2, 2016, 1, 0, 0, round(valor3,0))
+        regravaParametro(0, 2, 2015, 1, 0, 0, round(valor4,0))
+        regravaParametro(0, 3, 2016, 1, 0, 0, round(valor5,0))
+        regravaParametro(0, 3, 2015, 1, 0, 0, round(valor6,0))
+        regravaParametro(0, 4, 2016, 1, 0, 0, round(valor041,0))
+        regravaParametro(0, 4, 2015, 1, 0, 0, round(valor042,0))
+        regravaParametro(0, 5, 2016, 1, 0, 0, round(valor051,0))
+        regravaParametro(0, 5, 2015, 1, 0, 0, round(valor052,0))
+        regravaParametro(0, 6, 2016, 1, 0, 0, round(valor061,0))
+        regravaParametro(0, 6, 2015, 1, 0, 0, round(valor062,0))
+        regravaParametro(0, 7, 2016, 1, 0, 0, round(valor071,0))
+        regravaParametro(0, 7, 2015, 1, 0, 0, round(valor072,0))
+        regravaParametro(0, 8, 2016, 1, 0, 0, round(valor081,0))
+        regravaParametro(0, 8, 2015, 1, 0, 0, round(valor082,0))
+        regravaParametro(0, 9, 2016, 1, 0, 0, round(valor091,0))
+        regravaParametro(0, 9, 2015, 1, 0, 0, round(valor092,0))
+        regravaParametro(0, 10, 2016, 1, 0, 0, round(valor101,0))
+        regravaParametro(0, 10, 2015, 1, 0, 0, round(valor102,0))
+        regravaParametro(0, 11, 2016, 1, 0, 0, round(valor111,0))
+        regravaParametro(0, 11, 2015, 1, 0, 0, round(valor112,0))
+        regravaParametro(0, 12, 2016, 1, 0, 0, round(valor121,0))
+        regravaParametro(0, 12, 2015, 1, 0, 0, round(valor122,0))
+
 
     if  flag == 'S':
         flag = 'N'
@@ -262,6 +374,7 @@ for r in range(1, sheet.nrows):
             flag = 'S'
         if  contalinha >= 582 and contalinha <= 585:
             flag = 'S'
+
 
         # print(str(contalinha) + ' - ' + flag + ' - ' + str(valor) + ' - ' )
 
@@ -400,9 +513,6 @@ for r in range(1, sheet.nrows):
         except Exception as e:
             flag = 'N'
 
-
-
-
     if  flag == 'S':
         registro = verificasetem(registro, ipservidor, usuario, senha, banco)
 
@@ -422,349 +532,84 @@ for r in range(1, sheet.nrows):
         if  (codigo[0:1] == '2'):
             tipocd = 'C'
 
-        query = 'insert into dbContabil.cadplano (idplano, codigo, descricao, tipocd) values (' + str(contplano) + ',"' + registro + '","' + descri + '","' + tipocd + '")'
-        cursor.execute(query)
+#       Grava Plano de contas
+        gravaPlano(contplano, registro, descri, tipocd)
 
 #       Grava os lançamentos
 
 #       JANEIRO
-
         contlancto = contlancto + 1
-        query = 'insert into {0}.{1} (idlancamento, ano, mes, idplano, valor, idcliente) values ({2}, {3}, {4}, "{5}", {6}, {7})'.format("dbContabil", "cadlancamento", 
-            contlancto, 
-            2016, 
-            01, 
-            registro,
-            valor,
-            1
-            )
-
-        print query
-
-        cursor.execute(query)
-
+        gravaLancamento(contlancto, 2016, 1, registro, valor, 1)
         contlancto = contlancto + 1
-        query = 'insert into {0}.{1} (idlancamento, ano, mes, idplano, valor, idcliente) values ({2}, {3}, {4}, "{5}", {6}, {7})'.format("dbContabil", "cadlancamento", 
-            contlancto, 
-            2015, 
-            01, 
-            registro,
-            valor2,
-            1
-            )
-
-        cursor.execute(query)
+        gravaLancamento(contlancto, 2015, 1, registro, valor2, 1)
 
 #       FEVEREIRO
-
         contlancto = contlancto + 1
-        query = 'insert into {0}.{1} (idlancamento, ano, mes, idplano, valor, idcliente) values ({2}, {3}, {4}, "{5}", {6}, {7})'.format("dbContabil", "cadlancamento", 
-            contlancto, 
-            2016, 
-            02, 
-            registro,
-            valor3,
-            1
-            )
-
-        print query
-
-        cursor.execute(query)
-
+        gravaLancamento(contlancto, 2016, 2, registro, valor3, 1)
         contlancto = contlancto + 1
-        query = 'insert into {0}.{1} (idlancamento, ano, mes, idplano, valor, idcliente) values ({2}, {3}, {4}, "{5}", {6}, {7})'.format("dbContabil", "cadlancamento", 
-            contlancto, 
-            2015, 
-            02, 
-            registro,
-            valor4,
-            1
-            )
-
-        cursor.execute(query)
+        gravaLancamento(contlancto, 2015, 2, registro, valor4, 1)
 
 #       MARÇO
-
         contlancto = contlancto + 1
-        query = 'insert into {0}.{1} (idlancamento, ano, mes, idplano, valor, idcliente) values ({2}, {3}, {4}, "{5}", {6}, {7})'.format("dbContabil", "cadlancamento", 
-            contlancto, 
-            2016, 
-            03, 
-            registro,
-            valor5,
-            1
-            )
-
-        print query
-
-        cursor.execute(query)
-
+        gravaLancamento(contlancto, 2016, 3, registro, valor5, 1)
         contlancto = contlancto + 1
-        query = 'insert into {0}.{1} (idlancamento, ano, mes, idplano, valor, idcliente) values ({2}, {3}, {4}, "{5}", {6}, {7})'.format("dbContabil", "cadlancamento", 
-            contlancto, 
-            2015, 
-            03, 
-            registro,
-            valor6,
-            1
-            )
-
-        cursor.execute(query)
+        gravaLancamento(contlancto, 2015, 3, registro, valor6, 1)
 
 #       ABRIL
-
         contlancto = contlancto + 1
-        query = 'insert into {0}.{1} (idlancamento, ano, mes, idplano, valor, idcliente) values ({2}, {3}, {4}, "{5}", {6}, {7})'.format("dbContabil", "cadlancamento", 
-            contlancto, 
-            2016, 
-            04, 
-            registro,
-            valor041,
-            1
-            )
-
-        print query
-
-        cursor.execute(query)
-
+        gravaLancamento(contlancto, 2016, 4, registro, valor041, 1)
         contlancto = contlancto + 1
-        query = 'insert into {0}.{1} (idlancamento, ano, mes, idplano, valor, idcliente) values ({2}, {3}, {4}, "{5}", {6}, {7})'.format("dbContabil", "cadlancamento", 
-            contlancto, 
-            2015, 
-            04, 
-            registro,
-            valor042,
-            1
-            )
-
-        cursor.execute(query)
+        gravaLancamento(contlancto, 2015, 4, registro, valor042, 1)
 
 #       MAIO
-
         contlancto = contlancto + 1
-        query = 'insert into {0}.{1} (idlancamento, ano, mes, idplano, valor, idcliente) values ({2}, {3}, {4}, "{5}", {6}, {7})'.format("dbContabil", "cadlancamento", 
-            contlancto, 
-            2016, 
-            05, 
-            registro,
-            valor051,
-            1
-            )
-
-        print query
-
-        cursor.execute(query)
-
+        gravaLancamento(contlancto, 2016, 5, registro, valor051, 1)
         contlancto = contlancto + 1
-        query = 'insert into {0}.{1} (idlancamento, ano, mes, idplano, valor, idcliente) values ({2}, {3}, {4}, "{5}", {6}, {7})'.format("dbContabil", "cadlancamento", 
-            contlancto, 
-            2015, 
-            05, 
-            registro,
-            valor052,
-            1
-            )
-
-        cursor.execute(query)
+        gravaLancamento(contlancto, 2015, 5, registro, valor052, 1)
 
 #       JUNHO
-
         contlancto = contlancto + 1
-        query = 'insert into {0}.{1} (idlancamento, ano, mes, idplano, valor, idcliente) values ({2}, {3}, {4}, "{5}", {6}, {7})'.format("dbContabil", "cadlancamento", 
-            contlancto, 
-            2016, 
-            06, 
-            registro,
-            valor061,
-            1
-            )
-
-        print query
-
-        cursor.execute(query)
-
+        gravaLancamento(contlancto, 2016, 6, registro, valor061, 1)
         contlancto = contlancto + 1
-        query = 'insert into {0}.{1} (idlancamento, ano, mes, idplano, valor, idcliente) values ({2}, {3}, {4}, "{5}", {6}, {7})'.format("dbContabil", "cadlancamento", 
-            contlancto, 
-            2015, 
-            06, 
-            registro,
-            valor062,
-            1
-            )
-
-        cursor.execute(query)
+        gravaLancamento(contlancto, 2015, 6, registro, valor062, 1)
 
 #       JULHO
-
         contlancto = contlancto + 1
-        query = 'insert into {0}.{1} (idlancamento, ano, mes, idplano, valor, idcliente) values ({2}, {3}, {4}, "{5}", {6}, {7})'.format("dbContabil", "cadlancamento", 
-            contlancto, 
-            2016, 
-            07, 
-            registro,
-            valor071,
-            1
-            )
-
-        print query
-
-        cursor.execute(query)
-
+        gravaLancamento(contlancto, 2016, 7, registro, valor071, 1)
         contlancto = contlancto + 1
-        query = 'insert into {0}.{1} (idlancamento, ano, mes, idplano, valor, idcliente) values ({2}, {3}, {4}, "{5}", {6}, {7})'.format("dbContabil", "cadlancamento", 
-            contlancto, 
-            2015, 
-            07, 
-            registro,
-            valor072,
-            1
-            )
-
-        cursor.execute(query)
+        gravaLancamento(contlancto, 2015, 7, registro, valor072, 1)
 
 #       AGOSTO
-
         contlancto = contlancto + 1
-        query = 'insert into {0}.{1} (idlancamento, ano, mes, idplano, valor, idcliente) values ({2}, {3}, {4}, "{5}", {6}, {7})'.format("dbContabil", "cadlancamento", 
-            contlancto, 
-            2016, 
-            8, 
-            registro,
-            valor081,
-            1
-            )
-
-        print query
-
-        cursor.execute(query)
-
+        gravaLancamento(contlancto, 2016, 8, registro, valor081, 1)
         contlancto = contlancto + 1
-        query = 'insert into {0}.{1} (idlancamento, ano, mes, idplano, valor, idcliente) values ({2}, {3}, {4}, "{5}", {6}, {7})'.format("dbContabil", "cadlancamento", 
-            contlancto, 
-            2015, 
-            8, 
-            registro,
-            valor082,
-            1
-            )
-
-        cursor.execute(query)
+        gravaLancamento(contlancto, 2015, 8, registro, valor082, 1)
 
 #       SETEMBRO
-
         contlancto = contlancto + 1
-        query = 'insert into {0}.{1} (idlancamento, ano, mes, idplano, valor, idcliente) values ({2}, {3}, {4}, "{5}", {6}, {7})'.format("dbContabil", "cadlancamento", 
-            contlancto, 
-            2016, 
-            9, 
-            registro,
-            valor091,
-            1
-            )
-
-        print query
-
-        cursor.execute(query)
-
+        gravaLancamento(contlancto, 2016, 9, registro, valor091, 1)
         contlancto = contlancto + 1
-        query = 'insert into {0}.{1} (idlancamento, ano, mes, idplano, valor, idcliente) values ({2}, {3}, {4}, "{5}", {6}, {7})'.format("dbContabil", "cadlancamento", 
-            contlancto, 
-            2015, 
-            9, 
-            registro,
-            valor092,
-            1
-            )
-
-        cursor.execute(query)
+        gravaLancamento(contlancto, 2015, 9, registro, valor092, 1)
 
 #       OUTUBRO
-
         contlancto = contlancto + 1
-        query = 'insert into {0}.{1} (idlancamento, ano, mes, idplano, valor, idcliente) values ({2}, {3}, {4}, "{5}", {6}, {7})'.format("dbContabil", "cadlancamento", 
-            contlancto, 
-            2016, 
-            10, 
-            registro,
-            valor101,
-            1
-            )
-
-        print query
-
-        cursor.execute(query)
-
+        gravaLancamento(contlancto, 2016, 10, registro, valor101, 1)
         contlancto = contlancto + 1
-        query = 'insert into {0}.{1} (idlancamento, ano, mes, idplano, valor, idcliente) values ({2}, {3}, {4}, "{5}", {6}, {7})'.format("dbContabil", "cadlancamento", 
-            contlancto, 
-            2015, 
-            10, 
-            registro,
-            valor102,
-            1
-            )
-
-        cursor.execute(query)
+        gravaLancamento(contlancto, 2015, 10, registro, valor102, 1)
 
 #       NOVEMBRO
-
         contlancto = contlancto + 1
-        query = 'insert into {0}.{1} (idlancamento, ano, mes, idplano, valor, idcliente) values ({2}, {3}, {4}, "{5}", {6}, {7})'.format("dbContabil", "cadlancamento", 
-            contlancto, 
-            2016, 
-            11, 
-            registro,
-            valor111,
-            1
-            )
-
-        print query
-
-        cursor.execute(query)
-
+        gravaLancamento(contlancto, 2016, 11, registro, valor111, 1)
         contlancto = contlancto + 1
-        query = 'insert into {0}.{1} (idlancamento, ano, mes, idplano, valor, idcliente) values ({2}, {3}, {4}, "{5}", {6}, {7})'.format("dbContabil", "cadlancamento", 
-            contlancto, 
-            2015, 
-            11, 
-            registro,
-            valor112,
-            1
-            )
-
-        cursor.execute(query)
+        gravaLancamento(contlancto, 2015, 11, registro, valor112, 1)
 
 #       DEZEMBRO
-
         contlancto = contlancto + 1
-        query = 'insert into {0}.{1} (idlancamento, ano, mes, idplano, valor, idcliente) values ({2}, {3}, {4}, "{5}", {6}, {7})'.format("dbContabil", "cadlancamento", 
-            contlancto, 
-            2016, 
-            12, 
-            registro,
-            valor121,
-            1
-            )
-
-        print query
-
-        cursor.execute(query)
-
+        gravaLancamento(contlancto, 2016, 12, registro, valor121, 1)
         contlancto = contlancto + 1
-        query = 'insert into {0}.{1} (idlancamento, ano, mes, idplano, valor, idcliente) values ({2}, {3}, {4}, "{5}", {6}, {7})'.format("dbContabil", "cadlancamento", 
-            contlancto, 
-            2015, 
-            12, 
-            registro,
-            valor122,
-            1
-            )
-
-        cursor.execute(query)
+        gravaLancamento(contlancto, 2015, 12, registro, valor122, 1)
 
 #       COMMIT
-
         database.commit()
 
 

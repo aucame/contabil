@@ -66,6 +66,7 @@ def cria_Parametro():
         Column('idempresa', Integer),
         Column('diasuteis', Integer),
         Column('meddiafat', Integer),
+        Column('paramostra', Integer),
         schema=dba
     )
 

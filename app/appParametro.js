@@ -28,7 +28,8 @@ app.controller('ctlParametro', function($scope, $http, $location, $window, confi
 		'ano': undefined, 
 		'idempresa': undefined,
 		'diasuteis': undefined,
-		'meddiafat': undefined
+		'meddiafat': undefined,
+		'paramostra': undefined
 	};
 
     $scope.options = $scope.meses;
@@ -49,12 +50,13 @@ app.controller('ctlParametro', function($scope, $http, $location, $window, confi
 			{ field: 'idempresa', enableCellEdit: false, minWidth: 50, width: 150, displayName: 'Empresa' },
 			{ field: 'diasuteis', enableCellEdit: false, minWidth: 50, width: 150, displayName: 'Dias Uteis' },
 			{ field: 'meddiafat', enableCellEdit: false, minWidth: 50, width: 150, displayName: 'Media Dia Fat.' },
+			{ field: 'paramostra', enableCellEdit: false, minWidth: 50, width: 150, displayName: 'Pares Amostra' },
 			{ name: 'Opções', enableCellEdit: false, width: 200,
 			cellTemplate:'<button class="btn btn-primary" ng-click="grid.appScope.editregistro(row)"><span class="glyphicon glyphicon-edit"></span> Editar</button>  <button class="btn btn-primary" ng-click="grid.appScope.delregistro(row)"><span class="glyphicon glyphicon-trash"></span> Deletar</button>'  }		
 		],
 
 		data: [ 
-			{ 'idparam': 0, 'mes': 0, 'ano': 0, 'idempresa': 0, 'diasuteis': 0, 'meddiafat': 0 }
+			{ 'idparam': 0, 'mes': 0, 'ano': 0, 'idempresa': 0, 'diasuteis': 0, 'meddiafat': 0, 'paramostra': 0 }
 		]
 
 	}; 			
@@ -78,7 +80,8 @@ app.controller('ctlParametro', function($scope, $http, $location, $window, confi
 		'ano': undefined, 
 		'idempresa': undefined,
 		'diasuteis': undefined,
-		'meddiafat': undefined
+		'meddiafat': undefined,
+		'paramostra': undefined
 		};
         $scope.selectedOption = $scope.options[0];
 	};
