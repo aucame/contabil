@@ -46,7 +46,8 @@ class MySqlQuery():
                 'mes': value['mes'], 
                 'ano': value['ano'],
                 'idempresa': value['idempresa'],
-                'diasuteis': value['diasuteis']
+                'diasuteis': value['diasuteis'],
+                'meddiafat': value['meddiafat']
                 })
     
         retorno = {'cadparam': result}
@@ -57,12 +58,13 @@ class MySqlQuery():
 
         novo = self.proximo_codigo()
 
-        query = 'insert into {0}.{1}(idparam, mes, ano, idempresa, diasuteis) values ({2}, {3}, {4}, {5}, {6})'.format(banco, tb_banco, 
+        query = 'insert into {0}.{1}(idparam, mes, ano, idempresa, diasuteis, meddiafat) values ({2}, {3}, {4}, {5}, {6}, {7})'.format(banco, tb_banco, 
             novo, 
             reg['mes'], 
             reg['ano'], 
             reg['idempresa'],
-            reg['diasuteis']
+            reg['diasuteis'],
+            reg['meddiafat']
             )
 
         retorno = self.execute(banco, query)
@@ -90,11 +92,12 @@ class MySqlQuery():
 
     def altera_registro(self, data):
         reg = json.loads(data)
-        query = 'update {0}.{1} set mes = {3}, ano = {4}, idempresa={5}, diasuteis={6} where idparam = {2}'.format(banco, tb_banco, 
+        query = 'update {0}.{1} set mes = {3}, ano = {4}, idempresa={5}, diasuteis={6}, meddiafat={7} where idparam = {2}'.format(banco, tb_banco, 
             reg['idparam'],
             reg['mes'],
             reg['ano'],
             reg['idempresa'],
-            reg['diasuteis']
+            reg['diasuteis'],
+            reg['meddiafat']
             )
         retorno = self.execute(banco, query)
