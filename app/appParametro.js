@@ -27,7 +27,8 @@ app.controller('ctlParametro', function($scope, $http, $location, $window, confi
 		'mes':  0,
 		'ano': undefined, 
 		'idempresa': undefined,
-		'diasuteis': undefined
+		'diasuteis': undefined,
+		'meddiafat': undefined
 	};
 
     $scope.options = $scope.meses;
@@ -42,17 +43,18 @@ app.controller('ctlParametro', function($scope, $http, $location, $window, confi
 		//enableCellEditOnFocus: true,
 
 		columnDefs: [
-			{ field: 'idparam', enableCellEdit: false, minWidth: 50, width: 80, displayName: 'Codigo' },
-			{ field: 'mes', enableCellEdit: false, minWidth: 120, width: 250, displayName: 'Mes' },
-			{ field: 'ano', enableCellEdit: false, minWidth: 120, width: 300, displayName: 'Ano' },
-			{ field: 'idempresa', enableCellEdit: false, minWidth: 120, width: 150, displayName: 'Empresa' },
-			{ field: 'diasuteis', enableCellEdit: false, minWidth: 120, width: 150, displayName: 'Dias Uteis' },
+			{ field: 'idparam', enableCellEdit: false, minWidth: 50, width: 150, displayName: 'Codigo' },
+			{ field: 'mes', enableCellEdit: false, minWidth: 50, width: 150, displayName: 'Mes' },
+			{ field: 'ano', enableCellEdit: false, minWidth: 50, width: 150, displayName: 'Ano' },
+			{ field: 'idempresa', enableCellEdit: false, minWidth: 50, width: 150, displayName: 'Empresa' },
+			{ field: 'diasuteis', enableCellEdit: false, minWidth: 50, width: 150, displayName: 'Dias Uteis' },
+			{ field: 'meddiafat', enableCellEdit: false, minWidth: 50, width: 150, displayName: 'Media Dia Fat.' },
 			{ name: 'Opções', enableCellEdit: false, width: 200,
 			cellTemplate:'<button class="btn btn-primary" ng-click="grid.appScope.editregistro(row)"><span class="glyphicon glyphicon-edit"></span> Editar</button>  <button class="btn btn-primary" ng-click="grid.appScope.delregistro(row)"><span class="glyphicon glyphicon-trash"></span> Deletar</button>'  }		
 		],
 
 		data: [ 
-			{ 'idparam': 0, 'mes': 0, 'ano': 0, 'idempresa': 0, 'diasuteis': 0 }
+			{ 'idparam': 0, 'mes': 0, 'ano': 0, 'idempresa': 0, 'diasuteis': 0, 'meddiafat': 0 }
 		]
 
 	}; 			
@@ -75,7 +77,8 @@ app.controller('ctlParametro', function($scope, $http, $location, $window, confi
 		'mes':  undefined,
 		'ano': undefined, 
 		'idempresa': undefined,
-		'diasuteis': undefined
+		'diasuteis': undefined,
+		'meddiafat': undefined
 		};
         $scope.selectedOption = $scope.options[0];
 	};
