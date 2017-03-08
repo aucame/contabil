@@ -3,6 +3,22 @@
 import MySQLdb
 from sqlalchemy import create_engine
 
+def gravalinha(linha):
+    file = open('pdf.html','a')
+    file.write(linha+'\n')
+
+gravalinha('<!DOCTYPE html>')
+gravalinha('<html>')
+gravalinha('<head>')
+gravalinha('<meta charset="UTF-8">')
+gravalinha('<title>Title of the document</title>')
+gravalinha('</head>')
+gravalinha('')
+gravalinha('<body>')
+gravalinha('Content of the document......')
+gravalinha('</body>')
+gravalinha('</html>')
+
 # from sqlalchemy import create_engine
 
 # # query = 'select count(*) total from dbContabil.cadplano where codigo like "%' + codigo + '%"'
@@ -237,10 +253,10 @@ query = '''
 
 # result = connection.execute(query)
 cursor = connection.cursor()
-cursor.execute(query)
+# cursor.execute(query)
 
-for row in cursor:
-    print '|' + row[0] + '|' + row[1] + '|' + str(row[2]) + '|' + str(row[3]) + '|' + str(row[4]) + '|'
+# for row in cursor:
+#     print '|' + row[0] + '|' + row[1] + '|' + str(row[2]) + '|' + str(row[3]) + '|' + str(row[4]) + '|'
 
 cursor.close()
 connection.close()
