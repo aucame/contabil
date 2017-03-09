@@ -4,20 +4,38 @@ import MySQLdb
 from sqlalchemy import create_engine
 
 def gravalinha(linha):
+    file = open('pdf.html','w')
+    file.write('')
+    file.close()
+
+def gravalinha(linha):
     file = open('pdf.html','a')
     file.write(linha+'\n')
+    file.close()
 
 gravalinha('<!DOCTYPE html>')
 gravalinha('<html>')
 gravalinha('<head>')
 gravalinha('<meta charset="UTF-8">')
-gravalinha('<title>Title of the document</title>')
+gravalinha('<title>Titulo</title>')
+
+gravalinha('<style>')
+gravalinha('table, th, td {')
+gravalinha('    border: 1px solid black;')
+gravalinha('    padding: 1px;')
+gravalinha('}')
+gravalinha('table {')
+gravalinha('    border-spacing: 1px;')
+gravalinha('}')
+gravalinha('</style>')
+
 gravalinha('</head>')
-gravalinha('')
 gravalinha('<body>')
-gravalinha('Content of the document......')
-gravalinha('</body>')
-gravalinha('</html>')
+
+gravalinha('<table>')
+gravalinha('<tr><th>codigo</th><th>MÉDIA DIÁRIA DE FATURAMENTO PARES / DIA</th><th>Age</th></tr>')
+
+
 
 # from sqlalchemy import create_engine
 
@@ -253,10 +271,18 @@ query = '''
 
 # result = connection.execute(query)
 cursor = connection.cursor()
-# cursor.execute(query)
+cursor.execute(query)
 
-# for row in cursor:
+for row in cursor:
 #     print '|' + row[0] + '|' + row[1] + '|' + str(row[2]) + '|' + str(row[3]) + '|' + str(row[4]) + '|'
+    linha = '<tr><td>{0}</td><td>{1}</td><td>{2}</td></tr>'.format(row[0],row[1],row[2])
+    gravalinha(linha)
 
 cursor.close()
 connection.close()
+
+gravalinha('</table>')
+gravalinha('</body>')
+gravalinha('</html>')
+
+
