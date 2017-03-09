@@ -3,9 +3,8 @@
 import MySQLdb
 from sqlalchemy import create_engine
 
-def gravalinha(linha):
+def limpaarquivo():
     file = open('pdf.html','w')
-    file.write('')
     file.close()
 
 def gravalinha(linha):
@@ -13,276 +12,363 @@ def gravalinha(linha):
     file.write(linha+'\n')
     file.close()
 
+def buscaDados():
+    # Establish a MySQL Connection
+    ipservidor = "127.0.0.1" # LOCAL
+    # ipservidor = "200.98.174.103" # UOLHOST
+
+    usuario    = "root"
+    # senha      = "lelo$321"
+    senha      = "123456"
+    banco      = "dbContabil"
+
+    connection = MySQLdb.connect (host=ipservidor, user=usuario, passwd=senha, db=banco)
+
+    query = '''
+        SELECT a.codigo, a.descricao,
+            (select b.valor 
+                from dbContabil.cadlancamento b
+                where b.ano = 2015
+                and b.mes = 01
+                and b.idplano = a.codigo
+            ) Janeiro2015,
+            (select b.valor 
+                from dbContabil.cadlancamento b
+                where b.ano = 2016
+                and b.mes = 01
+                and b.idplano = a.codigo
+            ) Janeiro2016,
+            (select b.valor 
+                from dbContabil.cadlancamento b
+                where b.ano = 2015
+                and b.mes = 02
+                and b.idplano = a.codigo
+            ) Fevereiro2015,
+            (select b.valor 
+                from dbContabil.cadlancamento b
+                where b.ano = 2016
+                and b.mes = 02
+                and b.idplano = a.codigo
+            ) Fevereiro2016,
+            (select b.valor 
+                from dbContabil.cadlancamento b
+                where b.ano = 2015
+                and b.mes = 03
+                and b.idplano = a.codigo
+            ) Marco2015,
+            (select b.valor 
+                from dbContabil.cadlancamento b
+                where b.ano = 2016
+                and b.mes = 03
+                and b.idplano = a.codigo
+            ) Marco2016,
+            (select b.valor 
+                from dbContabil.cadlancamento b
+                where b.ano = 2015
+                and b.mes = 04
+                and b.idplano = a.codigo
+            ) Abril2015,
+            (select b.valor 
+                from dbContabil.cadlancamento b
+                where b.ano = 2016
+                and b.mes = 04
+                and b.idplano = a.codigo
+            ) Abril2016,
+            (select b.valor 
+                from dbContabil.cadlancamento b
+                where b.ano = 2015
+                and b.mes = 05
+                and b.idplano = a.codigo
+            ) Maio2015,
+            (select b.valor 
+                from dbContabil.cadlancamento b
+                where b.ano = 2016
+                and b.mes = 05
+                and b.idplano = a.codigo
+            ) Maio2016,
+            (select b.valor 
+                from dbContabil.cadlancamento b
+                where b.ano = 2015
+                and b.mes = 06
+                and b.idplano = a.codigo
+            ) Junho2015,
+            (select b.valor 
+                from dbContabil.cadlancamento b
+                where b.ano = 2016
+                and b.mes = 06
+                and b.idplano = a.codigo
+            ) Junho2016,
+            (select b.valor 
+                from dbContabil.cadlancamento b
+                where b.ano = 2015
+                and b.mes = 07
+                and b.idplano = a.codigo
+            ) Julho2015,
+            (select b.valor 
+                from dbContabil.cadlancamento b
+                where b.ano = 2016
+                and b.mes = 07
+                and b.idplano = a.codigo
+            ) Julho2016,
+            (select b.valor 
+                from dbContabil.cadlancamento b
+                where b.ano = 2015
+                and b.mes = 08
+                and b.idplano = a.codigo
+            ) Agosto2015,
+            (select b.valor 
+                from dbContabil.cadlancamento b
+                where b.ano = 2016
+                and b.mes = 08
+                and b.idplano = a.codigo
+            ) Agosto2016,
+            (select b.valor 
+                from dbContabil.cadlancamento b
+                where b.ano = 2015
+                and b.mes = 09
+                and b.idplano = a.codigo
+            ) Setembro2015,
+            (select b.valor 
+                from dbContabil.cadlancamento b
+                where b.ano = 2016
+                and b.mes = 09
+                and b.idplano = a.codigo
+            ) Setembro2016,
+            (select b.valor 
+                from dbContabil.cadlancamento b
+                where b.ano = 2015
+                and b.mes = 10
+                and b.idplano = a.codigo
+            ) Outubro2015,
+            (select b.valor 
+                from dbContabil.cadlancamento b
+                where b.ano = 2016
+                and b.mes = 10
+                and b.idplano = a.codigo
+            ) Outubro2016,
+            (select b.valor 
+                from dbContabil.cadlancamento b
+                where b.ano = 2015
+                and b.mes = 11
+                and b.idplano = a.codigo
+            ) Novembro2015,
+            (select b.valor 
+                from dbContabil.cadlancamento b
+                where b.ano = 2016
+                and b.mes = 11
+                and b.idplano = a.codigo
+            ) Novembro2016,
+            (select b.valor 
+                from dbContabil.cadlancamento b
+                where b.ano = 2015
+                and b.mes = 12
+                and b.idplano = a.codigo
+            ) Dezembro2015,
+            (select b.valor 
+                from dbContabil.cadlancamento b
+                where b.ano = 2016
+                and b.mes = 12
+                and b.idplano = a.codigo
+            ) Dezembro2016
+
+        FROM dbContabil.cadplano a
+        order by a.tipocd desc
+    '''
+
+    # result = connection.execute(query)
+    cursor = connection.cursor()
+    cursor.execute(query)
+
+    cursor.close()
+    connection.close()
+
+    return  cursor
+
+limpaarquivo()
+
 gravalinha('<!DOCTYPE html>')
 gravalinha('<html>')
 gravalinha('<head>')
 gravalinha('<meta charset="UTF-8">')
 gravalinha('<title>Titulo</title>')
 
-gravalinha('<style>')
-gravalinha('table, th, td {')
-gravalinha('    border: 1px solid black;')
-gravalinha('    padding: 1px;')
-gravalinha('}')
-gravalinha('table {')
-gravalinha('    border-spacing: 1px;')
-gravalinha('}')
-gravalinha('</style>')
+linha   =   '''
+            <style>
+            table, th, td {
+                border: 1px solid black;
+                padding: 1px;
+                text-align: right;
+            }
+            table {
+                border-spacing: 1px;
+            }
+            body {
+            width: 2500px;
+            margin: 0 auto;
+            }
+            </style>
+            '''
+gravalinha(linha)
 
 gravalinha('</head>')
 gravalinha('<body>')
 
 gravalinha('<table>')
-gravalinha('<tr><th>codigo</th><th>MÉDIA DIÁRIA DE FATURAMENTO PARES / DIA</th><th>Age</th></tr>')
 
+linha = '<tr>'+ \
+        '<th></th>'+ \
+        '<th width = "400px">D.R.E. 2.016 X 2.015</th>'+ \
+        '<th></th>'+ \
+        '<th></th>'+ \
+        '<th></th>'+ \
+        '<th></th>'+ \
+        '<th></th>'+ \
+        '<th></th>'+ \
+        '<th></th>'+ \
+        '<th></th>'+ \
+        '<th></th>'+ \
+        '<th></th>'+ \
+        '<th></th>'+ \
+        '<th></th>'+ \
+        '<th></th>'+ \
+        '<th></th>'+ \
+        '<th></th>'+ \
+        '<th></th>'+ \
+        '<th></th>'+ \
+        '<th></th>'+ \
+        '<th></th>'+ \
+        '<th></th>'+ \
+        '<th></th>'+ \
+        '<th></th>'+ \
+        '<th></th>'+ \
+        '<th></th>'+ \
+        '</tr>'
+gravalinha(linha)
 
+linha = '<tr>'+ \
+        '<td></td>'+ \
+        '<td>D.R.E. ECONÔMICO / FINANCEIRO</td>'+ \
+        '<td>2015</td>'+ \
+        '<td>2016</td>'+ \
+        '<td>2015</td>'+ \
+        '<td>2016</td>'+ \
+        '<td>2015</td>'+ \
+        '<td>2016</td>'+ \
+        '<td>2015</td>'+ \
+        '<td>2016</td>'+ \
+        '<td>2015</td>'+ \
+        '<td>2016</td>'+ \
+        '<td>2015</td>'+ \
+        '<td>2016</td>'+ \
+        '<td>2015</td>'+ \
+        '<td>2016</td>'+ \
+        '<td>2015</td>'+ \
+        '<td>2016</td>'+ \
+        '<td>2015</td>'+ \
+        '<td>2016</td>'+ \
+        '<td>2015</td>'+ \
+        '<td>2016</td>'+ \
+        '<td>2015</td>'+ \
+        '<td>2016</td>'+ \
+        '<td>2015</td>'+ \
+        '<td>2016</td>'+ \
+        '</tr>'
+gravalinha(linha)
 
-# from sqlalchemy import create_engine
+linha = '<tr>'+ \
+        '<td></td>'+ \
+        '<td>EXERCICIOS : 2.016 X 2.015</td>'+ \
+        '<td>Janeiro</td>'+ \
+        '<td>Janeiro</td>'+ \
+        '<td>Fevereiro</td>'+ \
+        '<td>Fevereiro</td>'+ \
+        '<td>Marco</td>'+ \
+        '<td>Marco</td>'+ \
+        '<td>Abril</td>'+ \
+        '<td>Abril</td>'+ \
+        '<td>Maio</td>'+ \
+        '<td>Maio</td>'+ \
+        '<td>Junho</td>'+ \
+        '<td>Junho</td>'+ \
+        '<td>Julho</td>'+ \
+        '<td>Julho</td>'+ \
+        '<td>Agosto</td>'+ \
+        '<td>Agosto</td>'+ \
+        '<td>Setembro</td>'+ \
+        '<td>Setembro</td>'+ \
+        '<td>Outubro</td>'+ \
+        '<td>Outubro</td>'+ \
+        '<td>Novembro</td>'+ \
+        '<td>Novembro</td>'+ \
+        '<td>Dezembro</td>'+ \
+        '<td>Dezembro</td>'+ \
+        '</tr>'
+gravalinha(linha)
 
-# # query = 'select count(*) total from dbContabil.cadplano where codigo like "%' + codigo + '%"'
-# # data = cursor.execute(query)
+linha = '<tr>'+ \
+        '<td>CONTABIL</td>'+ \
+        '<td>JANEIRO A DEZEMBRO</td>'+ \
+        '<td align="right">2015</td>'+ \
+        '<td align="right">2016</td>'+ \
+        '<td align="right">2015</td>'+ \
+        '<td align="right">2016</td>'+ \
+        '<td align="right">2015</td>'+ \
+        '<td align="right">2016</td>'+ \
+        '<td align="right">2015</td>'+ \
+        '<td align="right">2016</td>'+ \
+        '<td align="right">2015</td>'+ \
+        '<td align="right">2016</td>'+ \
+        '<td align="right">2015</td>'+ \
+        '<td align="right">2016</td>'+ \
+        '<td align="right">2015</td>'+ \
+        '<td align="right">2016</td>'+ \
+        '<td align="right">2015</td>'+ \
+        '<td align="right">2016</td>'+ \
+        '<td align="right">2015</td>'+ \
+        '<td align="right">2016</td>'+ \
+        '<td align="right">2015</td>'+ \
+        '<td align="right">2016</td>'+ \
+        '<td align="right">2015</td>'+ \
+        '<td align="right">2016</td>'+ \
+        '<td align="right">2015</td>'+ \
+        '<td align="right">2016</td>'+ \
+        '</tr>'
+gravalinha(linha)
 
-# # print query + str(dir(data))
+dados = buscaDados()
 
-# engine = create_engine('mysql://root:123456@127.0.0.1/dbContabil')
-# connection = engine.connect()
-# result = connection.execute("select * from dbContabil.cadplano where codigo = '2.1.1.03.004'")
-# # result = connection.execute('select * from dbContabil.cadplano')
+for row in dados:
+    linha = '<tr>' + \
+            '<td>' + str(row[0])+'</td>' + \
+            '<td align="left">' + str(row[1])+'</td>' + \
+            '<td>' + str(row[2])+'</td>' + \
+            '<td>' + str(row[3])+'</td>' + \
+            '<td>' + str(row[4])+'</td>' + \
+            '<td>' + str(row[5])+'</td>' + \
+            '<td>' + str(row[6])+'</td>' + \
+            '<td>' + str(row[7])+'</td>' + \
+            '<td>' + str(row[8])+'</td>' + \
+            '<td>' + str(row[9])+'</td>' + \
+            '<td>' + str(row[10])+'</td>' + \
+            '<td>' + str(row[11])+'</td>' + \
+            '<td>' + str(row[12])+'</td>' + \
+            '<td>' + str(row[13])+'</td>' + \
+            '<td>' + str(row[14])+'</td>' + \
+            '<td>' + str(row[15])+'</td>' + \
+            '<td>' + str(row[16])+'</td>' + \
+            '<td>' + str(row[17])+'</td>' + \
+            '<td>' + str(row[18])+'</td>' + \
+            '<td>' + str(row[19])+'</td>' + \
+            '<td>' + str(row[20])+'</td>' + \
+            '<td>' + str(row[21])+'</td>' + \
+            '<td>' + str(row[22])+'</td>' + \
+            '<td>' + str(row[23])+'</td>' + \
+            '<td>' + str(row[24])+'</td>' + \
+            '<td>' + str(row[25])+'</td>' + \
+            '</tr>'
 
-# print result.rowcount
-
-# for row in result:
-#     print("codigo: ", row['codigo'])
-
-# connection.close()
-
-# import fpdf
-
-# pdf = fpdf.FPDF(format='A4')
-# pdf.add_page()
-# pdf.set_font("Arial", size=10)
-# pdf.cell(10, 10, txt="Welcome to Python!", align="L")
-# pdf.cell(10, 20, txt="Welcome to Python!", align="L")
-# pdf.cell(70, 20, txt="Welcome to Python!", align="L")
-# pdf.output("tutorial.pdf")
-
-# html = """
-# <H1 align="center">html2fpdf</H1>
-# <h2>Basic usage</h2>
-# <p>You can now easily print text while mixing different
-# styles : <B>bold</B>, <I>italic</I>, <U>underlined</U>, or
-# <B><I><U>all at once</U></I></B>!
-
-# <BR>You can also insert hyperlinks
-# like this <A HREF="http://www.mousevspython.com">www.mousevspython.com</A>,
-# or include a hyperlink in an image. Just click on the one below.<br>
-# <center>
-# <A HREF="http://www.mousevspython.com"></A>
-# </center>
-
-# <h3>Sample List</h3>
-# <ul><li>option 1</li>
-# <ol><li>option 2</li></ol>
-# <li>option 3</li></ul>
-
-# <table border="0" align="center" width="50%">
-# <thead><tr><th width="30%">Header 1</th><th width="70%">header 2</th></tr></thead>
-# <tbody>
-# <tr><td>cell 1</td><td>cell 2</td></tr>
-# <tr><td>cell 2</td><td>cell 3</td></tr>
-# </tbody>
-# </table>
-# """
-
-# from fpdf import FPDF, HTMLMixin
-
-# class MyFPDF(FPDF, HTMLMixin):
-#     pass
-
-# pdf=MyFPDF()
-# #First page
-# pdf.add_page()
-# pdf.write_html(html)
-# pdf.output('html.pdf','F')
-
-
-
-# Establish a MySQL Connection
-ipservidor = "127.0.0.1" # LOCAL
-# ipservidor = "200.98.174.103" # UOLHOST
-
-usuario    = "root"
-# senha      = "lelo$321"
-senha      = "123456"
-banco      = "dbContabil"
-
-connection = MySQLdb.connect (host=ipservidor, user=usuario, passwd=senha, db=banco)
-
-query = '''
-    SELECT a.codigo, a.descricao,
-        (select b.valor 
-            from dbContabil.cadlancamento b
-            where b.ano = 2015
-            and b.mes = 01
-            and b.idplano = a.codigo
-        ) Janeiro2015,
-        (select b.valor 
-            from dbContabil.cadlancamento b
-            where b.ano = 2016
-            and b.mes = 01
-            and b.idplano = a.codigo
-        ) Janeiro2016,
-        (select b.valor 
-            from dbContabil.cadlancamento b
-            where b.ano = 2015
-            and b.mes = 02
-            and b.idplano = a.codigo
-        ) Fevereiro2015,
-        (select b.valor 
-            from dbContabil.cadlancamento b
-            where b.ano = 2016
-            and b.mes = 02
-            and b.idplano = a.codigo
-        ) Fevereiro2016,
-        (select b.valor 
-            from dbContabil.cadlancamento b
-            where b.ano = 2015
-            and b.mes = 03
-            and b.idplano = a.codigo
-        ) Marco2015,
-        (select b.valor 
-            from dbContabil.cadlancamento b
-            where b.ano = 2016
-            and b.mes = 03
-            and b.idplano = a.codigo
-        ) Marco2016,
-        (select b.valor 
-            from dbContabil.cadlancamento b
-            where b.ano = 2015
-            and b.mes = 04
-            and b.idplano = a.codigo
-        ) Abril2015,
-        (select b.valor 
-            from dbContabil.cadlancamento b
-            where b.ano = 2016
-            and b.mes = 04
-            and b.idplano = a.codigo
-        ) Abril2016,
-        (select b.valor 
-            from dbContabil.cadlancamento b
-            where b.ano = 2015
-            and b.mes = 05
-            and b.idplano = a.codigo
-        ) Maio2015,
-        (select b.valor 
-            from dbContabil.cadlancamento b
-            where b.ano = 2016
-            and b.mes = 05
-            and b.idplano = a.codigo
-        ) Maio2016,
-        (select b.valor 
-            from dbContabil.cadlancamento b
-            where b.ano = 2015
-            and b.mes = 06
-            and b.idplano = a.codigo
-        ) Junho2015,
-        (select b.valor 
-            from dbContabil.cadlancamento b
-            where b.ano = 2016
-            and b.mes = 06
-            and b.idplano = a.codigo
-        ) Junho2016,
-        (select b.valor 
-            from dbContabil.cadlancamento b
-            where b.ano = 2015
-            and b.mes = 07
-            and b.idplano = a.codigo
-        ) Julho2015,
-        (select b.valor 
-            from dbContabil.cadlancamento b
-            where b.ano = 2016
-            and b.mes = 07
-            and b.idplano = a.codigo
-        ) Julho2016,
-        (select b.valor 
-            from dbContabil.cadlancamento b
-            where b.ano = 2015
-            and b.mes = 08
-            and b.idplano = a.codigo
-        ) Agosto2015,
-        (select b.valor 
-            from dbContabil.cadlancamento b
-            where b.ano = 2016
-            and b.mes = 08
-            and b.idplano = a.codigo
-        ) Agosto2016,
-        (select b.valor 
-            from dbContabil.cadlancamento b
-            where b.ano = 2015
-            and b.mes = 09
-            and b.idplano = a.codigo
-        ) Setembro2015,
-        (select b.valor 
-            from dbContabil.cadlancamento b
-            where b.ano = 2016
-            and b.mes = 09
-            and b.idplano = a.codigo
-        ) Setembro2016,
-        (select b.valor 
-            from dbContabil.cadlancamento b
-            where b.ano = 2015
-            and b.mes = 10
-            and b.idplano = a.codigo
-        ) Outubro2015,
-        (select b.valor 
-            from dbContabil.cadlancamento b
-            where b.ano = 2016
-            and b.mes = 10
-            and b.idplano = a.codigo
-        ) Outubro2016,
-        (select b.valor 
-            from dbContabil.cadlancamento b
-            where b.ano = 2015
-            and b.mes = 11
-            and b.idplano = a.codigo
-        ) Novembro2015,
-        (select b.valor 
-            from dbContabil.cadlancamento b
-            where b.ano = 2016
-            and b.mes = 11
-            and b.idplano = a.codigo
-        ) Novembro2016,
-        (select b.valor 
-            from dbContabil.cadlancamento b
-            where b.ano = 2015
-            and b.mes = 12
-            and b.idplano = a.codigo
-        ) Dezembro2015,
-        (select b.valor 
-            from dbContabil.cadlancamento b
-            where b.ano = 2016
-            and b.mes = 12
-            and b.idplano = a.codigo
-        ) Dezembro2016
-
-    FROM dbContabil.cadplano a
-    order by a.tipocd desc
-'''
-
-# result = connection.execute(query)
-cursor = connection.cursor()
-cursor.execute(query)
-
-for row in cursor:
-#     print '|' + row[0] + '|' + row[1] + '|' + str(row[2]) + '|' + str(row[3]) + '|' + str(row[4]) + '|'
-    linha = '<tr><td>{0}</td><td>{1}</td><td>{2}</td></tr>'.format(row[0],row[1],row[2])
     gravalinha(linha)
-
-cursor.close()
-connection.close()
 
 gravalinha('</table>')
 gravalinha('</body>')
 gravalinha('</html>')
-
-
