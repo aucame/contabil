@@ -147,5 +147,5 @@ SELECT a.codigo,
        ) Dezembro2016
 
   FROM dbContabil.cadplano a
-order by a.tipocd desc
+order by a.tipocd desc, a.idplano asc
 ;

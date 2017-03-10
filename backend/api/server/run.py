@@ -2,7 +2,7 @@
 
 import tornado.web
 from configuration import server
-from handlers import default, usuarios, clientes, login, empresas, param, plano, lancamento
+from handlers import default, usuarios, clientes, login, empresas, param, plano, lancamento, peoficial
 
 class Web(tornado.web.Application):
     def __init__(self):
@@ -17,7 +17,8 @@ class Web(tornado.web.Application):
             (r'/empresas/([0-9]+)',empresas.Handler),
             (r'/parametro/([0-9]+)',param.Handler),
             (r'/planocontas/([0-9]+)',plano.Handler),
-            (r'/lancamentos/([0-9]+)',lancamento.Handler)
+            (r'/lancamentos/([0-9]+)',lancamento.Handler),
+            (r'/relatorios/peoficial',peoficial.Handler)
         ]
 
         tornado.web.Application.__init__(self,handlers)

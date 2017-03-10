@@ -172,7 +172,7 @@ def buscaDados():
             ) Dezembro2016
 
         FROM dbContabil.cadplano a
-        order by a.tipocd desc
+        order by a.tipocd desc, a.idplano asc
     '''
 
     # result = connection.execute(query)
@@ -336,7 +336,6 @@ linha = '<tr>'+ \
 gravalinha(linha)
 
 dados = buscaDados()
-
 for row in dados:
     linha = '<tr>' + \
             '<td>' + str(row[0])+'</td>' + \
@@ -366,7 +365,6 @@ for row in dados:
             '<td>' + str(row[24])+'</td>' + \
             '<td>' + str(row[25])+'</td>' + \
             '</tr>'
-
     gravalinha(linha)
 
 gravalinha('</table>')

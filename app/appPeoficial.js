@@ -7,8 +7,8 @@ app.controller('ctlPeoficial', function($scope, $http, $location, $window, confi
 	$scope.linksite = config.linksite;
 
 	$scope.printPeoficial = function(){
-//		$window.print();
-		$scope.site = 'http://127.0.0.1/contabil/backend/html.pdf';
+		// $scope.relatorio();
+		$scope.site = $scope.linksite + 'backend/api/pdf.html';
 		window.open($scope.site);
 	};
 
@@ -128,6 +128,21 @@ app.controller('ctlPeoficial', function($scope, $http, $location, $window, confi
 				});
 			}
 		}
+	};
+
+	$scope.relatorio = function() {
+		$http({
+			method: 	"GET",
+			url: 		$scope.linkapi + "/relatorios/peoficial",
+			headers: {
+			'Content-Type': 'application/json'
+			}
+		}).then(function(response){
+			console.log(respose.data);
+			// $scope.gridOptions.data = response.data.cadparam;
+		}, function(error){
+			console.log("Error... = " + error.status);
+		});
 	};
 
 	$scope.getregistro = function() {
