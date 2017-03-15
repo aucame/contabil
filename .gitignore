@@ -11,3 +11,5 @@ backend/bin
 carreteiro/
 
 *.pyc
+
+.vscode/*
