@@ -51,11 +51,12 @@ sheet = book.sheet_by_name("DRE 2.016 X 2.015")
 #sheet = book.sheet_by_index(0)
 
 # Establish a MySQL Connection
-ipservidor = "127.0.0.1" # LOCAL
-# ipservidor = "200.98.174.103" # UOLHOST
+# ipservidor = "127.0.0.1" # LOCAL
+ipservidor = "200.98.174.103" # UOLHOST
 
 usuario    = "root"
-senha      = "123456"
+# senha      = "123456" # LOCAL
+senha      = "lelo$321" # LOCAL
 banco      = "dbContabil"
 
 database = MySQLdb.connect (host=ipservidor, user=usuario, passwd=senha, db=banco)
