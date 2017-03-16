@@ -20,3 +20,4 @@
 6. Levantar todos os totais do relatorio PE.Oficial e validar todos os calculos. (verificando)
 
 7. Confirmar todos os calculos no relatorio PE.Oficial. (verificando)
+
