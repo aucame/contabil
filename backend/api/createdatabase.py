@@ -79,6 +79,11 @@ def cria_Plano():
         Column('codigo', String(20)),
         Column('descricao', String(100)),
         Column('tipocd', String(1)),
+        Column('tipo', Numeric(2,0)),
+        Column('grupo', Numeric(2,0)),
+        Column('subgrupo', Numeric(2,0)),
+        Column('subgrp', Numeric(3,0)),
+        Column('numero', Numeric(5,0)),
         schema=dba
     )
 

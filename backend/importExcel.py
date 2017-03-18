@@ -26,11 +26,40 @@ def verificasetem(codigo, ipservidor, usuario, senha, banco):
 
     return codigo
 
+def montaCodigo(registro):
+
+    tipo, grupo, subgrupo, subgrp, numero = registro.split('.')
+
+    novo =  tipo.zfill(2) + '.' + \
+            grupo.zfill(2) + '.' + \
+            subgrupo.zfill(2) + '.' + \
+            subgrp.zfill(3) + '.' + \
+            numero.zfill(5)
+
+    # print novo
+
+    return novo
+
 def gravaPlano(contplano, registro, descri, tipocd):
-    query = 'insert into dbContabil.cadplano (idplano, codigo, descricao, tipocd) values (' + str(contplano) + ',"' + registro + '","' + descri + '","' + tipocd + '")'
+    
+    tipo, grupo, subgrupo, subgrp, numero = registro.split('.')
+
+    registro =  montaCodigo(registro)
+
+    print registro
+
+    query = 'insert into dbContabil.cadplano (idplano, codigo, descricao, tipocd, tipo, grupo, subgrupo, subgrp, numero) values (' + \
+        str(contplano) + ',"' + registro + '","' + \
+        descri + '","' + tipocd + '","' + tipo + '","' + \
+        grupo + '","' + subgrupo + '","' + subgrp + '","' + numero + \
+        '")'
+
     cursor.execute(query)
 
 def gravaLancamento(idlancamento, ano, mes, idplano, valor, idcliente):
+
+    idplano = montaCodigo(idplano)
+
     query = 'insert into {0}.{1} (idlancamento, ano, mes, idplano, valor, idcliente) values ({2}, {3}, {4}, "{5}", {6}, {7})'.format("dbContabil", "cadlancamento",
         idlancamento, ano, mes, idplano, valor, idcliente )
     cursor.execute(query)
@@ -57,7 +86,7 @@ ipservidor = "200.98.174.103" # UOLHOST
 
 usuario    = "root"
 # senha      = "123456" # LOCAL
-senha      = "lelo$321" # LOCAL
+senha      = "lelo$321" # UOLHOST
 banco      = "dbContabil"
 
 database = MySQLdb.connect (host=ipservidor, user=usuario, passwd=senha, db=banco)

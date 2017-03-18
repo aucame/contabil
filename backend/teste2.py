@@ -1,3 +1,14 @@
+registro = '4.1.2.3.0001'
+
+tipo, grupo, subgrupo, subgrp, numero = registro.split('.')
+
+reg =   tipo.zfill(2) + '.' + \
+        grupo.zfill(2) + '.' + \
+        subgrupo.zfill(2) + '.' + \
+        subgrp.zfill(3) + '.' + \
+        numero.zfill(5)
+
+print reg
 
 # from sqlalchemy import create_engine
 
