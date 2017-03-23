@@ -4,7 +4,7 @@ $(function() {
 //	$("#valor").maskMoney();
 });
 
-var app = angular.module('appLancamento', ['ui.utils.masks','ui.grid','Config']);
+var app = angular.module('appLancamento', ['ui.utils.masks','ui.grid','Config','ngMask']);
 
 app.controller('ctlLancamento', function($scope, $http, $location, $window, config) {
 

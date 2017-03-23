@@ -12,14 +12,23 @@ def verificasetem(codigo, ipservidor, usuario, senha, banco):
 
     flag = 'S'
     while   (flag == 'S'):
+
+        codigo = montaCodigo(codigo)
         query = 'select * from dbContabil.cadplano where codigo = "' + codigo + '"'
         # print(query)
         result = connection.execute(query)
-        numero = int(codigo[9:12])
+
+        print query
+
+        numero = int(codigo[13:18])
+
         if  result.rowcount > 0:
-            numero = numero + 1
-            codigo = codigo[0:9] + str(numero).zfill(3)
+            print 'sim'
+            numero += 1
+            codigo = codigo[0:13] + str(numero).zfill(5)
+            print '...... ' + codigo
         else:
+            print 'naooooo'
             flag = 'N'
 
     connection.close()
@@ -46,7 +55,7 @@ def gravaPlano(contplano, registro, descri, tipocd):
 
     registro =  montaCodigo(registro)
 
-    print registro
+    # print registro
 
     query = 'insert into dbContabil.cadplano (idplano, codigo, descricao, tipocd, tipo, grupo, subgrupo, subgrp, numero) values (' + \
         str(contplano) + ',"' + registro + '","' + \
@@ -81,12 +90,12 @@ sheet = book.sheet_by_name("DRE 2.016 X 2.015")
 #sheet = book.sheet_by_index(0)
 
 # Establish a MySQL Connection
-# ipservidor = "127.0.0.1" # LOCAL
-ipservidor = "200.98.174.103" # UOLHOST
+ipservidor = "127.0.0.1" # LOCAL
+# ipservidor = "200.98.174.103" # UOLHOST
 
 usuario    = "root"
-# senha      = "123456" # LOCAL
-senha      = "lelo$321" # UOLHOST
+senha      = "123456" # LOCAL
+# senha      = "lelo$321" # UOLHOST
 banco      = "dbContabil"
 
 database = MySQLdb.connect (host=ipservidor, user=usuario, passwd=senha, db=banco)
