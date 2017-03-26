@@ -309,30 +309,30 @@ def relatorio():
     linha = '<tr>'+ \
             '<td>CONTABIL</td>'+ \
             '<td>JANEIRO A DEZEMBRO</td>'+ \
-            '<td align="right">2015</td>'+ \
-            '<td align="right">2016</td>'+ \
-            '<td align="right">2015</td>'+ \
-            '<td align="right">2016</td>'+ \
-            '<td align="right">2015</td>'+ \
-            '<td align="right">2016</td>'+ \
-            '<td align="right">2015</td>'+ \
-            '<td align="right">2016</td>'+ \
-            '<td align="right">2015</td>'+ \
-            '<td align="right">2016</td>'+ \
-            '<td align="right">2015</td>'+ \
-            '<td align="right">2016</td>'+ \
-            '<td align="right">2015</td>'+ \
-            '<td align="right">2016</td>'+ \
-            '<td align="right">2015</td>'+ \
-            '<td align="right">2016</td>'+ \
-            '<td align="right">2015</td>'+ \
-            '<td align="right">2016</td>'+ \
-            '<td align="right">2015</td>'+ \
-            '<td align="right">2016</td>'+ \
-            '<td align="right">2015</td>'+ \
-            '<td align="right">2016</td>'+ \
-            '<td align="right">2015</td>'+ \
-            '<td align="right">2016</td>'+ \
+            '<td></td>'+ \
+            '<td></td>'+ \
+            '<td></td>'+ \
+            '<td></td>'+ \
+            '<td></td>'+ \
+            '<td></td>'+ \
+            '<td></td>'+ \
+            '<td></td>'+ \
+            '<td></td>'+ \
+            '<td></td>'+ \
+            '<td></td>'+ \
+            '<td></td>'+ \
+            '<td></td>'+ \
+            '<td></td>'+ \
+            '<td></td>'+ \
+            '<td></td>'+ \
+            '<td></td>'+ \
+            '<td></td>'+ \
+            '<td></td>'+ \
+            '<td></td>'+ \
+            '<td></td>'+ \
+            '<td></td>'+ \
+            '<td></td>'+ \
+            '<td></td>'+ \
             '</tr>'
     gravalinha(linha)
 
