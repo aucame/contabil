@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# -*- coding: UTF-8 -*-
 
 import MySQLdb
 from sqlalchemy import create_engine
@@ -23,7 +23,7 @@ def gravalinha(linha):
 def buscaDados(anoini, anofin):
     # Establish a MySQL Connection
 
-    connection = MySQLdb.connect (host=ipservidor, user=usuario, passwd=senha, db=banco)
+    connection = MySQLdb.connect (host=ipservidor, user=usuario, passwd=senha, db=banco, charset="utf8", use_unicode = True)
 
     query = '''
         SELECT a.codigo, a.descricao,
@@ -178,7 +178,7 @@ def buscaDados(anoini, anofin):
 
     query = query.format(anoini, anofin)
 
-    print query
+    # print query
 
     # result = connection.execute(query)
     cursor = connection.cursor()
@@ -189,11 +189,11 @@ def buscaDados(anoini, anofin):
 
     return  cursor
 
-def diasuteisTrabalhados(anoini, anofin):
+def diasuteis(anoini, anofin):
     connection = MySQLdb.connect (host=ipservidor, user=usuario, passwd=senha, db=banco)
 
     query = '''
-        select 'a', 
+        select 'a', 'b',
             (
             select b.diasuteis
             from dbContabil.cadparam b
@@ -377,11 +377,11 @@ def diasuteisTrabalhados(anoini, anofin):
     return  cursor
 
 def linhabranca():
-    linha = '<tr>'+ \
-            '<th>.</th>'     +   \
+    linha = '<tr>'          +   \
+            '<th>.</th>'    +   \
             '<th></th>'     +   \
             '<th></th>'     +   \
-            '<th></th>'+ \
+            '<th></th>'     +   \
             '<th></th>'+ \
             '<th></th>'+ \
             '<th></th>'+ \
@@ -563,11 +563,44 @@ def relatorio(anoini, anofin):
 
     linhabranca()
 
+# Dias Uteis
+    dados = diasuteis(anoini, anofin)
+    for row in dados:
+        linha = '<tr>' + \
+                '<td></td>' + \
+                '<td align="left"> Dias Uteis </td>' + \
+                '<td>' + str(row[2])+'</td>' + \
+                '<td>' + str(row[3])+'</td>' + \
+                '<td>' + str(row[4])+'</td>' + \
+                '<td>' + str(row[5])+'</td>' + \
+                '<td>' + str(row[6])+'</td>' + \
+                '<td>' + str(row[7])+'</td>' + \
+                '<td>' + str(row[8])+'</td>' + \
+                '<td>' + str(row[9])+'</td>' + \
+                '<td>' + str(row[10])+'</td>' + \
+                '<td>' + str(row[11])+'</td>' + \
+                '<td>' + str(row[12])+'</td>' + \
+                '<td>' + str(row[13])+'</td>' + \
+                '<td>' + str(row[14])+'</td>' + \
+                '<td>' + str(row[15])+'</td>' + \
+                '<td>' + str(row[16])+'</td>' + \
+                '<td>' + str(row[17])+'</td>' + \
+                '<td>' + str(row[18])+'</td>' + \
+                '<td>' + str(row[19])+'</td>' + \
+                '<td>' + str(row[20])+'</td>' + \
+                '<td>' + str(row[21])+'</td>' + \
+                '<td>' + str(row[22])+'</td>' + \
+                '<td>' + str(row[23])+'</td>' + \
+                '<td>' + str(row[24])+'</td>' + \
+                '<td>' + str(row[25])+'</td>' + \
+                '</tr>'
+        gravalinha(linha)
+
     dados = buscaDados(anoini, anofin)
     for row in dados:
         linha = '<tr>' + \
                 '<td>' + str(row[0])+'</td>' + \
-                '<td align="left">' + str(row[1])+'</td>' + \
+                '<td align="left">' + row[1] +'</td>' + \
                 '<td>' + str(row[2])+'</td>' + \
                 '<td>' + str(row[3])+'</td>' + \
                 '<td>' + str(row[4])+'</td>' + \
