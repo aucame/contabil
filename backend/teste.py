@@ -3,6 +3,7 @@
 import MySQLdb
 from sqlalchemy import create_engine
 
+
 ipservidor = "127.0.0.1" # LOCAL
 # ipservidor = "200.98.174.103" # UOLHOST
 
@@ -16,9 +17,7 @@ def limpaarquivo():
     file.close()
 
 def gravalinha(linha):
-    file = open('pdf.html','a')
     file.write(linha+'\n')
-    file.close()
 
 def buscaDados(anoini, anofin):
     # Establish a MySQL Connection
@@ -563,7 +562,7 @@ def relatorio(anoini, anofin):
 
     linhabranca()
 
-# Dias Uteis
+    # Dias Uteis
     dados = diasuteis(anoini, anofin)
     for row in dados:
         linha = '<tr>' + \
@@ -626,10 +625,13 @@ def relatorio(anoini, anofin):
                 '<td>' + str(row[24])+'</td>' + \
                 '<td>' + str(row[25])+'</td>' + \
                 '</tr>'
+        linha = linha.encode('utf-8')
         gravalinha(linha)
 
     gravalinha('</table>')
     gravalinha('</body>')
     gravalinha('</html>')
 
+file = open('pdf.html','a')
 relatorio(2016,2015)
+file.close()
