@@ -1,6 +1,5 @@
 # coding=utf-8
 
-
 import xlrd
 import MySQLdb
 from sqlalchemy import create_engine
@@ -49,7 +48,7 @@ def montaCodigo(registro):
 
     return novo
 
-def gravaPlano(contplano, registro, descri, tipocd):
+def gravaPlano(contplano, registro, descri, tipocd, grupoplano):
     
     tipo, grupo, subgrupo, subgrp, numero = registro.split('.')
 
@@ -57,11 +56,10 @@ def gravaPlano(contplano, registro, descri, tipocd):
 
     # print registro
 
-    query = 'insert into dbContabil.cadplano (idplano, codigo, descricao, tipocd, tipo, grupo, subgrupo, subgrp, numero) values (' + \
+    query = 'insert into dbContabil.cadplano (idplano, codigo, descricao, tipocd, tipo, grupo, subgrupo, subgrp, numero, grupoplano) values (' + \
         str(contplano) + ',"' + registro + '","' + \
         descri + '","' + tipocd + '","' + tipo + '","' + \
-        grupo + '","' + subgrupo + '","' + subgrp + '","' + numero + \
-        '")'
+        grupo + '","' + subgrupo + '","' + subgrp + '","' + numero + '","' + grupoplano + '")'
 
     cursor.execute(query)
 
@@ -119,6 +117,8 @@ contlancto = 0
 contalinha = 0
 contlancto2 = 0
 contparam = 0
+
+grupoplano = ''
 
 flag = 'S'
 valor  = 0.0
@@ -376,8 +376,10 @@ for r in range(1, sheet.nrows):
 
     if  flag == 'S':
         flag = 'N'
+        grupoplano = ''
         if  contalinha >= 11 and contalinha <= 13:
             flag = 'S'
+            grupoplano = '00001'
         if  contalinha >= 21 and contalinha <= 22:
             flag = 'S'
         if  contalinha >= 55 and contalinha <= 71:
@@ -573,7 +575,7 @@ for r in range(1, sheet.nrows):
             tipocd = 'C'
 
 #       Grava Plano de contas
-        gravaPlano(contplano, registro, descri, tipocd)
+        gravaPlano(contplano, registro, descri, tipocd, grupoplano)
 
 #       Grava os lançamentos
 

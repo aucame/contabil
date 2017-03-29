@@ -84,6 +84,7 @@ def cria_Plano():
         Column('subgrupo', Numeric(2,0)),
         Column('subgrp', Numeric(3,0)),
         Column('numero', Numeric(5,0)),
+        Column('grupoplano', String(50)),
         schema=dba
     )
 
