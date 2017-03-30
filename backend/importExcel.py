@@ -376,46 +376,64 @@ for r in range(1, sheet.nrows):
 
     if  flag == 'S':
         flag = 'N'
-        grupoplano = ''
+        grupoplano = '99999'
         if  contalinha >= 11 and contalinha <= 13:
             flag = 'S'
             grupoplano = '00001'
         if  contalinha >= 21 and contalinha <= 22:
             flag = 'S'
+            grupoplano = '00002'
         if  contalinha >= 55 and contalinha <= 71:
             flag = 'S'
+            grupoplano = '00003'
         if  contalinha >= 90 and contalinha <= 97:
             flag = 'S'
+            grupoplano = '00004'
         if  contalinha >= 118 and contalinha <= 146:
             flag = 'S'
+            grupoplano = '00005'
         if  contalinha >= 157 and contalinha <= 171:
             flag = 'S'
+            grupoplano = '00006'
         if  contalinha >= 183 and contalinha <= 204:
             flag = 'S'
+            grupoplano = '00007'
         if  contalinha >= 215 and contalinha <= 242:
             flag = 'S'
+            grupoplano = '00008'
         if  contalinha >= 253 and contalinha <= 316:
             flag = 'S'
+            grupoplano = '00009'
         if  contalinha >= 327 and contalinha <= 342:
             flag = 'S'
+            grupoplano = '00010'
         if  contalinha >= 353 and contalinha <= 363:
             flag = 'S'
+            grupoplano = '00011'
         if  contalinha >= 383 and contalinha <= 385:
             flag = 'S'
+            grupoplano = '00012'
         if  contalinha >= 396 and contalinha <= 399:
             flag = 'S'
+            grupoplano = '00013'
         if  contalinha >= 410 and contalinha <= 420:
             flag = 'S'
+            grupoplano = '00014'
         if  contalinha >= 431 and contalinha <= 456:
             flag = 'S'
+            grupoplano = '00015'
         if  contalinha >= 467 and contalinha <= 470:
             flag = 'S'
+            grupoplano = '00016'
         if  contalinha >= 489 and contalinha <= 509:
             flag = 'S'
+            grupoplano = '00017'
         if  contalinha >= 519 and contalinha <= 531:
             flag = 'S'
+            grupoplano = '00018'
         if  contalinha >= 582 and contalinha <= 585:
             flag = 'S'
+            grupoplano = '00019'
 
 
         # print(str(contalinha) + ' - ' + flag + ' - ' + str(valor) + ' - ' )
@@ -425,7 +443,7 @@ for r in range(1, sheet.nrows):
             valor = round(valor,2)
         except Exception as e:
             flag = 'N'
-        
+
     if  flag == 'S':
         try:
             valor2 = round(valor2,2)

@@ -12,6 +12,14 @@ usuario    = "root"
 senha      = "123456"
 banco      = "dbContabil"
 
+def moeda(valor):
+    # if valor != None:
+    #     import locale
+    #     locale.setlocale( locale.LC_ALL, '' )
+    #     return locale.currency( valor, grouping=True )
+    # return ''
+    return valor
+
 def limpaarquivo():
     file = open('pdf.html','w')
     file.close()
@@ -169,11 +177,14 @@ def buscaDados(anoini, anofin):
                 where b.ano = {1}
                 and b.mes = 12
                 and b.idplano = a.codigo
-            ) Dezembro2016
+            ) Dezembro2016,
+            a.grupoplano
 
         FROM dbContabil.cadplano a
-        order by a.tipocd asc #desc, a.idplano asc
+        order by a.tipocd asc, a.grupoplano asc
     '''
+
+        # order by a.tipocd asc #desc, a.idplano asc
 
     query = query.format(anoini, anofin)
 
@@ -377,32 +388,34 @@ def diasuteis(anoini, anofin):
 
 def linhabranca():
     linha = '<tr>'          +   \
-            '<th>.</th>'    +   \
-            '<th></th>'     +   \
-            '<th></th>'     +   \
-            '<th></th>'     +   \
-            '<th></th>'+ \
-            '<th></th>'+ \
-            '<th></th>'+ \
-            '<th></th>'+ \
-            '<th></th>'+ \
-            '<th></th>'+ \
-            '<th></th>'+ \
-            '<th></th>'+ \
-            '<th></th>'+ \
-            '<th></th>'+ \
-            '<th></th>'+ \
-            '<th></th>'+ \
-            '<th></th>'+ \
-            '<th></th>'+ \
-            '<th></th>'+ \
-            '<th></th>'+ \
-            '<th></th>'+ \
-            '<th></th>'+ \
-            '<th></th>'+ \
-            '<th></th>'+ \
-            '<th></th>'+ \
-            '<th></th>'+ \
+            '<td>.</td>'     +   \
+            '<td></td>'     +   \
+            '<td></td>'     +   \
+            '<td></td>'     +   \
+            '<td></td>'     +   \
+            '<td></td>'     +   \
+            '<td></td>'     +   \
+            '<td></td>'     +   \
+            '<td></td>'     +   \
+            '<td></td>'     +   \
+            '<td></td>'     +   \
+            '<td></td>'     +   \
+            '<td></td>'     +   \
+            '<td></td>'     +   \
+            '<td></td>'     +   \
+            '<td></td>'     +   \
+            '<td></td>'     +   \
+            '<td></td>'     +   \
+            '<td></td>'     +   \
+            '<td></td>'     +   \
+            '<td></td>'     +   \
+            '<td></td>'     +   \
+            '<td></td>'     +   \
+            '<td></td>'     +   \
+            '<td></td>'     +   \
+            '<td></td>'     +   \
+            '<td></td>'     +   \
+            '<td></td>'     +   \
             '</tr>'
     gravalinha(linha)
 
@@ -434,36 +447,40 @@ def cabecalho(anoini, anofin):
             '<th></th>'+ \
             '<th></th>'+ \
             '<th></th>'+ \
+            '<th></th>'+ \
+            '<th></th>'+ \
             '</tr>'
     gravalinha(linha)
 
     linha = '<tr>'+ \
             '<td></td>'+ \
-            '<td>D.R.E. ECONÔMICO / FINANCEIRO</td>'    + \
-            '<td>{0}</td>'.format(anoini) + \
-            '<td>{0}</td>'.format(anofin) + \
-            '<td>{0}</td>'.format(anoini) + \
-            '<td>{0}</td>'.format(anofin) + \
-            '<td>{0}</td>'.format(anoini) + \
-            '<td>{0}</td>'.format(anofin) + \
-            '<td>{0}</td>'.format(anoini) + \
-            '<td>{0}</td>'.format(anofin) + \
-            '<td>{0}</td>'.format(anoini) + \
-            '<td>{0}</td>'.format(anofin) + \
-            '<td>{0}</td>'.format(anoini) + \
-            '<td>{0}</td>'.format(anofin) + \
-            '<td>{0}</td>'.format(anoini) + \
-            '<td>{0}</td>'.format(anofin) + \
-            '<td>{0}</td>'.format(anoini) + \
-            '<td>{0}</td>'.format(anofin) + \
-            '<td>{0}</td>'.format(anoini) + \
-            '<td>{0}</td>'.format(anofin) + \
-            '<td>{0}</td>'.format(anoini) + \
-            '<td>{0}</td>'.format(anofin) + \
-            '<td>{0}</td>'.format(anoini) + \
-            '<td>{0}</td>'.format(anofin) + \
-            '<td>{0}</td>'.format(anoini) + \
-            '<td>{0}</td>'.format(anofin) + \
+            '<td>D.R.E. ECONÔMICO / FINANCEIRO</td>' + \
+            '<td></td>'+ \
+            '<td></td>'+ \
+            '<td></td>'+ \
+            '<td></td>'+ \
+            '<td></td>'+ \
+            '<td></td>'+ \
+            '<td></td>'+ \
+            '<td></td>'+ \
+            '<td></td>'+ \
+            '<td></td>'+ \
+            '<td></td>'+ \
+            '<td></td>'+ \
+            '<td></td>'+ \
+            '<td></td>'+ \
+            '<td></td>'+ \
+            '<td></td>'+ \
+            '<td></td>'+ \
+            '<td></td>'+ \
+            '<td></td>'+ \
+            '<td></td>'+ \
+            '<td></td>'+ \
+            '<td></td>'+ \
+            '<td></td>'+ \
+            '<td></td>'+ \
+            '<td></td>'+ \
+            '<td></td>'+ \
             '</tr>'
     gravalinha(linha)
 
@@ -494,36 +511,40 @@ def cabecalho(anoini, anofin):
             '<td>Novembro</td>'+ \
             '<td>Dezembro</td>'+ \
             '<td>Dezembro</td>'+ \
+            '<td>ACUMULADO</td>'+ \
+            '<td>ACUMULADO</td>'+ \
             '</tr>'
     gravalinha(linha)
 
     linha = '<tr>'+ \
             '<td>CONTABIL</td>'+ \
             '<td>JANEIRO A DEZEMBRO</td>'+ \
-            '<td></td>'+ \
-            '<td></td>'+ \
-            '<td></td>'+ \
-            '<td></td>'+ \
-            '<td></td>'+ \
-            '<td></td>'+ \
-            '<td></td>'+ \
-            '<td></td>'+ \
-            '<td></td>'+ \
-            '<td></td>'+ \
-            '<td></td>'+ \
-            '<td></td>'+ \
-            '<td></td>'+ \
-            '<td></td>'+ \
-            '<td></td>'+ \
-            '<td></td>'+ \
-            '<td></td>'+ \
-            '<td></td>'+ \
-            '<td></td>'+ \
-            '<td></td>'+ \
-            '<td></td>'+ \
-            '<td></td>'+ \
-            '<td></td>'+ \
-            '<td></td>'+ \
+            '<td>{0}</td>'.format(anoini) + \
+            '<td>{0}</td>'.format(anofin) + \
+            '<td>{0}</td>'.format(anoini) + \
+            '<td>{0}</td>'.format(anofin) + \
+            '<td>{0}</td>'.format(anoini) + \
+            '<td>{0}</td>'.format(anofin) + \
+            '<td>{0}</td>'.format(anoini) + \
+            '<td>{0}</td>'.format(anofin) + \
+            '<td>{0}</td>'.format(anoini) + \
+            '<td>{0}</td>'.format(anofin) + \
+            '<td>{0}</td>'.format(anoini) + \
+            '<td>{0}</td>'.format(anofin) + \
+            '<td>{0}</td>'.format(anoini) + \
+            '<td>{0}</td>'.format(anofin) + \
+            '<td>{0}</td>'.format(anoini) + \
+            '<td>{0}</td>'.format(anofin) + \
+            '<td>{0}</td>'.format(anoini) + \
+            '<td>{0}</td>'.format(anofin) + \
+            '<td>{0}</td>'.format(anoini) + \
+            '<td>{0}</td>'.format(anofin) + \
+            '<td>{0}</td>'.format(anoini) + \
+            '<td>{0}</td>'.format(anofin) + \
+            '<td>{0}</td>'.format(anoini) + \
+            '<td>{0}</td>'.format(anofin) + \
+            '<td>{0}</td>'.format(anoini) + \
+            '<td>{0}</td>'.format(anofin) + \
             '</tr>'
     gravalinha(linha)
 
@@ -562,6 +583,8 @@ def relatorio(anoini, anofin):
 
     linhabranca()
 
+    wgrupoplano = ''
+
     # Dias Uteis
     dados = diasuteis(anoini, anofin)
     for row in dados:
@@ -592,41 +615,63 @@ def relatorio(anoini, anofin):
                 '<td>' + str(row[23])+'</td>' + \
                 '<td>' + str(row[24])+'</td>' + \
                 '<td>' + str(row[25])+'</td>' + \
+                '<td></td>' + \
+                '<td></td>' + \
                 '</tr>'
         gravalinha(linha)
 
     dados = buscaDados(anoini, anofin)
     for row in dados:
+
+        somaini =   float(row[2])  + float(row[4])  + float(row[6])  + float(row[8])  + \
+                    float(row[10]) + float(row[12]) + float(row[14]) + float(row[16]) + \
+                    float(row[18]) + float(row[20]) + float(row[22]) + float(row[24])
+
+        somafin =   float(row[3])  + float(row[5])  + float(row[7])  + float(row[9])  + \
+                    float(row[11]) + float(row[13]) + float(row[15]) + float(row[17]) + \
+                    float(row[19]) + float(row[21]) + float(row[23]) + float(row[25])
+
         linha = '<tr>' + \
                 '<td>' + str(row[0])+'</td>' + \
                 '<td align="left">' + row[1] +'</td>' + \
-                '<td>' + str(row[2])+'</td>' + \
-                '<td>' + str(row[3])+'</td>' + \
-                '<td>' + str(row[4])+'</td>' + \
-                '<td>' + str(row[5])+'</td>' + \
-                '<td>' + str(row[6])+'</td>' + \
-                '<td>' + str(row[7])+'</td>' + \
-                '<td>' + str(row[8])+'</td>' + \
-                '<td>' + str(row[9])+'</td>' + \
-                '<td>' + str(row[10])+'</td>' + \
-                '<td>' + str(row[11])+'</td>' + \
-                '<td>' + str(row[12])+'</td>' + \
-                '<td>' + str(row[13])+'</td>' + \
-                '<td>' + str(row[14])+'</td>' + \
-                '<td>' + str(row[15])+'</td>' + \
-                '<td>' + str(row[16])+'</td>' + \
-                '<td>' + str(row[17])+'</td>' + \
-                '<td>' + str(row[18])+'</td>' + \
-                '<td>' + str(row[19])+'</td>' + \
-                '<td>' + str(row[20])+'</td>' + \
-                '<td>' + str(row[21])+'</td>' + \
-                '<td>' + str(row[22])+'</td>' + \
-                '<td>' + str(row[23])+'</td>' + \
-                '<td>' + str(row[24])+'</td>' + \
-                '<td>' + str(row[25])+'</td>' + \
+                '<td>' + str(moeda(row[2]))+'</td>' + \
+                '<td>' + str(moeda(row[3]))+'</td>' + \
+                '<td>' + str(moeda(row[4]))+'</td>' + \
+                '<td>' + str(moeda(row[5]))+'</td>' + \
+                '<td>' + str(moeda(row[6]))+'</td>' + \
+                '<td>' + str(moeda(row[7]))+'</td>' + \
+                '<td>' + str(moeda(row[8]))+'</td>' + \
+                '<td>' + str(moeda(row[9]))+'</td>' + \
+                '<td>' + str(moeda(row[10]))+'</td>' + \
+                '<td>' + str(moeda(row[11]))+'</td>' + \
+                '<td>' + str(moeda(row[12]))+'</td>' + \
+                '<td>' + str(moeda(row[13]))+'</td>' + \
+                '<td>' + str(moeda(row[14]))+'</td>' + \
+                '<td>' + str(moeda(row[15]))+'</td>' + \
+                '<td>' + str(moeda(row[16]))+'</td>' + \
+                '<td>' + str(moeda(row[17]))+'</td>' + \
+                '<td>' + str(moeda(row[18]))+'</td>' + \
+                '<td>' + str(moeda(row[19]))+'</td>' + \
+                '<td>' + str(moeda(row[20]))+'</td>' + \
+                '<td>' + str(moeda(row[21]))+'</td>' + \
+                '<td>' + str(moeda(row[22]))+'</td>' + \
+                '<td>' + str(moeda(row[23]))+'</td>' + \
+                '<td>' + str(moeda(row[24]))+'</td>' + \
+                '<td>' + str(moeda(row[25]))+'</td>' + \
+                '<td>' + str(moeda(somaini))+'</td>' + \
+                '<td>' + str(moeda(somafin))+'</td>' + \
                 '</tr>'
+
+        if  wgrupoplano ==  '':
+            wgrupoplano =   row[26]
+        else:
+            if  wgrupoplano <> row[26]:
+                wgrupoplano =  row[26]
+                linhabranca()
+
         linha = linha.encode('utf-8')
         gravalinha(linha)
+
 
     gravalinha('</table>')
     gravalinha('</body>')
