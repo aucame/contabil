@@ -8,7 +8,7 @@ app.controller('ctlPeoficial', function($scope, $http, $location, $window, confi
 
 	$scope.printPeoficial = function(){
 		// $scope.relatorio();
-		$scope.site = $scope.linksite + 'backend/api/pdf.html';
+		$scope.site = $scope.linksite + 'backend/pdf.html';
 		window.open($scope.site);
 	};
 
@@ -67,13 +67,13 @@ app.controller('ctlPeoficial', function($scope, $http, $location, $window, confi
 	// 	$scope.gridApi = gridApi;
 	// };
 
-	// $scope.appMenu = function(menu) {
-	// 	if(menu == 'logout'){
-	// 		location.href = $scope.linksite;
-	// 	} else {
-	// 		location.href = $scope.linksite + menu + '.html';
-	// 	}
-	// };
+	$scope.appMenu = function(menu) {
+		if(menu == 'logout'){
+			location.href = $scope.linksite;
+		} else {
+			location.href = $scope.linksite + menu + '.html';
+		}
+	};
 
 	// $scope.novo = function() {
 	// 	$scope.parametro = { 

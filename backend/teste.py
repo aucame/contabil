@@ -4,13 +4,15 @@ import MySQLdb
 from sqlalchemy import create_engine
 
 
-ipservidor = "127.0.0.1" # LOCAL
+ipservidor  = "127.0.0.1" # LOCAL
 # ipservidor = "200.98.174.103" # UOLHOST
 
-usuario    = "root"
+usuario     = "root"
 # senha      = "lelo$321"
-senha      = "123456"
-banco      = "dbContabil"
+senha       = "123456"
+banco       = "dbContabil"
+
+totlinha    =   [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
 
 def moeda(valor):
     # if valor != None:
@@ -548,6 +550,72 @@ def cabecalho(anoini, anofin):
             '</tr>'
     gravalinha(linha)
 
+def zeralinha():
+    totlinha    =   [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+
+def somalinha(linha):
+    totlinha[2] += linha[2]
+    totlinha[3] += linha[3]
+    totlinha[4] += linha[4]
+    totlinha[5] += linha[5]
+    totlinha[6] += linha[6]
+    totlinha[7] += linha[7]
+    totlinha[8] += linha[8]
+    totlinha[9] += linha[9]
+    totlinha[10] += linha[10]
+    totlinha[11] += linha[11]
+    totlinha[12] += linha[12]
+    totlinha[13] += linha[13]
+    totlinha[14] += linha[14]
+    totlinha[15] += linha[15]
+    totlinha[16] += linha[16]
+    totlinha[17] += linha[17]
+    totlinha[18] += linha[18]
+    totlinha[19] += linha[19]
+    totlinha[20] += linha[20]
+    totlinha[21] += linha[21]
+    totlinha[22] += linha[22]
+    totlinha[23] += linha[23]
+    totlinha[24] += linha[24]
+    totlinha[25] += linha[25]
+
+    print totlinha
+
+def totalgrupo():
+    linha = '<tr>' + \
+            '<td></td>' + \
+            '<td></td>' + \
+            '<td>' + str(totlinha[2])+'</td>' + \
+            '<td>' + str(totlinha[3])+'</td>' + \
+            '<td>' + str(totlinha[4])+'</td>' + \
+            '<td>' + str(totlinha[5])+'</td>' + \
+            '<td>' + str(totlinha[6])+'</td>' + \
+            '<td>' + str(totlinha[7])+'</td>' + \
+            '<td>' + str(totlinha[8])+'</td>' + \
+            '<td>' + str(totlinha[9])+'</td>' + \
+            '<td>' + str(totlinha[10])+'</td>' + \
+            '<td>' + str(totlinha[11])+'</td>' + \
+            '<td>' + str(totlinha[12])+'</td>' + \
+            '<td>' + str(totlinha[13])+'</td>' + \
+            '<td>' + str(totlinha[14])+'</td>' + \
+            '<td>' + str(totlinha[15])+'</td>' + \
+            '<td>' + str(totlinha[16])+'</td>' + \
+            '<td>' + str(totlinha[17])+'</td>' + \
+            '<td>' + str(totlinha[18])+'</td>' + \
+            '<td>' + str(totlinha[19])+'</td>' + \
+            '<td>' + str(totlinha[20])+'</td>' + \
+            '<td>' + str(totlinha[21])+'</td>' + \
+            '<td>' + str(totlinha[22])+'</td>' + \
+            '<td>' + str(totlinha[23])+'</td>' + \
+            '<td>' + str(totlinha[24])+'</td>' + \
+            '<td>' + str(totlinha[25])+'</td>' + \
+            '<td></td>' + \
+            '<td></td>' + \
+            '</tr>'
+    gravalinha(linha)
+
+    zeralinha()
+
 def relatorio(anoini, anofin):
     limpaarquivo()
 
@@ -623,6 +691,8 @@ def relatorio(anoini, anofin):
     dados = buscaDados(anoini, anofin)
     for row in dados:
 
+        # print row
+
         somaini =   float(row[2])  + float(row[4])  + float(row[6])  + float(row[8])  + \
                     float(row[10]) + float(row[12]) + float(row[14]) + float(row[16]) + \
                     float(row[18]) + float(row[20]) + float(row[22]) + float(row[24])
@@ -664,10 +734,13 @@ def relatorio(anoini, anofin):
 
         if  wgrupoplano ==  '':
             wgrupoplano =   row[26]
+            # somalinha(row)
         else:
             if  wgrupoplano <> row[26]:
                 wgrupoplano =  row[26]
+                # totalgrupo()
                 linhabranca()
+                # somalinha(row)
 
         linha = linha.encode('utf-8')
         gravalinha(linha)
