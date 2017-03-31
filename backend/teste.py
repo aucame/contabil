@@ -551,7 +551,30 @@ def cabecalho(anoini, anofin):
     gravalinha(linha)
 
 def zeralinha():
-    totlinha    =   [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+    totlinha[2]  = 0
+    totlinha[3]  = 0
+    totlinha[4]  = 0
+    totlinha[5]  = 0
+    totlinha[6]  = 0
+    totlinha[7]  = 0
+    totlinha[8]  = 0
+    totlinha[9]  = 0
+    totlinha[10] = 0
+    totlinha[11] = 0
+    totlinha[12] = 0
+    totlinha[13] = 0
+    totlinha[14] = 0
+    totlinha[15] = 0
+    totlinha[16] = 0
+    totlinha[17] = 0
+    totlinha[18] = 0
+    totlinha[19] = 0
+    totlinha[20] = 0
+    totlinha[21] = 0
+    totlinha[22] = 0
+    totlinha[23] = 0
+    totlinha[24] = 0
+    totlinha[25] = 0
 
 def somalinha(linha):
     totlinha[2] += linha[2]
@@ -578,8 +601,6 @@ def somalinha(linha):
     totlinha[23] += linha[23]
     totlinha[24] += linha[24]
     totlinha[25] += linha[25]
-
-    print totlinha
 
 def totalgrupo():
     linha = '<tr>' + \
@@ -734,17 +755,21 @@ def relatorio(anoini, anofin):
 
         if  wgrupoplano ==  '':
             wgrupoplano =   row[26]
-            # somalinha(row)
+            somalinha(row)
         else:
             if  wgrupoplano <> row[26]:
                 wgrupoplano =  row[26]
-                # totalgrupo()
+                totalgrupo()
                 linhabranca()
-                # somalinha(row)
+                somalinha(row)
+            else:
+                somalinha(row)
+               
 
         linha = linha.encode('utf-8')
         gravalinha(linha)
 
+    totalgrupo()
 
     gravalinha('</table>')
     gravalinha('</body>')
