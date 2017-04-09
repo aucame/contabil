@@ -15,11 +15,11 @@ banco       = "dbContabil"
 totlinha    =   [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
 
 def moeda(valor):
-    # if valor != None:
-    #     import locale
-    #     locale.setlocale( locale.LC_ALL, '' )
-    #     return locale.currency( valor, grouping=True )
-    # return ''
+#    valor = 'R${:0,.2f}'.format(valor)
+    valor = '{:0,.2f}'.format(valor)
+    valor = valor.replace('.',';')
+    valor = valor.replace(',','.')
+    valor = valor.replace(';',',')
     return valor
 
 def limpaarquivo():
@@ -408,8 +408,6 @@ def somagrupo(grupoplano,anoini,anofin):
 
     zeralinha()
 
-    print 'passei'
-
     for linha in cursor:
         if  linha[1] == anoini:
             if  linha[2] == 1:
@@ -723,30 +721,30 @@ def totalgrupo():
     linha = '<tr>' + \
             '<td></td>' + \
             '<td></td>' + \
-            '<td>' + str(totlinha[2])+'</td>' + \
-            '<td>' + str(totlinha[3])+'</td>' + \
-            '<td>' + str(totlinha[4])+'</td>' + \
-            '<td>' + str(totlinha[5])+'</td>' + \
-            '<td>' + str(totlinha[6])+'</td>' + \
-            '<td>' + str(totlinha[7])+'</td>' + \
-            '<td>' + str(totlinha[8])+'</td>' + \
-            '<td>' + str(totlinha[9])+'</td>' + \
-            '<td>' + str(totlinha[10])+'</td>' + \
-            '<td>' + str(totlinha[11])+'</td>' + \
-            '<td>' + str(totlinha[12])+'</td>' + \
-            '<td>' + str(totlinha[13])+'</td>' + \
-            '<td>' + str(totlinha[14])+'</td>' + \
-            '<td>' + str(totlinha[15])+'</td>' + \
-            '<td>' + str(totlinha[16])+'</td>' + \
-            '<td>' + str(totlinha[17])+'</td>' + \
-            '<td>' + str(totlinha[18])+'</td>' + \
-            '<td>' + str(totlinha[19])+'</td>' + \
-            '<td>' + str(totlinha[20])+'</td>' + \
-            '<td>' + str(totlinha[21])+'</td>' + \
-            '<td>' + str(totlinha[22])+'</td>' + \
-            '<td>' + str(totlinha[23])+'</td>' + \
-            '<td>' + str(totlinha[24])+'</td>' + \
-            '<td>' + str(totlinha[25])+'</td>' + \
+            '<td>' + str(moeda(totlinha[2]))+'</td>' + \
+            '<td>' + str(moeda(totlinha[3]))+'</td>' + \
+            '<td>' + str(moeda(totlinha[4]))+'</td>' + \
+            '<td>' + str(moeda(totlinha[5]))+'</td>' + \
+            '<td>' + str(moeda(totlinha[6]))+'</td>' + \
+            '<td>' + str(moeda(totlinha[7]))+'</td>' + \
+            '<td>' + str(moeda(totlinha[8]))+'</td>' + \
+            '<td>' + str(moeda(totlinha[9]))+'</td>' + \
+            '<td>' + str(moeda(totlinha[10]))+'</td>' + \
+            '<td>' + str(moeda(totlinha[11]))+'</td>' + \
+            '<td>' + str(moeda(totlinha[12]))+'</td>' + \
+            '<td>' + str(moeda(totlinha[13]))+'</td>' + \
+            '<td>' + str(moeda(totlinha[14]))+'</td>' + \
+            '<td>' + str(moeda(totlinha[15]))+'</td>' + \
+            '<td>' + str(moeda(totlinha[16]))+'</td>' + \
+            '<td>' + str(moeda(totlinha[17]))+'</td>' + \
+            '<td>' + str(moeda(totlinha[18]))+'</td>' + \
+            '<td>' + str(moeda(totlinha[19]))+'</td>' + \
+            '<td>' + str(moeda(totlinha[20]))+'</td>' + \
+            '<td>' + str(moeda(totlinha[21]))+'</td>' + \
+            '<td>' + str(moeda(totlinha[22]))+'</td>' + \
+            '<td>' + str(moeda(totlinha[23]))+'</td>' + \
+            '<td>' + str(moeda(totlinha[24]))+'</td>' + \
+            '<td>' + str(moeda(totlinha[25]))+'</td>' + \
             '<td></td>' + \
             '<td></td>' + \
             '<td></td>' + \
@@ -773,14 +771,14 @@ def relatorio(anoini, anofin):
                 <style>
                 table, th, td {
                     border: 1px solid black;
-                    padding: 1px;
+                    padding: 0px;
                     text-align: right;
                 }
                 table {
-                    border-spacing: 1px;
+                    border-spacing: 0px;
                 }
                 body {
-                width: 3000px;
+                width: 4000px;
                 margin: 0 auto;
                 }
                 </style>
@@ -865,7 +863,7 @@ def relatorio(anoini, anofin):
 
         linha = '<tr>' + \
                 '<td>' + str(row[0])+'</td>' + \
-                '<td align="left">' + row[1] +'</td>' + \
+                '<td align="right">' + row[1] +'</td>' + \
                 '<td>' + str(moeda(row[2]))+'</td>' + \
                 '<td>' + str(moeda(row[3]))+'</td>' + \
                 '<td>' + str(moeda(row[4]))+'</td>' + \
@@ -900,14 +898,15 @@ def relatorio(anoini, anofin):
                 '<td></td>' + \
                 '</tr>'
 
-        if  contalinha  ==  4:
-            somagrupo('00001', anoini, anofin)
+#        if  contalinha  ==  4:
+#            somagrupo('00001', anoini, anofin)
 
         if  wgrupoplano ==  '':
             wgrupoplano =   row[26]
             somalinha(row)
         else:
             if  wgrupoplano <> row[26]:
+                somagrupo(wgrupoplano, anoini, anofin)
                 wgrupoplano =  row[26]
                 # totalgrupo()
                 linhabranca()
@@ -924,6 +923,7 @@ def relatorio(anoini, anofin):
         linha = linha.encode('utf-8')
         gravalinha(linha)
 
+    somagrupo(wgrupoplano, anoini, anofin)
     # totalgrupo()
 
     gravalinha('</table>')

@@ -7,10 +7,16 @@ app.controller('ctlPeoficial', function($scope, $http, $location, $window, confi
 	$scope.linksite = config.linksite;
 
 	$scope.printPeoficial = function(){
-		// $scope.relatorio();
-		$scope.site = $scope.linksite + 'backend/pdf.html';
-		window.open($scope.site);
+	//	$scope.relatorio();
+		//$window.setTimeout($scope.chama, 7000);
+//		$interval( function(){ $scope.chama(); }, 7000);
 	};
+
+//	$scope.chama = function () {
+//		console.log("Relatorio gerado...");
+//		$scope.site = $scope.linksite + 'backend/pdf.html';
+//		window.open($scope.site);		
+//	};
 
     // $scope.meses =	[
 	// 				{mes: "Selecione", numero: 00 },

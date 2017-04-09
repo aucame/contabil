@@ -18,7 +18,7 @@ class Web(tornado.web.Application):
             (r'/parametro/([0-9]+)',param.Handler),
             (r'/planocontas/([0-9]+)',plano.Handler),
             (r'/lancamentos/([0-9]+)',lancamento.Handler),
-            (r'/relatorios/peoficial',peoficial.Handler)
+            (r'/relatorios/peoficial/(.*)',peoficial.Handler)
         ]
 
         tornado.web.Application.__init__(self,handlers)

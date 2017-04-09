@@ -10,8 +10,9 @@ class Handler(tornado.web.RequestHandler):
         self.set_header("Access-Control-Allow-Headers", "x-requested-with, Content-Type")
         self.set_header('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, OPTIONS')        
 
-    def get(self):
-        dbpeoficial.relatorio()
+    def get(self,id):
+        param = json.loads(id)
+        dbpeoficial.relatorio(param['anoini'], param['anofin'])
         self.write('OK')
 
     # def get(self, id):
