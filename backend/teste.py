@@ -29,14 +29,90 @@ def limpaarquivo():
 def gravalinha(linha):
     file.write(linha+'\n')
 
-def buscaamostra(anoini, anofin):
+def buscaamostrafat(anoini, anofin):
     connection = MySQLdb.connect (host=ipservidor, user=usuario, passwd=senha, db=banco, charset="utf8", use_unicode = True)
 
     query = '''
-        SELECT a.idparam, a.ano, a.mes, a.fatamostra 
+          SELECT a.idparam, a.ano, a.mes, ifnull(a.fatamostra,0) 
             FROM dbContabil.cadparam a
-           where a.ano in ({0},{1})            
-        order by a.ano, a.mes;
+           where a.ano in ({0},{1})
+		     and a.mes in (1,2,3,4,5,6,7,8,9,10,11,12)           
+        order by a.ano, a.mes
+    '''
+    query = query.format(anoini, anofin)
+
+    zeralinha()
+
+    cursor = connection.cursor()
+    cursor.execute(query)
+
+    for linha in cursor:
+        if  linha[1] == anoini:
+            if  linha[2] == 1:
+                totlinha[2] = totlinha[2] + linha[3]
+            if  linha[2] == 2:
+                totlinha[4] = totlinha[4] + linha[3]
+            if  linha[2] == 3:
+                totlinha[6] = totlinha[6] + linha[3]
+            if  linha[2] == 4:
+                totlinha[8] = totlinha[8] + linha[3]
+            if  linha[2] == 5:
+                totlinha[10] = totlinha[10] + linha[3]
+            if  linha[2] == 6:
+                totlinha[12] = totlinha[12] + linha[3]
+            if  linha[2] == 7:
+                totlinha[14] = totlinha[14] + linha[3]
+            if  linha[2] == 8:
+                totlinha[16] = totlinha[16] + linha[3]
+            if  linha[2] == 9:
+                totlinha[18] = totlinha[18] + linha[3]
+            if  linha[2] == 10:
+                totlinha[20] = totlinha[20] + linha[3]
+            if  linha[2] == 11:
+                totlinha[22] = totlinha[22] + linha[3]
+            if  linha[2] == 12:
+                totlinha[24] = totlinha[24] + linha[3]
+
+        if  linha[1] == anofin:
+            if  linha[2] == 1:
+                totlinha[3] = totlinha[3] + linha[3]
+            if  linha[2] == 2:
+                totlinha[5] = totlinha[5] + linha[3]
+            if  linha[2] == 3:
+                totlinha[7] = totlinha[7] + linha[3]
+            if  linha[2] == 4:
+                totlinha[9] = totlinha[9] + linha[3]
+            if  linha[2] == 5:
+                totlinha[11] = totlinha[11] + linha[3]
+            if  linha[2] == 6:
+                totlinha[13] = totlinha[13] + linha[3]
+            if  linha[2] == 7:
+                totlinha[15] = totlinha[15] + linha[3]
+            if  linha[2] == 8:
+                totlinha[17] = totlinha[17] + linha[3]
+            if  linha[2] == 9:
+                totlinha[19] = totlinha[19] + linha[3]
+            if  linha[2] == 10:
+                totlinha[21] = totlinha[21] + linha[3]
+            if  linha[2] == 11:
+                totlinha[23] = totlinha[23] + linha[3]
+            if  linha[2] == 12:
+                totlinha[25] = totlinha[25] + linha[3]
+
+    cursor.close()
+    connection.close()
+
+    totalgrupo()    
+
+def buscaamostrapar(anoini, anofin):
+    connection = MySQLdb.connect (host=ipservidor, user=usuario, passwd=senha, db=banco, charset="utf8", use_unicode = True)
+
+    query = '''
+          SELECT a.idparam, a.ano, a.mes, ifnull(a.paramostra,0) 
+            FROM dbContabil.cadparam a
+           where a.ano in ({0},{1})
+		     and a.mes in (1,2,3,4,5,6,7,8,9,10,11,12)           
+        order by a.ano, a.mes
     '''
     query = query.format(anoini, anofin)
 
@@ -997,7 +1073,8 @@ def relatorio(anoini, anofin):
     somagrupo(wgrupoplano, anoini, anofin)
     # totalgrupo()
 
-    buscaamostra(anoini, anofin)
+    buscaamostrafat(anoini, anofin)
+    buscaamostrapar(anoini, anofin)
 
     gravalinha('</table>')
     gravalinha('</body>')
