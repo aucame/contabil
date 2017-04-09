@@ -12,7 +12,7 @@ usuario     = "root"
 senha       = "123456"
 banco       = "dbContabil"
 
-totlinha    =   [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+totlinha    =   [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
 
 def moeda(valor):
     # if valor != None:
@@ -414,22 +414,54 @@ def somagrupo(grupoplano,anoini,anofin):
         if  linha[1] == anoini:
             if  linha[2] == 1:
                 totlinha[2] = totlinha[2] + linha[3]
-        if  linha[1] == anoini:
             if  linha[2] == 2:
                 totlinha[4] = totlinha[4] + linha[3]
-        if  linha[1] == anoini:
             if  linha[2] == 3:
                 totlinha[6] = totlinha[6] + linha[3]
+            if  linha[2] == 4:
+                totlinha[8] = totlinha[8] + linha[3]
+            if  linha[2] == 5:
+                totlinha[10] = totlinha[10] + linha[3]
+            if  linha[2] == 6:
+                totlinha[12] = totlinha[12] + linha[3]
+            if  linha[2] == 7:
+                totlinha[14] = totlinha[14] + linha[3]
+            if  linha[2] == 8:
+                totlinha[16] = totlinha[16] + linha[3]
+            if  linha[2] == 9:
+                totlinha[18] = totlinha[18] + linha[3]
+            if  linha[2] == 10:
+                totlinha[20] = totlinha[20] + linha[3]
+            if  linha[2] == 11:
+                totlinha[22] = totlinha[22] + linha[3]
+            if  linha[2] == 12:
+                totlinha[24] = totlinha[24] + linha[3]
 
         if  linha[1] == anofin:
             if  linha[2] == 1:
                 totlinha[3] = totlinha[3] + linha[3]
-        if  linha[1] == anofin:
             if  linha[2] == 2:
                 totlinha[5] = totlinha[5] + linha[3]
-        if  linha[1] == anofin:
             if  linha[2] == 3:
                 totlinha[7] = totlinha[7] + linha[3]
+            if  linha[2] == 4:
+                totlinha[9] = totlinha[9] + linha[3]
+            if  linha[2] == 5:
+                totlinha[11] = totlinha[11] + linha[3]
+            if  linha[2] == 6:
+                totlinha[13] = totlinha[13] + linha[3]
+            if  linha[2] == 7:
+                totlinha[15] = totlinha[15] + linha[3]
+            if  linha[2] == 8:
+                totlinha[17] = totlinha[17] + linha[3]
+            if  linha[2] == 9:
+                totlinha[19] = totlinha[19] + linha[3]
+            if  linha[2] == 10:
+                totlinha[21] = totlinha[21] + linha[3]
+            if  linha[2] == 11:
+                totlinha[23] = totlinha[23] + linha[3]
+            if  linha[2] == 12:
+                totlinha[25] = totlinha[25] + linha[3]
 
     totalgrupo()
 
@@ -439,6 +471,12 @@ def somagrupo(grupoplano,anoini,anofin):
 def linhabranca():
     linha = '<tr>'          +   \
             '<td>.</td>'     +   \
+            '<td></td>'     +   \
+            '<td></td>'     +   \
+            '<td></td>'     +   \
+            '<td></td>'     +   \
+            '<td></td>'     +   \
+            '<td></td>'     +   \
             '<td></td>'     +   \
             '<td></td>'     +   \
             '<td></td>'     +   \
@@ -499,12 +537,24 @@ def cabecalho(anoini, anofin):
             '<th></th>'+ \
             '<th></th>'+ \
             '<th></th>'+ \
+            '<th></th>'+ \
+            '<th></th>'+ \
+            '<th></th>'+ \
+            '<th></th>'+ \
+            '<th></th>'+ \
+            '<th></th>'+ \
             '</tr>'
     gravalinha(linha)
 
     linha = '<tr>'+ \
             '<td></td>'+ \
             '<td>D.R.E. ECONÔMICO / FINANCEIRO</td>' + \
+            '<td></td>'+ \
+            '<td></td>'+ \
+            '<td></td>'+ \
+            '<td></td>'+ \
+            '<td></td>'+ \
+            '<td></td>'+ \
             '<td></td>'+ \
             '<td></td>'+ \
             '<td></td>'+ \
@@ -563,12 +613,24 @@ def cabecalho(anoini, anofin):
             '<td>Dezembro</td>'+ \
             '<td>ACUMULADO</td>'+ \
             '<td>ACUMULADO</td>'+ \
+            '<td>MEDIA</td>'+ \
+            '<td>MEDIA</td>'+ \
+            '<td>%</td>'+ \
+            '<td>%</td>'+ \
+            '<td>CUSTO P/PAR</td>'+ \
+            '<td>CUSTO P/PAR</td>'+ \
             '</tr>'
     gravalinha(linha)
 
     linha = '<tr>'+ \
             '<td>CONTABIL</td>'+ \
             '<td>JANEIRO A DEZEMBRO</td>'+ \
+            '<td>{0}</td>'.format(anoini) + \
+            '<td>{0}</td>'.format(anofin) + \
+            '<td>{0}</td>'.format(anoini) + \
+            '<td>{0}</td>'.format(anofin) + \
+            '<td>{0}</td>'.format(anoini) + \
+            '<td>{0}</td>'.format(anofin) + \
             '<td>{0}</td>'.format(anoini) + \
             '<td>{0}</td>'.format(anofin) + \
             '<td>{0}</td>'.format(anoini) + \
@@ -623,6 +685,13 @@ def zeralinha():
     totlinha[23] = 0
     totlinha[24] = 0
     totlinha[25] = 0
+
+    totlinha[26] = 0
+    totlinha[27] = 0
+    totlinha[28] = 0
+    totlinha[29] = 0
+    totlinha[30] = 0
+    totlinha[31] = 0
 
 def somalinha(linha):
     totlinha[2] += linha[2]
@@ -680,6 +749,12 @@ def totalgrupo():
             '<td>' + str(totlinha[25])+'</td>' + \
             '<td></td>' + \
             '<td></td>' + \
+            '<td></td>' + \
+            '<td></td>' + \
+            '<td></td>' + \
+            '<td></td>' + \
+            '<td></td>' + \
+            '<td></td>' + \
             '</tr>'
     gravalinha(linha)
 
@@ -705,7 +780,7 @@ def relatorio(anoini, anofin):
                     border-spacing: 1px;
                 }
                 body {
-                width: 2500px;
+                width: 3000px;
                 margin: 0 auto;
                 }
                 </style>
@@ -725,6 +800,16 @@ def relatorio(anoini, anofin):
     # Dias Uteis
     dados = diasuteis(anoini, anofin)
     for row in dados:
+
+        somaini =   row[2] + row[4] + row[6] + row[8] + row[10] + row[12] + \
+                    row[14] + row[16] + row[18] + row[20] + row[22] + row[24]
+
+        somafin =   row[3] + row[5] + row[7] + row[9] + row[11] + row[13] + \
+                    row[15] + row[17] + row[19] + row[21] + row[23] + row[25]
+
+        mediaini    =   somaini / 6
+        mediafin    =   somafin / 6
+
         linha = '<tr>' + \
                 '<td></td>' + \
                 '<td align="left"> Dias Uteis </td>' + \
@@ -752,6 +837,12 @@ def relatorio(anoini, anofin):
                 '<td>' + str(row[23])+'</td>' + \
                 '<td>' + str(row[24])+'</td>' + \
                 '<td>' + str(row[25])+'</td>' + \
+                '<td>' + str(somaini)+'</td>' + \
+                '<td>' + str(somafin)+'</td>' + \
+                '<td>' + str(mediaini)+'</td>' + \
+                '<td>' + str(mediafin)+'</td>' + \
+                '<td>100%</td>' + \
+                '<td>100%</td>' + \
                 '<td></td>' + \
                 '<td></td>' + \
                 '</tr>'
@@ -801,6 +892,12 @@ def relatorio(anoini, anofin):
                 '<td>' + str(moeda(row[25]))+'</td>' + \
                 '<td>' + str(moeda(somaini))+'</td>' + \
                 '<td>' + str(moeda(somafin))+'</td>' + \
+                '<td></td>' + \
+                '<td></td>' + \
+                '<td></td>' + \
+                '<td></td>' + \
+                '<td></td>' + \
+                '<td></td>' + \
                 '</tr>'
 
         if  contalinha  ==  4:
