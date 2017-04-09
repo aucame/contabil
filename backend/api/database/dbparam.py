@@ -1,4 +1,4 @@
-import json
+import simplejson as json
 import codecs
 from configuration import database
 from datetime import date, timedelta
@@ -40,6 +40,7 @@ class MySqlQuery():
         result = []
 
         data = self.execute(banco, query)
+
         for value in data:
             result.append({
                 'idparam': value['idparam'], 
@@ -48,7 +49,8 @@ class MySqlQuery():
                 'idempresa': value['idempresa'],
                 'diasuteis': value['diasuteis'],
                 'meddiafat': value['meddiafat'],
-                'paramostra': value['paramostra']
+                'paramostra': value['paramostra'],
+                'fatamostra': json.dumps(value['fatamostra'])
                 })
     
         retorno = {'cadparam': result}
@@ -59,14 +61,15 @@ class MySqlQuery():
 
         novo = self.proximo_codigo()
 
-        query = 'insert into {0}.{1}(idparam, mes, ano, idempresa, diasuteis, meddiafat, paramostra) values ({2}, {3}, {4}, {5}, {6}, {7}, {8})'.format(banco, tb_banco, 
+        query = 'insert into {0}.{1}(idparam, mes, ano, idempresa, diasuteis, meddiafat, paramostra, fatamostra) values ({2}, {3}, {4}, {5}, {6}, {7}, {8}, {9})'.format(banco, tb_banco, 
             novo, 
             reg['mes'], 
             reg['ano'], 
             reg['idempresa'],
             reg['diasuteis'],
             reg['meddiafat'],
-            reg['paramostra']
+            reg['paramostra'],
+            reg['fatamostra']
             )
 
         retorno = self.execute(banco, query)
@@ -94,13 +97,14 @@ class MySqlQuery():
 
     def altera_registro(self, data):
         reg = json.loads(data)
-        query = 'update {0}.{1} set mes = {3}, ano = {4}, idempresa={5}, diasuteis={6}, meddiafat={7}, paramostra={8} where idparam = {2}'.format(banco, tb_banco, 
+        query = 'update {0}.{1} set mes = {3}, ano = {4}, idempresa={5}, diasuteis={6}, meddiafat={7}, paramostra={8}, fatamostra={9} where idparam = {2}'.format(banco, tb_banco, 
             reg['idparam'],
             reg['mes'],
             reg['ano'],
             reg['idempresa'],
             reg['diasuteis'],
             reg['meddiafat'],
-            reg['paramostra']
+            reg['paramostra'],
+            reg['fatamostra']
             )
         retorno = self.execute(banco, query)
