@@ -202,7 +202,7 @@ def buscaDados(anoini, anofin):
     return  cursor
 
 def diasuteis(anoini, anofin):
-    connection = MySQLdb.connect (host=ipservidor, user=usuario, passwd=senha, db=banco)
+    connection = MySQLdb.connect (host=ipservidor, user=usuario, passwd=senha, db=banco, charset="utf8", use_unicode = True)
 
     query = '''
         select 'a', 'b',
@@ -387,6 +387,54 @@ def diasuteis(anoini, anofin):
     connection.close()
 
     return  cursor
+
+def somagrupo(grupoplano,anoini,anofin):
+    connection = MySQLdb.connect (host=ipservidor, user=usuario, passwd=senha, db=banco, charset="utf8", use_unicode = True)
+
+    query = '''
+         select a.codigo, b.ano, b.mes, b.valor 
+           from dbContabil.cadplano a,
+                dbContabil.cadlancamento b
+          where a.grupoplano = '{0}'
+            and b.idplano    = a.codigo
+            and b.ano in ({1}, {2})
+            and b.mes in (1,2,3,4,5,6,7,8,9,10,11,12)
+            order by b.ano, b.mes, a.codigo
+            '''
+    query = query.format(grupoplano, anoini, anofin)
+
+    cursor = connection.cursor()
+    cursor.execute(query)
+
+    zeralinha()
+
+    print 'passei'
+
+    for linha in cursor:
+        if  linha[1] == anoini:
+            if  linha[2] == 1:
+                totlinha[2] = totlinha[2] + linha[3]
+        if  linha[1] == anoini:
+            if  linha[2] == 2:
+                totlinha[4] = totlinha[4] + linha[3]
+        if  linha[1] == anoini:
+            if  linha[2] == 3:
+                totlinha[6] = totlinha[6] + linha[3]
+
+        if  linha[1] == anofin:
+            if  linha[2] == 1:
+                totlinha[3] = totlinha[3] + linha[3]
+        if  linha[1] == anofin:
+            if  linha[2] == 2:
+                totlinha[5] = totlinha[5] + linha[3]
+        if  linha[1] == anofin:
+            if  linha[2] == 3:
+                totlinha[7] = totlinha[7] + linha[3]
+
+    totalgrupo()
+
+    cursor.close()
+    connection.close()
 
 def linhabranca():
     linha = '<tr>'          +   \
@@ -710,9 +758,11 @@ def relatorio(anoini, anofin):
         gravalinha(linha)
 
     dados = buscaDados(anoini, anofin)
+    contalinha = 0
+
     for row in dados:
 
-        # print row
+        contalinha = contalinha + 1
 
         somaini =   float(row[2])  + float(row[4])  + float(row[6])  + float(row[8])  + \
                     float(row[10]) + float(row[12]) + float(row[14]) + float(row[16]) + \
@@ -753,23 +803,31 @@ def relatorio(anoini, anofin):
                 '<td>' + str(moeda(somafin))+'</td>' + \
                 '</tr>'
 
+        if  contalinha  ==  4:
+            somagrupo('00001', anoini, anofin)
+
         if  wgrupoplano ==  '':
             wgrupoplano =   row[26]
             somalinha(row)
         else:
             if  wgrupoplano <> row[26]:
                 wgrupoplano =  row[26]
-                totalgrupo()
+                # totalgrupo()
                 linhabranca()
                 somalinha(row)
             else:
                 somalinha(row)
+
+        # print str(contalinha) + ' ... ' + wgrupoplano
+
+        # if  contalinha  ==  15:
+        #     somagrupo(wgrupoplano, anoini, anofin)
                
 
         linha = linha.encode('utf-8')
         gravalinha(linha)
 
-    totalgrupo()
+    # totalgrupo()
 
     gravalinha('</table>')
     gravalinha('</body>')
