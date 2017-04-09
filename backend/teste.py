@@ -2,7 +2,7 @@
 
 import MySQLdb
 from sqlalchemy import create_engine
-
+from datetime import datetime
 
 ipservidor  = "127.0.0.1" # LOCAL
 # ipservidor = "200.98.174.103" # UOLHOST
@@ -930,6 +930,10 @@ def relatorio(anoini, anofin):
     gravalinha('</body>')
     gravalinha('</html>')
 
+print   datetime.now()
+
 file = open('pdf.html','a')
 relatorio(2016,2015)
 file.close()
+
+print   datetime.now()

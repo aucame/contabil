@@ -81,6 +81,11 @@ def regravaParametro(idparam, mes, ano, idempresa, diasuteis, meddiafat, paramos
         query   =   'update dbContabil.cadparam set paramostra = ' + str(paramostra) + ' where mes = ' + str(mes) + ' and ano = ' + str(ano) + ' and idempresa = ' + str(idempresa)
         cursor.execute(query)
 
+def gravaParametro2(idparam, mes, ano, idempresa, diasuteis, meddiafat, fatamostra):
+    if  fatamostra > 0:
+        query   =   'update dbContabil.cadparam set fatamostra = ' + str(fatamostra) + ' where mes = ' + str(mes) + ' and ano = ' + str(ano) + ' and idempresa = ' + str(idempresa)
+        cursor.execute(query)
+
 # Open the workbook and define the worksheet
 book = xlrd.open_workbook("DRE2016X2015.xls")
 
@@ -372,6 +377,32 @@ for r in range(1, sheet.nrows):
         regravaParametro(0, 11, 2015, 1, 0, 0, round(valor112,0))
         regravaParametro(0, 12, 2016, 1, 0, 0, round(valor121,0))
         regravaParametro(0, 12, 2015, 1, 0, 0, round(valor122,0))
+
+    if  contalinha == 17:
+        gravaParametro2(0, 1, 2016, 1, 0, 0, round(valor,0))
+        gravaParametro2(0, 1, 2015, 1, 0, 0, round(valor2,0))
+        gravaParametro2(0, 2, 2016, 1, 0, 0, round(valor3,0))
+        gravaParametro2(0, 2, 2015, 1, 0, 0, round(valor4,0))
+        gravaParametro2(0, 3, 2016, 1, 0, 0, round(valor5,0))
+        gravaParametro2(0, 3, 2015, 1, 0, 0, round(valor6,0))
+        gravaParametro2(0, 4, 2016, 1, 0, 0, round(valor041,0))
+        gravaParametro2(0, 4, 2015, 1, 0, 0, round(valor042,0))
+        gravaParametro2(0, 5, 2016, 1, 0, 0, round(valor051,0))
+        gravaParametro2(0, 5, 2015, 1, 0, 0, round(valor052,0))
+        gravaParametro2(0, 6, 2016, 1, 0, 0, round(valor061,0))
+        gravaParametro2(0, 6, 2015, 1, 0, 0, round(valor062,0))
+        gravaParametro2(0, 7, 2016, 1, 0, 0, round(valor071,0))
+        gravaParametro2(0, 7, 2015, 1, 0, 0, round(valor072,0))
+        gravaParametro2(0, 8, 2016, 1, 0, 0, round(valor081,0))
+        gravaParametro2(0, 8, 2015, 1, 0, 0, round(valor082,0))
+        gravaParametro2(0, 9, 2016, 1, 0, 0, round(valor091,0))
+        gravaParametro2(0, 9, 2015, 1, 0, 0, round(valor092,0))
+        gravaParametro2(0, 10, 2016, 1, 0, 0, round(valor101,0))
+        gravaParametro2(0, 10, 2015, 1, 0, 0, round(valor102,0))
+        gravaParametro2(0, 11, 2016, 1, 0, 0, round(valor111,0))
+        gravaParametro2(0, 11, 2015, 1, 0, 0, round(valor112,0))
+        gravaParametro2(0, 12, 2016, 1, 0, 0, round(valor121,0))
+        gravaParametro2(0, 12, 2015, 1, 0, 0, round(valor122,0))
 
 
     if  flag == 'S':
