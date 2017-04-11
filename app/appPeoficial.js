@@ -7,16 +7,12 @@ app.controller('ctlPeoficial', function($scope, $http, $location, $window, confi
 	$scope.linksite = config.linksite;
 
 	$scope.printPeoficial = function(){
-	//	$scope.relatorio();
-		//$window.setTimeout($scope.chama, 7000);
-//		$interval( function(){ $scope.chama(); }, 7000);
-	};
+		$scope.param = angular.toJson($scope.parametro);
+		$scope.relatorio();
 
-//	$scope.chama = function () {
-//		console.log("Relatorio gerado...");
-//		$scope.site = $scope.linksite + 'backend/pdf.html';
-//		window.open($scope.site);		
-//	};
+		$scope.site = $scope.linksite + 'backend/api/pdf.html';
+		window.open($scope.site);		
+	};
 
     // $scope.meses =	[
 	// 				{mes: "Selecione", numero: 00 },
@@ -34,13 +30,10 @@ app.controller('ctlPeoficial', function($scope, $http, $location, $window, confi
 	// 				{mes: "Dezembro", numero: 12}
     // 				];
 
-	// $scope.parametro = { 
-	// 	'idparam': undefined, 
-	// 	'mes':  0,
-	// 	'ano': undefined, 
-	// 	'idempresa': undefined,
-	// 	'diasuteis': undefined
-	// };
+	 $scope.parametro = { 
+	 	'anoini': 0, 
+	 	'anofin': 0
+	 };
 
     // $scope.options = $scope.meses;
     // $scope.selectedOption = $scope.options[0];
@@ -139,15 +132,15 @@ app.controller('ctlPeoficial', function($scope, $http, $location, $window, confi
 	$scope.relatorio = function() {
 		$http({
 			method: 	"GET",
-			url: 		$scope.linkapi + "/relatorios/peoficial",
+			url: 		$scope.linkapi + "/relatorios/peoficial/" + $scope.param,
 			headers: {
 			'Content-Type': 'application/json'
 			}
 		}).then(function(response){
-			console.log(respose.data);
+			//console.log(respose.data);
 			// $scope.gridOptions.data = response.data.cadparam;
 		}, function(error){
-			console.log("Error... = " + error.status);
+			//console.log("Error... = " + error.status);
 		});
 	};
 

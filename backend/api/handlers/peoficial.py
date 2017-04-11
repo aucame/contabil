@@ -12,7 +12,8 @@ class Handler(tornado.web.RequestHandler):
 
     def get(self,id):
         param = json.loads(id)
-        dbpeoficial.relatorio(param['anoini'], param['anofin'])
+        print param
+        dbpeoficial.relatorio(int(param['anoini']), int(param['anofin']))
         self.write('OK')
 
     # def get(self, id):
@@ -20,11 +21,12 @@ class Handler(tornado.web.RequestHandler):
     #     result = db_execute.get_registro(id)
     #     self.write(result)
 
-    # def post(self, id):
-    #     data = self.request.body
-    #     db_execute = dbparam.MySqlQuery()
-    #     result = db_execute.cria_registro(data)
-    #     self.write(data)
+    def post(self, id):
+        data = self.request.body
+        print data
+    #    db_execute = dbparam.MySqlQuery()
+    #    result = db_execute.cria_registro(data)
+        self.write(data)
 
     # def put(self, id):
     #     data = self.request.body
