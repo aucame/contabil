@@ -12,24 +12,178 @@ usuario     = "root"
 senha       = "123456"
 banco       = "dbContabil"
 
-file = open('pdf.html','w')
+caminho     = 'pdf.html'
 
 totlinha    =   [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
 
 def moeda(valor):
-    # if valor != None:
-    #     import locale
-    #     locale.setlocale( locale.LC_ALL, '' )
-    #     return locale.currency( valor, grouping=True )
-    # return ''
+#    valor = 'R${:0,.2f}'.format(valor)
+    valor = '{:0,.2f}'.format(valor)
+    valor = valor.replace('.',';')
+    valor = valor.replace(',','.')
+    valor = valor.replace(';',',')
     return valor
 
+def abrearquivo():
+    file = open(caminho,'a')
+    return file
+
 def limpaarquivo():
-    file = open('pdf.html','w')
+    file = open(caminho,'w')
     file.close()
 
-def gravalinha(linha):
+def gravalinha(file, linha):
     file.write(linha+'\n')
+
+def buscaamostrafat(file, anoini, anofin):
+    connection = MySQLdb.connect (host=ipservidor, user=usuario, passwd=senha, db=banco, charset="utf8", use_unicode = True)
+
+    query = '''
+          SELECT a.idparam, a.ano, a.mes, ifnull(a.fatamostra,0) 
+            FROM dbContabil.cadparam a
+           where a.ano in ({0},{1})
+		     and a.mes in (1,2,3,4,5,6,7,8,9,10,11,12)           
+        order by a.ano, a.mes
+    '''
+    query = query.format(anoini, anofin)
+
+    zeralinha()
+
+    cursor = connection.cursor()
+    cursor.execute(query)
+
+    for linha in cursor:
+        if  linha[1] == anoini:
+            if  linha[2] == 1:
+                totlinha[2] = totlinha[2] + linha[3]
+            if  linha[2] == 2:
+                totlinha[4] = totlinha[4] + linha[3]
+            if  linha[2] == 3:
+                totlinha[6] = totlinha[6] + linha[3]
+            if  linha[2] == 4:
+                totlinha[8] = totlinha[8] + linha[3]
+            if  linha[2] == 5:
+                totlinha[10] = totlinha[10] + linha[3]
+            if  linha[2] == 6:
+                totlinha[12] = totlinha[12] + linha[3]
+            if  linha[2] == 7:
+                totlinha[14] = totlinha[14] + linha[3]
+            if  linha[2] == 8:
+                totlinha[16] = totlinha[16] + linha[3]
+            if  linha[2] == 9:
+                totlinha[18] = totlinha[18] + linha[3]
+            if  linha[2] == 10:
+                totlinha[20] = totlinha[20] + linha[3]
+            if  linha[2] == 11:
+                totlinha[22] = totlinha[22] + linha[3]
+            if  linha[2] == 12:
+                totlinha[24] = totlinha[24] + linha[3]
+
+        if  linha[1] == anofin:
+            if  linha[2] == 1:
+                totlinha[3] = totlinha[3] + linha[3]
+            if  linha[2] == 2:
+                totlinha[5] = totlinha[5] + linha[3]
+            if  linha[2] == 3:
+                totlinha[7] = totlinha[7] + linha[3]
+            if  linha[2] == 4:
+                totlinha[9] = totlinha[9] + linha[3]
+            if  linha[2] == 5:
+                totlinha[11] = totlinha[11] + linha[3]
+            if  linha[2] == 6:
+                totlinha[13] = totlinha[13] + linha[3]
+            if  linha[2] == 7:
+                totlinha[15] = totlinha[15] + linha[3]
+            if  linha[2] == 8:
+                totlinha[17] = totlinha[17] + linha[3]
+            if  linha[2] == 9:
+                totlinha[19] = totlinha[19] + linha[3]
+            if  linha[2] == 10:
+                totlinha[21] = totlinha[21] + linha[3]
+            if  linha[2] == 11:
+                totlinha[23] = totlinha[23] + linha[3]
+            if  linha[2] == 12:
+                totlinha[25] = totlinha[25] + linha[3]
+
+    cursor.close()
+    connection.close()
+
+    totalgrupo(file)    
+
+def buscaamostrapar(file, anoini, anofin):
+    connection = MySQLdb.connect (host=ipservidor, user=usuario, passwd=senha, db=banco, charset="utf8", use_unicode = True)
+
+    query = '''
+          SELECT a.idparam, a.ano, a.mes, ifnull(a.paramostra,0) 
+            FROM dbContabil.cadparam a
+           where a.ano in ({0},{1})
+		     and a.mes in (1,2,3,4,5,6,7,8,9,10,11,12)           
+        order by a.ano, a.mes
+    '''
+    query = query.format(anoini, anofin)
+
+    zeralinha()
+
+    cursor = connection.cursor()
+    cursor.execute(query)
+
+    for linha in cursor:
+        if  linha[1] == anoini:
+            if  linha[2] == 1:
+                totlinha[2] = totlinha[2] + linha[3]
+            if  linha[2] == 2:
+                totlinha[4] = totlinha[4] + linha[3]
+            if  linha[2] == 3:
+                totlinha[6] = totlinha[6] + linha[3]
+            if  linha[2] == 4:
+                totlinha[8] = totlinha[8] + linha[3]
+            if  linha[2] == 5:
+                totlinha[10] = totlinha[10] + linha[3]
+            if  linha[2] == 6:
+                totlinha[12] = totlinha[12] + linha[3]
+            if  linha[2] == 7:
+                totlinha[14] = totlinha[14] + linha[3]
+            if  linha[2] == 8:
+                totlinha[16] = totlinha[16] + linha[3]
+            if  linha[2] == 9:
+                totlinha[18] = totlinha[18] + linha[3]
+            if  linha[2] == 10:
+                totlinha[20] = totlinha[20] + linha[3]
+            if  linha[2] == 11:
+                totlinha[22] = totlinha[22] + linha[3]
+            if  linha[2] == 12:
+                totlinha[24] = totlinha[24] + linha[3]
+
+        if  linha[1] == anofin:
+            if  linha[2] == 1:
+                totlinha[3] = totlinha[3] + linha[3]
+            if  linha[2] == 2:
+                totlinha[5] = totlinha[5] + linha[3]
+            if  linha[2] == 3:
+                totlinha[7] = totlinha[7] + linha[3]
+            if  linha[2] == 4:
+                totlinha[9] = totlinha[9] + linha[3]
+            if  linha[2] == 5:
+                totlinha[11] = totlinha[11] + linha[3]
+            if  linha[2] == 6:
+                totlinha[13] = totlinha[13] + linha[3]
+            if  linha[2] == 7:
+                totlinha[15] = totlinha[15] + linha[3]
+            if  linha[2] == 8:
+                totlinha[17] = totlinha[17] + linha[3]
+            if  linha[2] == 9:
+                totlinha[19] = totlinha[19] + linha[3]
+            if  linha[2] == 10:
+                totlinha[21] = totlinha[21] + linha[3]
+            if  linha[2] == 11:
+                totlinha[23] = totlinha[23] + linha[3]
+            if  linha[2] == 12:
+                totlinha[25] = totlinha[25] + linha[3]
+
+    cursor.close()
+    connection.close()
+
+    totalgrupo(file)    
 
 def buscaDados(anoini, anofin):
     # Establish a MySQL Connection
@@ -192,9 +346,6 @@ def buscaDados(anoini, anofin):
 
     query = query.format(anoini, anofin)
 
-    # print query
-
-    # result = connection.execute(query)
     cursor = connection.cursor()
     cursor.execute(query)
 
@@ -390,7 +541,7 @@ def diasuteis(anoini, anofin):
 
     return  cursor
 
-def somagrupo(grupoplano,anoini,anofin):
+def somagrupo(file,grupoplano,anoini,anofin):
     connection = MySQLdb.connect (host=ipservidor, user=usuario, passwd=senha, db=banco, charset="utf8", use_unicode = True)
 
     query = '''
@@ -409,8 +560,6 @@ def somagrupo(grupoplano,anoini,anofin):
     cursor.execute(query)
 
     zeralinha()
-
-    print 'passei'
 
     for linha in cursor:
         if  linha[1] == anoini:
@@ -465,12 +614,12 @@ def somagrupo(grupoplano,anoini,anofin):
             if  linha[2] == 12:
                 totlinha[25] = totlinha[25] + linha[3]
 
-    totalgrupo()
+    totalgrupo(file)
 
     cursor.close()
     connection.close()
 
-def linhabranca():
+def linhabranca(file):
     linha = '<tr>'          +   \
             '<td>.</td>'     +   \
             '<td></td>'     +   \
@@ -507,9 +656,9 @@ def linhabranca():
             '<td></td>'     +   \
             '<td></td>'     +   \
             '</tr>'
-    gravalinha(linha)
+    gravalinha(file,linha)
 
-def cabecalho(anoini, anofin):
+def cabecalho(file, anoini, anofin):
     linha = '<tr>'+ \
             '<th></th>'     +   \
             '<th width = "400px">D.R.E. {0} X {1}</th>'.format(anoini, anofin) + \
@@ -546,7 +695,7 @@ def cabecalho(anoini, anofin):
             '<th></th>'+ \
             '<th></th>'+ \
             '</tr>'
-    gravalinha(linha)
+    gravalinha(file, linha)
 
     linha = '<tr>'+ \
             '<td></td>'+ \
@@ -584,7 +733,7 @@ def cabecalho(anoini, anofin):
             '<td></td>'+ \
             '<td></td>'+ \
             '</tr>'
-    gravalinha(linha)
+    gravalinha(file, linha)
 
     linha = '<tr>'+ \
             '<td></td>'+ \
@@ -622,7 +771,7 @@ def cabecalho(anoini, anofin):
             '<td>CUSTO P/PAR</td>'+ \
             '<td>CUSTO P/PAR</td>'+ \
             '</tr>'
-    gravalinha(linha)
+    gravalinha(file, linha)
 
     linha = '<tr>'+ \
             '<td>CONTABIL</td>'+ \
@@ -660,7 +809,7 @@ def cabecalho(anoini, anofin):
             '<td>{0}</td>'.format(anoini) + \
             '<td>{0}</td>'.format(anofin) + \
             '</tr>'
-    gravalinha(linha)
+    gravalinha(file, linha)
 
 def zeralinha():
     totlinha[2]  = 0
@@ -721,34 +870,34 @@ def somalinha(linha):
     totlinha[24] += linha[24]
     totlinha[25] += linha[25]
 
-def totalgrupo():
+def totalgrupo(file):
     linha = '<tr>' + \
             '<td></td>' + \
             '<td></td>' + \
-            '<td>' + str(totlinha[2])+'</td>' + \
-            '<td>' + str(totlinha[3])+'</td>' + \
-            '<td>' + str(totlinha[4])+'</td>' + \
-            '<td>' + str(totlinha[5])+'</td>' + \
-            '<td>' + str(totlinha[6])+'</td>' + \
-            '<td>' + str(totlinha[7])+'</td>' + \
-            '<td>' + str(totlinha[8])+'</td>' + \
-            '<td>' + str(totlinha[9])+'</td>' + \
-            '<td>' + str(totlinha[10])+'</td>' + \
-            '<td>' + str(totlinha[11])+'</td>' + \
-            '<td>' + str(totlinha[12])+'</td>' + \
-            '<td>' + str(totlinha[13])+'</td>' + \
-            '<td>' + str(totlinha[14])+'</td>' + \
-            '<td>' + str(totlinha[15])+'</td>' + \
-            '<td>' + str(totlinha[16])+'</td>' + \
-            '<td>' + str(totlinha[17])+'</td>' + \
-            '<td>' + str(totlinha[18])+'</td>' + \
-            '<td>' + str(totlinha[19])+'</td>' + \
-            '<td>' + str(totlinha[20])+'</td>' + \
-            '<td>' + str(totlinha[21])+'</td>' + \
-            '<td>' + str(totlinha[22])+'</td>' + \
-            '<td>' + str(totlinha[23])+'</td>' + \
-            '<td>' + str(totlinha[24])+'</td>' + \
-            '<td>' + str(totlinha[25])+'</td>' + \
+            '<td>' + str(moeda(totlinha[2]))+'</td>' + \
+            '<td>' + str(moeda(totlinha[3]))+'</td>' + \
+            '<td>' + str(moeda(totlinha[4]))+'</td>' + \
+            '<td>' + str(moeda(totlinha[5]))+'</td>' + \
+            '<td>' + str(moeda(totlinha[6]))+'</td>' + \
+            '<td>' + str(moeda(totlinha[7]))+'</td>' + \
+            '<td>' + str(moeda(totlinha[8]))+'</td>' + \
+            '<td>' + str(moeda(totlinha[9]))+'</td>' + \
+            '<td>' + str(moeda(totlinha[10]))+'</td>' + \
+            '<td>' + str(moeda(totlinha[11]))+'</td>' + \
+            '<td>' + str(moeda(totlinha[12]))+'</td>' + \
+            '<td>' + str(moeda(totlinha[13]))+'</td>' + \
+            '<td>' + str(moeda(totlinha[14]))+'</td>' + \
+            '<td>' + str(moeda(totlinha[15]))+'</td>' + \
+            '<td>' + str(moeda(totlinha[16]))+'</td>' + \
+            '<td>' + str(moeda(totlinha[17]))+'</td>' + \
+            '<td>' + str(moeda(totlinha[18]))+'</td>' + \
+            '<td>' + str(moeda(totlinha[19]))+'</td>' + \
+            '<td>' + str(moeda(totlinha[20]))+'</td>' + \
+            '<td>' + str(moeda(totlinha[21]))+'</td>' + \
+            '<td>' + str(moeda(totlinha[22]))+'</td>' + \
+            '<td>' + str(moeda(totlinha[23]))+'</td>' + \
+            '<td>' + str(moeda(totlinha[24]))+'</td>' + \
+            '<td>' + str(moeda(totlinha[25]))+'</td>' + \
             '<td></td>' + \
             '<td></td>' + \
             '<td></td>' + \
@@ -758,44 +907,46 @@ def totalgrupo():
             '<td></td>' + \
             '<td></td>' + \
             '</tr>'
-    gravalinha(linha)
+    gravalinha(file, linha)
 
     zeralinha()
 
 def relatorio(anoini, anofin):
     limpaarquivo()
 
-    gravalinha('<!DOCTYPE html>')
-    gravalinha('<html>')
-    gravalinha('<head>')
-    gravalinha('<meta charset="UTF-8">')
-    gravalinha('<title>D.R.E </title>')
+    file = abrearquivo()
+
+    gravalinha(file, '<!DOCTYPE html>')
+    gravalinha(file, '<html>')
+    gravalinha(file, '<head>')
+    gravalinha(file, '<meta charset="UTF-8">')
+    gravalinha(file, '<title>D.R.E </title>')
 
     linha   =   '''
                 <style>
                 table, th, td {
                     border: 1px solid black;
-                    padding: 1px;
+                    padding: 0px;
                     text-align: right;
                 }
                 table {
-                    border-spacing: 1px;
+                    border-spacing: 0px;
                 }
                 body {
-                width: 3000px;
+                width: 4000px;
                 margin: 0 auto;
                 }
                 </style>
                 '''
-    gravalinha(linha)
+    gravalinha(file, linha)
 
-    gravalinha('</head>')
-    gravalinha('<body>')
-    gravalinha('<table>')
+    gravalinha(file, '</head>')
+    gravalinha(file, '<body>')
+    gravalinha(file, '<table>')
 
-    cabecalho(anoini, anofin)
+    cabecalho(file, anoini, anofin)
 
-    linhabranca()
+    linhabranca(file)
 
     wgrupoplano = ''
 
@@ -848,7 +999,7 @@ def relatorio(anoini, anofin):
                 '<td></td>' + \
                 '<td></td>' + \
                 '</tr>'
-        gravalinha(linha)
+        gravalinha(file, linha)
 
     dados = buscaDados(anoini, anofin)
     contalinha = 0
@@ -867,7 +1018,7 @@ def relatorio(anoini, anofin):
 
         linha = '<tr>' + \
                 '<td>' + str(row[0])+'</td>' + \
-                '<td align="left">' + row[1] +'</td>' + \
+                '<td align="right">' + row[1] +'</td>' + \
                 '<td>' + str(moeda(row[2]))+'</td>' + \
                 '<td>' + str(moeda(row[3]))+'</td>' + \
                 '<td>' + str(moeda(row[4]))+'</td>' + \
@@ -902,39 +1053,28 @@ def relatorio(anoini, anofin):
                 '<td></td>' + \
                 '</tr>'
 
-#        if  contalinha  ==  4:
-#            somagrupo('00001', anoini, anofin)
-
         if  wgrupoplano ==  '':
             wgrupoplano =   row[26]
             somalinha(row)
         else:
             if  wgrupoplano <> row[26]:
-                somagrupo(wgrupoplano, anoini, anofin)
+                somagrupo(file, wgrupoplano, anoini, anofin)
                 wgrupoplano =  row[26]
-                # totalgrupo()
-                linhabranca()
+                linhabranca(file)
                 somalinha(row)
             else:
                 somalinha(row)
 
-        # print str(contalinha) + ' ... ' + wgrupoplano
-
-        # if  contalinha  ==  15:
-        #     somagrupo(wgrupoplano, anoini, anofin)
-               
-
         linha = linha.encode('utf-8')
-        gravalinha(linha)
+        gravalinha(file, linha)
 
-    # totalgrupo()
+    somagrupo(file, wgrupoplano, anoini, anofin)
 
-    gravalinha('</table>')
-    gravalinha('</body>')
-    gravalinha('</html>')
+    buscaamostrafat(file, anoini, anofin)
+    buscaamostrapar(file, anoini, anofin)
+
+    gravalinha(file, '</table>')
+    gravalinha(file, '</body>')
+    gravalinha(file, '</html>')
 
     file.close()
-
-#print   datetime.now()
-#relatorio(2016,2015)
-#print   datetime.now()

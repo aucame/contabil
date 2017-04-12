@@ -12,6 +12,8 @@ usuario     = "root"
 senha       = "123456"
 banco       = "dbContabil"
 
+caminho     = 'pdf.html'
+
 totlinha    =   [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
 
 def moeda(valor):
@@ -22,14 +24,18 @@ def moeda(valor):
     valor = valor.replace(';',',')
     return valor
 
+def abrearquivo():
+    file = open(caminho,'a')
+    return file
+
 def limpaarquivo():
-    file = open('pdf.html','w')
+    file = open(caminho,'w')
     file.close()
 
-def gravalinha(linha):
+def gravalinha(file, linha):
     file.write(linha+'\n')
 
-def buscaamostrafat(anoini, anofin):
+def buscaamostrafat(file, anoini, anofin):
     connection = MySQLdb.connect (host=ipservidor, user=usuario, passwd=senha, db=banco, charset="utf8", use_unicode = True)
 
     query = '''
@@ -102,9 +108,9 @@ def buscaamostrafat(anoini, anofin):
     cursor.close()
     connection.close()
 
-    totalgrupo()    
+    totalgrupo(file, 'FATURAMENTO DE AMOSTRAS - R$'.lower())    
 
-def buscaamostrapar(anoini, anofin):
+def buscaamostrapar(file, anoini, anofin):
     connection = MySQLdb.connect (host=ipservidor, user=usuario, passwd=senha, db=banco, charset="utf8", use_unicode = True)
 
     query = '''
@@ -177,7 +183,7 @@ def buscaamostrapar(anoini, anofin):
     cursor.close()
     connection.close()
 
-    totalgrupo()    
+    totalgrupo(file)    
 
 def buscaDados(anoini, anofin):
     # Establish a MySQL Connection
@@ -535,7 +541,7 @@ def diasuteis(anoini, anofin):
 
     return  cursor
 
-def somagrupo(grupoplano,anoini,anofin):
+def somagrupo(file,grupoplano,anoini,anofin):
     connection = MySQLdb.connect (host=ipservidor, user=usuario, passwd=senha, db=banco, charset="utf8", use_unicode = True)
 
     query = '''
@@ -608,12 +614,18 @@ def somagrupo(grupoplano,anoini,anofin):
             if  linha[2] == 12:
                 totlinha[25] = totlinha[25] + linha[3]
 
-    totalgrupo()
+    msg = ''
+    if  grupoplano == '00001':
+        msg = 'SUB-TOTAL - VENDAS MERCADO INTERNO / EXTERNO'.lower()
+        # buscaamostrafat(file, anoini, anofin)
+
+
+    totalgrupo(file, msg)
 
     cursor.close()
     connection.close()
 
-def linhabranca():
+def linhabranca(file):
     linha = '<tr>'          +   \
             '<td>.</td>'     +   \
             '<td></td>'     +   \
@@ -650,9 +662,9 @@ def linhabranca():
             '<td></td>'     +   \
             '<td></td>'     +   \
             '</tr>'
-    gravalinha(linha)
+    gravalinha(file,linha)
 
-def cabecalho(anoini, anofin):
+def cabecalho(file, anoini, anofin):
     linha = '<tr>'+ \
             '<th></th>'     +   \
             '<th width = "400px">D.R.E. {0} X {1}</th>'.format(anoini, anofin) + \
@@ -689,7 +701,7 @@ def cabecalho(anoini, anofin):
             '<th></th>'+ \
             '<th></th>'+ \
             '</tr>'
-    gravalinha(linha)
+    gravalinha(file, linha)
 
     linha = '<tr>'+ \
             '<td></td>'+ \
@@ -727,7 +739,7 @@ def cabecalho(anoini, anofin):
             '<td></td>'+ \
             '<td></td>'+ \
             '</tr>'
-    gravalinha(linha)
+    gravalinha(file, linha)
 
     linha = '<tr>'+ \
             '<td></td>'+ \
@@ -765,7 +777,7 @@ def cabecalho(anoini, anofin):
             '<td>CUSTO P/PAR</td>'+ \
             '<td>CUSTO P/PAR</td>'+ \
             '</tr>'
-    gravalinha(linha)
+    gravalinha(file, linha)
 
     linha = '<tr>'+ \
             '<td>CONTABIL</td>'+ \
@@ -803,7 +815,7 @@ def cabecalho(anoini, anofin):
             '<td>{0}</td>'.format(anoini) + \
             '<td>{0}</td>'.format(anofin) + \
             '</tr>'
-    gravalinha(linha)
+    gravalinha(file, linha)
 
 def zeralinha():
     totlinha[2]  = 0
@@ -864,10 +876,10 @@ def somalinha(linha):
     totlinha[24] += linha[24]
     totlinha[25] += linha[25]
 
-def totalgrupo():
+def totalgrupo(file, msg = ''):
     linha = '<tr>' + \
             '<td></td>' + \
-            '<td></td>' + \
+            '<td>' + msg + '</td>' + \
             '<td>' + str(moeda(totlinha[2]))+'</td>' + \
             '<td>' + str(moeda(totlinha[3]))+'</td>' + \
             '<td>' + str(moeda(totlinha[4]))+'</td>' + \
@@ -901,18 +913,20 @@ def totalgrupo():
             '<td></td>' + \
             '<td></td>' + \
             '</tr>'
-    gravalinha(linha)
+    gravalinha(file, linha)
 
     zeralinha()
 
 def relatorio(anoini, anofin):
     limpaarquivo()
 
-    gravalinha('<!DOCTYPE html>')
-    gravalinha('<html>')
-    gravalinha('<head>')
-    gravalinha('<meta charset="UTF-8">')
-    gravalinha('<title>D.R.E </title>')
+    file = abrearquivo()
+
+    gravalinha(file, '<!DOCTYPE html>')
+    gravalinha(file, '<html>')
+    gravalinha(file, '<head>')
+    gravalinha(file, '<meta charset="UTF-8">')
+    gravalinha(file, '<title>D.R.E </title>')
 
     linha   =   '''
                 <style>
@@ -930,15 +944,15 @@ def relatorio(anoini, anofin):
                 }
                 </style>
                 '''
-    gravalinha(linha)
+    gravalinha(file, linha)
 
-    gravalinha('</head>')
-    gravalinha('<body>')
-    gravalinha('<table>')
+    gravalinha(file, '</head>')
+    gravalinha(file, '<body>')
+    gravalinha(file, '<table>')
 
-    cabecalho(anoini, anofin)
+    cabecalho(file, anoini, anofin)
 
-    linhabranca()
+    linhabranca(file)
 
     wgrupoplano = ''
 
@@ -991,7 +1005,7 @@ def relatorio(anoini, anofin):
                 '<td></td>' + \
                 '<td></td>' + \
                 '</tr>'
-        gravalinha(linha)
+        gravalinha(file, linha)
 
     dados = buscaDados(anoini, anofin)
     contalinha = 0
@@ -1045,45 +1059,32 @@ def relatorio(anoini, anofin):
                 '<td></td>' + \
                 '</tr>'
 
-#        if  contalinha  ==  4:
-#            somagrupo('00001', anoini, anofin)
-
         if  wgrupoplano ==  '':
             wgrupoplano =   row[26]
             somalinha(row)
         else:
             if  wgrupoplano <> row[26]:
-                somagrupo(wgrupoplano, anoini, anofin)
+                somagrupo(file, wgrupoplano, anoini, anofin)
                 wgrupoplano =  row[26]
-                # totalgrupo()
-                linhabranca()
+                linhabranca(file)
                 somalinha(row)
             else:
                 somalinha(row)
 
-        # print str(contalinha) + ' ... ' + wgrupoplano
-
-        # if  contalinha  ==  15:
-        #     somagrupo(wgrupoplano, anoini, anofin)
-               
-
         linha = linha.encode('utf-8')
-        gravalinha(linha)
+        gravalinha(file, linha)
 
-    somagrupo(wgrupoplano, anoini, anofin)
-    # totalgrupo()
+    somagrupo(file, wgrupoplano, anoini, anofin)
 
-    buscaamostrafat(anoini, anofin)
-    buscaamostrapar(anoini, anofin)
+    # buscaamostrafat(file, anoini, anofin)
+    buscaamostrapar(file, anoini, anofin)
 
-    gravalinha('</table>')
-    gravalinha('</body>')
-    gravalinha('</html>')
+    gravalinha(file, '</table>')
+    gravalinha(file, '</body>')
+    gravalinha(file, '</html>')
+
+    file.close()
 
 print   datetime.now()
-
-file = open('pdf.html','a')
 relatorio(2016,2015)
-file.close()
-
 print   datetime.now()
