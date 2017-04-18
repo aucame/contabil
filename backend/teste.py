@@ -615,9 +615,9 @@ def somagrupo(file,grupoplano,anoini,anofin):
                 totlinha[25] = totlinha[25] + linha[3]
 
     msg = ''
-    if  grupoplano == '00001':
-        msg = 'SUB-TOTAL - VENDAS MERCADO INTERNO / EXTERNO'.lower()
-        # buscaamostrafat(file, anoini, anofin)
+    # if  grupoplano == '00001':
+    #     msg = 'SUB-TOTAL - VENDAS MERCADO INTERNO / EXTERNO'.lower()
+    #     # buscaamostrafat(file, anoini, anofin)
 
 
     totalgrupo(file, msg)
@@ -971,7 +971,7 @@ def relatorio(anoini, anofin):
 
         linha = '<tr>' + \
                 '<td></td>' + \
-                '<td align="left"> Dias Uteis </td>' + \
+                '<td align="left"> DIAS ÚTEIS TRABALHADOS </td>' + \
                 '<td>' + str(row[2])+'</td>' + \
                 '<td>' + str(row[3])+'</td>' + \
                 '<td>' + str(row[4])+'</td>' + \
