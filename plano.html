@@ -52,6 +52,10 @@
 						<label for="tipocd">Debito/Credito</label>
 						<select class="form-control hint" data-ng-options="x.tipocd for x in options" data-ng-model="selectedOption"  id="tipocd" data-toggle="tooltip" title="Informe Debito/Credito"></select>					
 				</div>
+				<div class="form-group">
+						<label for="grupoplano">Grupo Plano</label>
+						<input type="text" maxlength="20" ng-model="plano.grupoplano" class="form-control hint" id="grupoplano" data-toggle="tooltip" title="Informe Grupo Plano" placeholder="Digite Grupo Plano">
+				</div>
 				
 				<br>
 				<button type="button" ng-click="novo()" class="btn btn-primary"><span class="glyphicon glyphicon-ok"></span> Novo</button>

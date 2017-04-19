@@ -10,7 +10,8 @@ app.controller('ctlPlano', function($scope, $http, $location, $window, config) {
 		'idplano': undefined, 
 		'codigo':  undefined,
 		'descricao': undefined, 
-		'tipocd': undefined
+		'tipocd': undefined,
+		'grupoplano': undefined
 	};
 
 	$scope.debcre = [
@@ -35,12 +36,13 @@ app.controller('ctlPlano', function($scope, $http, $location, $window, config) {
 			{ field: 'codigo', enableCellEdit: false, minWidth: 120, width: 250, displayName: 'Codigo' },
 			{ field: 'descricao', enableCellEdit: false, minWidth: 120, width: 300, displayName: 'Descrição' },
 			{ field: 'tipocd', enableCellEdit: false, minWidth: 120, width: 150, displayName: 'Tipo Deb/Cre' },
+			{ field: 'grupoplano', enableCellEdit: false, minWidth: 120, width: 150, displayName: 'Grupo Plano' },
 			{ name: 'Opções', enableCellEdit: false, width: 200,
 			cellTemplate:'<button class="btn btn-primary" ng-click="grid.appScope.editregistro(row)"><span class="glyphicon glyphicon-edit"></span> Editar</button>  <button class="btn btn-primary" ng-click="grid.appScope.delregistro(row)"><span class="glyphicon glyphicon-trash"></span> Deletar</button>'  }		
 		],
 
 		data: [ 
-			{ 'idplano': 0, 'codigo': 0, 'descricao': undefined, 'tipocd': undefined }
+			{ 'idplano': 0, 'codigo': 0, 'descricao': undefined, 'tipocd': undefined, 'grupoplano': undefined }
 		]
 
 	}; 			
@@ -62,7 +64,8 @@ app.controller('ctlPlano', function($scope, $http, $location, $window, config) {
 		'idplano': undefined, 
 		'codigo':  undefined,
 		'descricao': undefined, 
-		'tipocd': undefined
+		'tipocd': undefined,
+		'grupoplano': undefined
 		};
    	    $scope.selectedOption = $scope.options[0];
 	};
