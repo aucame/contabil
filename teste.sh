@@ -16,3 +16,11 @@
 
 # Deploy HTML
 # scp *.html *.png *.json *.txt *.css *.sh  root@200.98.174.103:/usr/share/nginx/html/contabil
+
+# Deploy Producao
+cd app
+scp appConfig.js root@200.98.174.103:/usr/share/nginx/html/contabil/app
+cd ..
+cd backend/api/configuration/properties
+scp contabil.properties root@200.98.174.103:/usr/share/nginx/html/contabil/backend/api/configuration/properties
+cd /usr/share/nginx/html/contabil
