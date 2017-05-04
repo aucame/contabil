@@ -10,7 +10,7 @@ def verificasetem(codigo, ipservidor, usuario, senha, banco):
     connection = engine.connect()
 
     flag = 'S'
-    while   (flag == 'S'):
+    while flag == 'S':
 
         codigo = montaCodigo(codigo)
         query = 'select * from dbContabil.cadplano where codigo = "' + codigo + '"'
@@ -38,21 +38,21 @@ def montaCodigo(registro):
 
     tipo, grupo, subgrupo, subgrp, numero = registro.split('.')
 
-    novo =  tipo.zfill(2) + '.' + \
-            grupo.zfill(2) + '.' + \
-            subgrupo.zfill(2) + '.' + \
-            subgrp.zfill(3) + '.' + \
-            numero.zfill(5)
+    novo = tipo.zfill(2) + '.' + \
+           grupo.zfill(2) + '.' + \
+           subgrupo.zfill(2) + '.' + \
+           subgrp.zfill(3) + '.' + \
+           numero.zfill(5)
 
     # print novo
 
     return novo
 
 def gravaPlano(contplano, registro, descri, tipocd, grupoplano):
-    
+
     tipo, grupo, subgrupo, subgrp, numero = registro.split('.')
 
-    registro =  montaCodigo(registro)
+    registro = montaCodigo(registro)
 
     # print registro
 
@@ -71,9 +71,9 @@ def gravaLancamento(idlancamento, ano, mes, idplano, valor, idcliente):
         idlancamento, ano, mes, idplano, valor, idcliente )
     cursor.execute(query)
 
-def gravaParametro(idparam, mes, ano, idempresa, diasuteis, meddiafat, paramostra):
-    query = 'insert into {0}.{1} (idparam, mes, ano, idempresa, diasuteis, meddiafat) values ({2}, {3}, {4}, "{5}", {6}, {7})'.format("dbContabil", "cadparam", 
-        idparam, mes, ano, idempresa, diasuteis, meddiafat, paramostra )
+def gravaParametro(idparam, mes, ano, idempresa, diasuteis, meddiafat, paramostra, fatamostra):
+    query = 'insert into {0}.{1} (idparam, mes, ano, idempresa, diasuteis, meddiafat, paramostra, fatamostra) values ({2}, {3}, {4}, "{5}", {6}, {7}, {8}, {9})'.format("dbContabil", "cadparam", 
+        idparam, mes, ano, idempresa, diasuteis, meddiafat, paramostra, fatamostra )
     cursor.execute(query)
 
 def regravaParametro(idparam, mes, ano, idempresa, diasuteis, meddiafat, paramostra):
@@ -96,12 +96,12 @@ sheet = book.sheet_by_name("DRE 2.016 X 2.015")
 ipservidor = "127.0.0.1" # LOCAL
 # ipservidor = "200.98.174.103" # UOLHOST
 
-usuario    = "root"
-senha      = "123456" # LOCAL
+usuario = "root"
+senha = "123456" # LOCAL
 # senha      = "lelo$321" # UOLHOST
-banco      = "dbContabil"
+banco = "dbContabil"
 
-database = MySQLdb.connect (host=ipservidor, user=usuario, passwd=senha, db=banco)
+database = MySQLdb.connect(host=ipservidor, user=usuario, passwd=senha, db=banco)
 
 # Get the cursor, which is used to traverse the database, line by line
 cursor = database.cursor()
@@ -109,10 +109,10 @@ cursor = database.cursor()
 query = 'truncate table dbContabil.cadplano'
 cursor.execute(query)
 
-query = 'truncate table dbContabil.cadlancamento' 
+query = 'truncate table dbContabil.cadlancamento'
 cursor.execute(query)
 
-query = 'truncate table dbContabil.cadparam' 
+query = 'truncate table dbContabil.cadparam'
 cursor.execute(query)
 
 idchave = 0
@@ -126,7 +126,7 @@ contparam = 0
 grupoplano = ''
 
 flag = 'S'
-valor  = 0.0
+valor = 0.0
 valor2 = 0.0
 valor3 = 0.0
 valor4 = 0.0
@@ -158,43 +158,42 @@ for r in range(1, sheet.nrows):
     flag = 'S'
     contalinha = contalinha + 1
 
-    codigo = sheet.cell(r,0).value
-    descri = sheet.cell(r,1).value
+    codigo = sheet.cell(r, 0).value
+    descri = sheet.cell(r, 1).value
 
-    valor  = sheet.cell(r,3).value
-    valor2 = sheet.cell(r,4).value
-    valor3 = sheet.cell(r,5).value
-    valor4 = sheet.cell(r,6).value
-    valor5 = sheet.cell(r,7).value
-    valor6 = sheet.cell(r,8).value
+    valor = sheet.cell(r, 3).value
+    valor2 = sheet.cell(r, 4).value
+    valor3 = sheet.cell(r, 5).value
+    valor4 = sheet.cell(r, 6).value
+    valor5 = sheet.cell(r, 7).value
+    valor6 = sheet.cell(r, 8).value
 
-    valor041 = sheet.cell(r,9).value
-    valor042 = sheet.cell(r,10).value
+    valor041 = sheet.cell(r, 9).value
+    valor042 = sheet.cell(r, 10).value
 
-    valor051 = sheet.cell(r,11).value
-    valor052 = sheet.cell(r,12).value
+    valor051 = sheet.cell(r, 11).value
+    valor052 = sheet.cell(r, 12).value
 
-    valor061 = sheet.cell(r,13).value
-    valor062 = sheet.cell(r,14).value
+    valor061 = sheet.cell(r, 13).value
+    valor062 = sheet.cell(r, 14).value
 
-    valor071 = sheet.cell(r,15).value
-    valor072 = sheet.cell(r,16).value
+    valor071 = sheet.cell(r, 15).value
+    valor072 = sheet.cell(r, 16).value
 
-    valor081 = sheet.cell(r,17).value
-    valor082 = sheet.cell(r,18).value
+    valor081 = sheet.cell(r, 17).value
+    valor082 = sheet.cell(r, 18).value
 
-    valor091 = sheet.cell(r,19).value
-    valor092 = sheet.cell(r,20).value
+    valor091 = sheet.cell(r, 19).value
+    valor092 = sheet.cell(r, 20).value
 
-    valor101 = sheet.cell(r,21).value
-    valor102 = sheet.cell(r,22).value
+    valor101 = sheet.cell(r, 21).value
+    valor102 = sheet.cell(r, 22).value
 
-    valor111 = sheet.cell(r,23).value
-    valor112 = sheet.cell(r,24).value
+    valor111 = sheet.cell(r, 23).value
+    valor112 = sheet.cell(r, 24).value
 
-    valor121 = sheet.cell(r,25).value
-    valor122 = sheet.cell(r,26).value
-
+    valor121 = sheet.cell(r, 25).value
+    valor122 = sheet.cell(r, 26).value
 
     registro = codigo[0:12]
 
@@ -290,119 +289,120 @@ for r in range(1, sheet.nrows):
         valor122 = float(valor122)
 
     if  contalinha == 9:
+        # idparam, mes, ano, idempresa, diasuteis, meddiafat, paramostra, fatamostra
 
         contparam = contparam + 1
-        gravaParametro(contparam, 1, 2016, 1, round(valor,0), 0, 0)
+        gravaParametro(contparam, 1, 2016, 1, round(valor, 0), 0, 0, 0)
         contparam = contparam + 1
-        gravaParametro(contparam, 1, 2015, 1, round(valor2,0), 0, 0)
+        gravaParametro(contparam, 1, 2015, 1, round(valor2, 0), 0, 0, 0)
 
         contparam = contparam + 1
-        gravaParametro(contparam, 2, 2016, 1, round(valor3,0), 0, 0)
+        gravaParametro(contparam, 2, 2016, 1, round(valor3, 0), 0, 0, 0)
         contparam = contparam + 1
-        gravaParametro(contparam, 2, 2015, 1, round(valor4,0), 0, 0)
+        gravaParametro(contparam, 2, 2015, 1, round(valor4, 0), 0, 0, 0)
 
         contparam = contparam + 1
-        gravaParametro(contparam, 3, 2016, 1, round(valor5,0), 0, 0)
+        gravaParametro(contparam, 3, 2016, 1, round(valor5, 0), 0, 0, 0)
         contparam = contparam + 1
-        gravaParametro(contparam, 3, 2015, 1, round(valor6,0), 0, 0)
+        gravaParametro(contparam, 3, 2015, 1, round(valor6, 0), 0, 0, 0)
 
         contparam = contparam + 1
-        gravaParametro(contparam, 4, 2016, 1, round(valor041,0), 0, 0)
+        gravaParametro(contparam, 4, 2016, 1, round(valor041, 0), 0, 0, 0)
         contparam = contparam + 1
-        gravaParametro(contparam, 4, 2015, 1, round(valor042,0), 0, 0)
+        gravaParametro(contparam, 4, 2015, 1, round(valor042, 0), 0, 0, 0)
 
         contparam = contparam + 1
-        gravaParametro(contparam, 5, 2016, 1, round(valor051,0), 0, 0)
+        gravaParametro(contparam, 5, 2016, 1, round(valor051, 0), 0, 0, 0)
         contparam = contparam + 1
-        gravaParametro(contparam, 5, 2015, 1, round(valor052,0), 0, 0)
+        gravaParametro(contparam, 5, 2015, 1, round(valor052, 0), 0, 0, 0)
 
         contparam = contparam + 1
-        gravaParametro(contparam, 6, 2016, 1, round(valor061,0), 0, 0)
+        gravaParametro(contparam, 6, 2016, 1, round(valor061, 0), 0, 0, 0)
         contparam = contparam + 1
-        gravaParametro(contparam, 6, 2015, 1, round(valor062,0), 0, 0)
+        gravaParametro(contparam, 6, 2015, 1, round(valor062, 0), 0, 0, 0)
 
         contparam = contparam + 1
-        gravaParametro(contparam, 7, 2016, 1, round(valor071,0), 0, 0)
+        gravaParametro(contparam, 7, 2016, 1, round(valor071, 0), 0, 0, 0)
         contparam = contparam + 1
-        gravaParametro(contparam, 7, 2015, 1, round(valor072,0), 0, 0)
+        gravaParametro(contparam, 7, 2015, 1, round(valor072, 0), 0, 0, 0)
 
         contparam = contparam + 1
-        gravaParametro(contparam, 8, 2016, 1, round(valor081,0), 0, 0)
+        gravaParametro(contparam, 8, 2016, 1, round(valor081, 0), 0, 0, 0)
         contparam = contparam + 1
-        gravaParametro(contparam, 8, 2015, 1, round(valor082,0), 0, 0)
+        gravaParametro(contparam, 8, 2015, 1, round(valor082, 0), 0, 0, 0)
 
         contparam = contparam + 1
-        gravaParametro(contparam, 9, 2016, 1, round(valor091,0), 0, 0)
+        gravaParametro(contparam, 9, 2016, 1, round(valor091, 0), 0, 0, 0)
         contparam = contparam + 1
-        gravaParametro(contparam, 9, 2015, 1, round(valor092,0), 0, 0)
+        gravaParametro(contparam, 9, 2015, 1, round(valor092, 0), 0, 0, 0)
 
         contparam = contparam + 1
-        gravaParametro(contparam, 10, 2016, 1, round(valor101,0), 0, 0)
+        gravaParametro(contparam, 10, 2016, 1, round(valor101, 0), 0, 0, 0)
         contparam = contparam + 1
-        gravaParametro(contparam, 10, 2015, 1, round(valor102,0), 0, 0)
+        gravaParametro(contparam, 10, 2015, 1, round(valor102, 0), 0, 0, 0)
 
         contparam = contparam + 1
-        gravaParametro(contparam, 11, 2016, 1, round(valor111,0), 0, 0)
+        gravaParametro(contparam, 11, 2016, 1, round(valor111, 0), 0, 0, 0)
         contparam = contparam + 1
-        gravaParametro(contparam, 11, 2015, 1, round(valor112,0), 0, 0)
+        gravaParametro(contparam, 11, 2015, 1, round(valor112, 0), 0, 0, 0)
 
         contparam = contparam + 1
-        gravaParametro(contparam, 12, 2016, 1, round(valor121,0), 0, 0)
+        gravaParametro(contparam, 12, 2016, 1, round(valor121, 0), 0, 0, 0)
         contparam = contparam + 1
-        gravaParametro(contparam, 12, 2015, 1, round(valor122,0), 0, 0)
+        gravaParametro(contparam, 12, 2015, 1, round(valor122, 0), 0, 0, 0)
 
 
     if  contalinha == 26:
-        regravaParametro(0, 1, 2016, 1, 0, 0, round(valor,0))
-        regravaParametro(0, 1, 2015, 1, 0, 0, round(valor2,0))
-        regravaParametro(0, 2, 2016, 1, 0, 0, round(valor3,0))
-        regravaParametro(0, 2, 2015, 1, 0, 0, round(valor4,0))
-        regravaParametro(0, 3, 2016, 1, 0, 0, round(valor5,0))
-        regravaParametro(0, 3, 2015, 1, 0, 0, round(valor6,0))
-        regravaParametro(0, 4, 2016, 1, 0, 0, round(valor041,0))
-        regravaParametro(0, 4, 2015, 1, 0, 0, round(valor042,0))
-        regravaParametro(0, 5, 2016, 1, 0, 0, round(valor051,0))
-        regravaParametro(0, 5, 2015, 1, 0, 0, round(valor052,0))
-        regravaParametro(0, 6, 2016, 1, 0, 0, round(valor061,0))
-        regravaParametro(0, 6, 2015, 1, 0, 0, round(valor062,0))
-        regravaParametro(0, 7, 2016, 1, 0, 0, round(valor071,0))
-        regravaParametro(0, 7, 2015, 1, 0, 0, round(valor072,0))
-        regravaParametro(0, 8, 2016, 1, 0, 0, round(valor081,0))
-        regravaParametro(0, 8, 2015, 1, 0, 0, round(valor082,0))
-        regravaParametro(0, 9, 2016, 1, 0, 0, round(valor091,0))
-        regravaParametro(0, 9, 2015, 1, 0, 0, round(valor092,0))
-        regravaParametro(0, 10, 2016, 1, 0, 0, round(valor101,0))
-        regravaParametro(0, 10, 2015, 1, 0, 0, round(valor102,0))
-        regravaParametro(0, 11, 2016, 1, 0, 0, round(valor111,0))
-        regravaParametro(0, 11, 2015, 1, 0, 0, round(valor112,0))
-        regravaParametro(0, 12, 2016, 1, 0, 0, round(valor121,0))
-        regravaParametro(0, 12, 2015, 1, 0, 0, round(valor122,0))
+        regravaParametro(0, 1, 2016, 1, 0, 0, round(valor, 0))
+        regravaParametro(0, 1, 2015, 1, 0, 0, round(valor2, 0))
+        regravaParametro(0, 2, 2016, 1, 0, 0, round(valor3, 0))
+        regravaParametro(0, 2, 2015, 1, 0, 0, round(valor4, 0))
+        regravaParametro(0, 3, 2016, 1, 0, 0, round(valor5, 0))
+        regravaParametro(0, 3, 2015, 1, 0, 0, round(valor6, 0))
+        regravaParametro(0, 4, 2016, 1, 0, 0, round(valor041, 0))
+        regravaParametro(0, 4, 2015, 1, 0, 0, round(valor042, 0))
+        regravaParametro(0, 5, 2016, 1, 0, 0, round(valor051, 0))
+        regravaParametro(0, 5, 2015, 1, 0, 0, round(valor052, 0))
+        regravaParametro(0, 6, 2016, 1, 0, 0, round(valor061, 0))
+        regravaParametro(0, 6, 2015, 1, 0, 0, round(valor062, 0))
+        regravaParametro(0, 7, 2016, 1, 0, 0, round(valor071, 0))
+        regravaParametro(0, 7, 2015, 1, 0, 0, round(valor072, 0))
+        regravaParametro(0, 8, 2016, 1, 0, 0, round(valor081, 0))
+        regravaParametro(0, 8, 2015, 1, 0, 0, round(valor082, 0))
+        regravaParametro(0, 9, 2016, 1, 0, 0, round(valor091, 0))
+        regravaParametro(0, 9, 2015, 1, 0, 0, round(valor092, 0))
+        regravaParametro(0, 10, 2016, 1, 0, 0, round(valor101, 0))
+        regravaParametro(0, 10, 2015, 1, 0, 0, round(valor102, 0))
+        regravaParametro(0, 11, 2016, 1, 0, 0, round(valor111, 0))
+        regravaParametro(0, 11, 2015, 1, 0, 0, round(valor112, 0))
+        regravaParametro(0, 12, 2016, 1, 0, 0, round(valor121, 0))
+        regravaParametro(0, 12, 2015, 1, 0, 0, round(valor122, 0))
 
     if  contalinha == 17:
-        gravaParametro2(0, 1, 2016, 1, 0, 0, round(valor,0))
-        gravaParametro2(0, 1, 2015, 1, 0, 0, round(valor2,0))
-        gravaParametro2(0, 2, 2016, 1, 0, 0, round(valor3,0))
-        gravaParametro2(0, 2, 2015, 1, 0, 0, round(valor4,0))
-        gravaParametro2(0, 3, 2016, 1, 0, 0, round(valor5,0))
-        gravaParametro2(0, 3, 2015, 1, 0, 0, round(valor6,0))
-        gravaParametro2(0, 4, 2016, 1, 0, 0, round(valor041,0))
-        gravaParametro2(0, 4, 2015, 1, 0, 0, round(valor042,0))
-        gravaParametro2(0, 5, 2016, 1, 0, 0, round(valor051,0))
-        gravaParametro2(0, 5, 2015, 1, 0, 0, round(valor052,0))
-        gravaParametro2(0, 6, 2016, 1, 0, 0, round(valor061,0))
-        gravaParametro2(0, 6, 2015, 1, 0, 0, round(valor062,0))
-        gravaParametro2(0, 7, 2016, 1, 0, 0, round(valor071,0))
-        gravaParametro2(0, 7, 2015, 1, 0, 0, round(valor072,0))
-        gravaParametro2(0, 8, 2016, 1, 0, 0, round(valor081,0))
-        gravaParametro2(0, 8, 2015, 1, 0, 0, round(valor082,0))
-        gravaParametro2(0, 9, 2016, 1, 0, 0, round(valor091,0))
-        gravaParametro2(0, 9, 2015, 1, 0, 0, round(valor092,0))
-        gravaParametro2(0, 10, 2016, 1, 0, 0, round(valor101,0))
-        gravaParametro2(0, 10, 2015, 1, 0, 0, round(valor102,0))
-        gravaParametro2(0, 11, 2016, 1, 0, 0, round(valor111,0))
-        gravaParametro2(0, 11, 2015, 1, 0, 0, round(valor112,0))
-        gravaParametro2(0, 12, 2016, 1, 0, 0, round(valor121,0))
-        gravaParametro2(0, 12, 2015, 1, 0, 0, round(valor122,0))
+        gravaParametro2(0, 1, 2016, 1, 0, 0, round(valor, 0))
+        gravaParametro2(0, 1, 2015, 1, 0, 0, round(valor2, 0))
+        gravaParametro2(0, 2, 2016, 1, 0, 0, round(valor3, 0))
+        gravaParametro2(0, 2, 2015, 1, 0, 0, round(valor4, 0))
+        gravaParametro2(0, 3, 2016, 1, 0, 0, round(valor5, 0))
+        gravaParametro2(0, 3, 2015, 1, 0, 0, round(valor6, 0))
+        gravaParametro2(0, 4, 2016, 1, 0, 0, round(valor041, 0))
+        gravaParametro2(0, 4, 2015, 1, 0, 0, round(valor042, 0))
+        gravaParametro2(0, 5, 2016, 1, 0, 0, round(valor051, 0))
+        gravaParametro2(0, 5, 2015, 1, 0, 0, round(valor052, 0))
+        gravaParametro2(0, 6, 2016, 1, 0, 0, round(valor061, 0))
+        gravaParametro2(0, 6, 2015, 1, 0, 0, round(valor062, 0))
+        gravaParametro2(0, 7, 2016, 1, 0, 0, round(valor071, 0))
+        gravaParametro2(0, 7, 2015, 1, 0, 0, round(valor072, 0))
+        gravaParametro2(0, 8, 2016, 1, 0, 0, round(valor081, 0))
+        gravaParametro2(0, 8, 2015, 1, 0, 0, round(valor082, 0))
+        gravaParametro2(0, 9, 2016, 1, 0, 0, round(valor091, 0))
+        gravaParametro2(0, 9, 2015, 1, 0, 0, round(valor092, 0))
+        gravaParametro2(0, 10, 2016, 1, 0, 0, round(valor101, 0))
+        gravaParametro2(0, 10, 2015, 1, 0, 0, round(valor102, 0))
+        gravaParametro2(0, 11, 2016, 1, 0, 0, round(valor111, 0))
+        gravaParametro2(0, 11, 2015, 1, 0, 0, round(valor112, 0))
+        gravaParametro2(0, 12, 2016, 1, 0, 0, round(valor121, 0))
+        gravaParametro2(0, 12, 2015, 1, 0, 0, round(valor122, 0))
 
 
     if  flag == 'S':
@@ -471,136 +471,136 @@ for r in range(1, sheet.nrows):
 
     if  flag == 'S':
         try:
-            valor = round(valor,2)
+            valor = round(valor, 2)
         except Exception as e:
             flag = 'N'
 
     if  flag == 'S':
         try:
-            valor2 = round(valor2,2)
+            valor2 = round(valor2, 2)
         except Exception as e:
             flag = 'N'
 
     if  flag == 'S':
         try:
-            valor3 = round(valor3,2)
+            valor3 = round(valor3, 2)
         except Exception as e:
             flag = 'N'
 
     if  flag == 'S':
         try:
-            valor4 = round(valor4,2)
+            valor4 = round(valor4, 2)
         except Exception as e:
             flag = 'N'
 
     if  flag == 'S':
         try:
-            valor5 = round(valor5,2)
+            valor5 = round(valor5, 2)
         except Exception as e:
             flag = 'N'
 
     if  flag == 'S':
         try:
-            valor6 = round(valor6,2)
+            valor6 = round(valor6, 2)
         except Exception as e:
             flag = 'N'
 
     if  flag == 'S':
         try:
-            valor041 = round(valor041,2)
+            valor041 = round(valor041, 2)
         except Exception as e:
             flag = 'N'
     if  flag == 'S':
         try:
-            valor042 = round(valor042,2)
-        except Exception as e:
-            flag = 'N'
-
-    if  flag == 'S':
-        try:
-            valor051 = round(valor051,2)
-        except Exception as e:
-            flag = 'N'
-    if  flag == 'S':
-        try:
-            valor052 = round(valor052,2)
+            valor042 = round(valor042, 2)
         except Exception as e:
             flag = 'N'
 
     if  flag == 'S':
         try:
-            valor061 = round(valor061,2)
+            valor051 = round(valor051, 2)
         except Exception as e:
             flag = 'N'
     if  flag == 'S':
         try:
-            valor062 = round(valor062,2)
-        except Exception as e:
-            flag = 'N'
-
-    if  flag == 'S':
-        try:
-            valor071 = round(valor071,2)
-        except Exception as e:
-            flag = 'N'
-    if  flag == 'S':
-        try:
-            valor072 = round(valor072,2)
+            valor052 = round(valor052, 2)
         except Exception as e:
             flag = 'N'
 
     if  flag == 'S':
         try:
-            valor081 = round(valor081,2)
+            valor061 = round(valor061, 2)
         except Exception as e:
             flag = 'N'
     if  flag == 'S':
         try:
-            valor082 = round(valor082,2)
-        except Exception as e:
-            flag = 'N'
-
-    if  flag == 'S':
-        try:
-            valor091 = round(valor091,2)
-        except Exception as e:
-            flag = 'N'
-    if  flag == 'S':
-        try:
-            valor092 = round(valor092,2)
+            valor062 = round(valor062, 2)
         except Exception as e:
             flag = 'N'
 
     if  flag == 'S':
         try:
-            valor101 = round(valor101,2)
+            valor071 = round(valor071, 2)
         except Exception as e:
             flag = 'N'
     if  flag == 'S':
         try:
-            valor102 = round(valor102,2)
-        except Exception as e:
-            flag = 'N'
-
-    if  flag == 'S':
-        try:
-            valor111 = round(valor111,2)
-        except Exception as e:
-            flag = 'N'
-    if  flag == 'S':
-        try:
-            valor112 = round(valor112,2)
+            valor072 = round(valor072, 2)
         except Exception as e:
             flag = 'N'
 
     if  flag == 'S':
         try:
-            valor121 = round(valor121,2)
+            valor081 = round(valor081, 2)
         except Exception as e:
             flag = 'N'
     if  flag == 'S':
         try:
-            valor122 = round(valor122,2)
+            valor082 = round(valor082, 2)
+        except Exception as e:
+            flag = 'N'
+
+    if  flag == 'S':
+        try:
+            valor091 = round(valor091, 2)
+        except Exception as e:
+            flag = 'N'
+    if  flag == 'S':
+        try:
+            valor092 = round(valor092, 2)
+        except Exception as e:
+            flag = 'N'
+
+    if  flag == 'S':
+        try:
+            valor101 = round(valor101, 2)
+        except Exception as e:
+            flag = 'N'
+    if  flag == 'S':
+        try:
+            valor102 = round(valor102, 2)
+        except Exception as e:
+            flag = 'N'
+
+    if  flag == 'S':
+        try:
+            valor111 = round(valor111, 2)
+        except Exception as e:
+            flag = 'N'
+    if  flag == 'S':
+        try:
+            valor112 = round(valor112, 2)
+        except Exception as e:
+            flag = 'N'
+
+    if  flag == 'S':
+        try:
+            valor121 = round(valor121, 2)
+        except Exception as e:
+            flag = 'N'
+    if  flag == 'S':
+        try:
+            valor122 = round(valor122, 2)
         except Exception as e:
             flag = 'N'
 
@@ -614,13 +614,13 @@ for r in range(1, sheet.nrows):
 
         tipocd = ''
 
-        if  (codigo[0:1] == '4'):
+        if  codigo[0:1] == '4':
             tipocd = 'C'
 
-        if  (codigo[0:1] == '3'):
+        if  codigo[0:1] == '3':
             tipocd = 'D'
 
-        if  (codigo[0:1] == '2'):
+        if  codigo[0:1] == '2':
             tipocd = 'C'
 
 #       Grava Plano de contas
